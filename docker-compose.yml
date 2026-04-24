@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  gumas-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gumas-web
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=gumas-db;Database=GumasDB;User Id=sa;Password=${DB_PASSWORD:-Gumas2024!};TrustServerCertificate=True;
+    volumes:
+      - gumas-uploads:/app/wwwroot/uploads
+    depends_on:
+      gumas-db:
+        condition: service_healthy
+    networks:
+      - gumas-network
+
+  gumas-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: gumas-db
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${DB_PASSWORD:-Gumas2024!}
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - gumas-db-data:/var/opt/mssql
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "${DB_PASSWORD:-Gumas2024!}" -C -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - gumas-network
+
+volumes:
+  gumas-db-data:
+    driver: local
+  gumas-uploads:
+    driver: local
+
+networks:
+  gumas-network:
+    driver: bridge

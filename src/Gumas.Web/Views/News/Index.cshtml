@@ -1,0 +1,148 @@
+@model NewsListViewModel
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEnglish = currentCulture == "en";
+    ViewData["Title"] = isEnglish ? "News" : "Haberler";
+    var homeUrl = isEnglish ? "/en" : "/";
+    var newsDetailUrl = isEnglish ? "/en/news" : "/haber";
+    var dateCulture = isEnglish ? new CultureInfo("en-US") : new CultureInfo("tr-TR");
+}
+
+<!-- Main Content -->
+<main class="pt-32 pb-20 bg-white dark:bg-gumas-dark transition-colors duration-300">
+
+    <!-- Page Header -->
+    <section class="container mx-auto px-6 mb-20 relative z-10">
+        <h1 class="text-6xl md:text-8xl font-oswald font-bold uppercase mb-6 text-black dark:text-white">
+            @L["News_Title"]<span class="text-gumas-gray">@L["News_TitleSuffix"]</span>
+        </h1>
+        <p class="max-w-2xl text-gray-600 dark:text-gray-400 font-light">
+            @L["News_Description"]
+        </p>
+    </section>
+
+    <!-- News Grid -->
+    <section class="container mx-auto px-6 relative z-10">
+        @if (Model.News.Any())
+        {
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach (var news in Model.News)
+                {
+                    <a href="@newsDetailUrl/@news.Slug"
+                       class="group bg-white dark:bg-gumas-gray border border-gray-200 dark:border-white/10 hover:border-gumas-red transition-colors duration-300 overflow-hidden">
+                        <div class="aspect-video overflow-hidden">
+                            @if (!string.IsNullOrEmpty(news.ImageUrl))
+                            {
+                                <img src="@news.ImageUrl" alt="@news.GetTitle(currentCulture)"
+                                     class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500" />
+                            }
+                            else
+                            {
+                                <div class="w-full h-full bg-gray-200 dark:bg-gumas-dark flex items-center justify-center">
+                                    <i class="fa-solid fa-newspaper text-4xl text-gray-400"></i>
+                                </div>
+                            }
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs text-gray-500 dark:text-gray-400 mb-2 block">
+                                <i class="fa-solid fa-calendar-days mr-1"></i>
+                                @news.PublishDate.ToString("dd MMMM yyyy", dateCulture)
+                            </span>
+                            <h3 class="text-xl font-oswald uppercase text-black dark:text-white group-hover:text-gumas-red transition-colors mb-3 line-clamp-2">
+                                @news.GetTitle(currentCulture)
+                            </h3>
+                            @if (!string.IsNullOrEmpty(news.GetSummary(currentCulture)))
+                            {
+                                <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mb-4">
+                                    @news.GetSummary(currentCulture)
+                                </p>
+                            }
+                            <span class="inline-flex items-center gap-2 text-xs font-oswald uppercase tracking-widest text-gumas-red group-hover:gap-3 transition-all duration-300">
+                                @L["Common_ReadMore"]
+                                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </span>
+                        </div>
+                    </a>
+                }
+            </div>
+
+            <!-- Pagination -->
+            @if (Model.TotalPages > 1)
+            {
+                <div class="flex justify-center items-center gap-2 mt-16">
+                    @if (Model.Page > 1)
+                    {
+                        <a href="@Url.Action("Index", new { page = Model.Page - 1 })"
+                           class="w-12 h-12 flex items-center justify-center border border-gray-300 dark:border-white/20 text-gray-600 dark:text-gray-400 hover:border-gumas-red hover:text-gumas-red transition-colors">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </a>
+                    }
+
+                    @{
+                        var startPage = Math.Max(1, Model.Page - 2);
+                        var endPage = Math.Min(Model.TotalPages, Model.Page + 2);
+                    }
+
+                    @if (startPage > 1)
+                    {
+                        <a href="@Url.Action("Index", new { page = 1 })"
+                           class="w-12 h-12 flex items-center justify-center border border-gray-300 dark:border-white/20 text-gray-600 dark:text-gray-400 hover:border-gumas-red hover:text-gumas-red transition-colors font-oswald">
+                            1
+                        </a>
+                        @if (startPage > 2)
+                        {
+                            <span class="text-gray-400">...</span>
+                        }
+                    }
+
+                    @for (int i = startPage; i <= endPage; i++)
+                    {
+                        <a href="@Url.Action("Index", new { page = i })"
+                           class="w-12 h-12 flex items-center justify-center border font-oswald transition-colors
+                                  @(i == Model.Page ? "bg-gumas-red text-white border-gumas-red" : "border-gray-300 dark:border-white/20 text-gray-600 dark:text-gray-400 hover:border-gumas-red hover:text-gumas-red")">
+                            @i
+                        </a>
+                    }
+
+                    @if (endPage < Model.TotalPages)
+                    {
+                        @if (endPage < Model.TotalPages - 1)
+                        {
+                            <span class="text-gray-400">...</span>
+                        }
+                        <a href="@Url.Action("Index", new { page = Model.TotalPages })"
+                           class="w-12 h-12 flex items-center justify-center border border-gray-300 dark:border-white/20 text-gray-600 dark:text-gray-400 hover:border-gumas-red hover:text-gumas-red transition-colors font-oswald">
+                            @Model.TotalPages
+                        </a>
+                    }
+
+                    @if (Model.Page < Model.TotalPages)
+                    {
+                        <a href="@Url.Action("Index", new { page = Model.Page + 1 })"
+                           class="w-12 h-12 flex items-center justify-center border border-gray-300 dark:border-white/20 text-gray-600 dark:text-gray-400 hover:border-gumas-red hover:text-gumas-red transition-colors">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <!-- No News -->
+            <div class="text-center py-20">
+                <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-100 dark:bg-gumas-gray flex items-center justify-center">
+                    <i class="fa-solid fa-newspaper text-4xl text-gray-400"></i>
+                </div>
+                <h3 class="text-2xl font-oswald uppercase text-black dark:text-white mb-4">@L["News_NoResults"]</h3>
+                <p class="text-gray-500 dark:text-gray-400 mb-8 max-w-md mx-auto">
+                    @L["News_NoResultsDesc"]
+                </p>
+                <a href="@homeUrl"
+                   class="inline-block font-oswald border border-black dark:border-white px-8 py-4 uppercase text-sm tracking-widest hover:bg-gumas-red hover:border-gumas-red hover:text-white transition-all duration-300 text-black dark:text-white">
+                    @L["Nav_Home"]
+                </a>
+            </div>
+        }
+    </section>
+
+</main>

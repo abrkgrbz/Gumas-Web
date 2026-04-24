@@ -1,0 +1,257 @@
+@model ProductDetailViewModel
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEnglish = currentCulture == "en";
+    ViewData["Title"] = Model.Product.GetName(currentCulture);
+    var mainImage = Model.Product.Images?.FirstOrDefault(i => i.IsMain) ?? Model.Product.Images?.FirstOrDefault();
+    var homeUrl = isEnglish ? "/en" : "/";
+    var productsUrl = isEnglish ? "/en/products" : "/urunler";
+    var productDetailUrl = isEnglish ? "/en/product" : "/urun";
+    var brandDetailUrl = isEnglish ? "/en/brand" : "/marka";
+    var contactUrl = isEnglish ? "/en/contact" : "/iletisim";
+    var whatsAppMessage = isEnglish
+        ? $"Hello, I would like to get information about {Model.Product.GetName(currentCulture)} ({Model.Product.ProductCode})."
+        : $"Merhaba, {Model.Product.GetName(currentCulture)} ({Model.Product.ProductCode}) ürünü hakkında bilgi almak istiyorum.";
+}
+
+<!-- Main Content -->
+<main class="pt-32 pb-20 bg-white dark:bg-gumas-dark transition-colors duration-300">
+
+    <!-- Breadcrumb -->
+    <div class="container mx-auto px-6 mb-8 text-xs font-mono text-gray-500 uppercase tracking-widest">
+        <a href="@homeUrl" class="hover:text-black dark:hover:text-white transition-colors">@L["Nav_Home"]</a>
+        <span class="mx-2">/</span>
+        <a href="@productsUrl" class="hover:text-black dark:hover:text-white transition-colors">@L["Nav_Products"]</a>
+        <span class="mx-2">/</span>
+        <span class="text-gumas-red">@Model.Product.GetName(currentCulture)</span>
+    </div>
+
+    <!-- Product Hero -->
+    <section class="container mx-auto px-6 mb-20 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+            <!-- Product Image -->
+            <div class="bg-gray-200 dark:bg-white/5 border border-black/10 dark:border-white/10 p-8 md:p-12 relative group overflow-hidden">
+                @if (Model.Product.IsFeatured)
+                {
+                    <div class="absolute top-4 right-4 z-10">
+                        <span class="bg-gumas-red text-white text-xs font-oswald uppercase px-3 py-1 tracking-widest">
+                            @L["Products_Featured"]
+                        </span>
+                    </div>
+                }
+
+                @if (mainImage != null)
+                {
+                    <img src="@mainImage.ImageUrl" alt="@Model.Product.GetName(currentCulture)" id="mainProductImage"
+                         class="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all duration-500 scale-95 group-hover:scale-105" />
+                }
+                else
+                {
+                    <div class="w-full h-80 flex items-center justify-center">
+                        <i class="fa-solid fa-image text-6xl text-gray-400"></i>
+                    </div>
+                }
+            </div>
+
+            <!-- Thumbnail Gallery -->
+            @if (Model.Product.Images?.Count() > 1)
+            {
+                <div class="lg:col-span-2 -mt-8">
+                    <div class="flex gap-4 overflow-x-auto pb-4">
+                        @foreach (var image in Model.Product.Images)
+                        {
+                            <button onclick="changeMainImage('@image.ImageUrl', this)"
+                                    class="thumbnail-btn flex-shrink-0 w-20 h-20 border-2 @(image.IsMain ? "border-gumas-red" : "border-gray-300 dark:border-white/20") hover:border-gumas-red transition-colors overflow-hidden">
+                                <img src="@image.ImageUrl" alt="@Model.Product.GetName(currentCulture)"
+                                     class="w-full h-full object-cover" />
+                            </button>
+                        }
+                    </div>
+                </div>
+            }
+
+            <!-- Product Info -->
+            <div class="@(Model.Product.Images?.Count() > 1 ? "" : "")">
+                <div class="mb-4">
+                    <a href="@productsUrl"
+                       class="text-sm font-oswald uppercase tracking-widest text-gray-500 dark:text-gray-400 hover:text-gumas-red transition-colors inline-flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        @L["Products_BackToProducts"]
+                    </a>
+                </div>
+
+                <!-- Brand & Category -->
+                <div class="flex flex-wrap gap-4 mb-4">
+                    @if (Model.Product.Brand != null)
+                    {
+                        <a href="@brandDetailUrl/@Model.Product.Brand.Slug"
+                           class="text-xs font-oswald uppercase tracking-widest px-3 py-1 bg-gumas-red/10 text-gumas-red hover:bg-gumas-red hover:text-white transition-colors">
+                            @Model.Product.Brand.GetName(currentCulture)
+                        </a>
+                    }
+                    @if (Model.Product.Category != null)
+                    {
+                        <span class="text-xs font-oswald uppercase tracking-widest px-3 py-1 bg-gray-200 dark:bg-white/10 text-gray-600 dark:text-gray-400">
+                            @Model.Product.Category.GetName(currentCulture)
+                        </span>
+                    }
+                </div>
+
+                <h1 class="text-4xl md:text-6xl font-oswald font-bold uppercase mb-4 text-black dark:text-white">
+                    @Model.Product.GetName(currentCulture)
+                </h1>
+
+                <!-- Product Codes -->
+                <div class="flex flex-wrap gap-6 mb-8">
+                    @if (!string.IsNullOrEmpty(Model.Product.ProductCode))
+                    {
+                        <p class="text-lg text-gray-700 dark:text-gray-300 font-light">
+                            @L["Products_ProductCode"]: <span class="font-mono text-gumas-red">@Model.Product.ProductCode</span>
+                        </p>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Product.OemNumber))
+                    {
+                        <p class="text-lg text-gray-700 dark:text-gray-300 font-light">
+                            @L["Products_OemNumber"]: <span class="font-mono text-gumas-red">@Model.Product.OemNumber</span>
+                        </p>
+                    }
+                </div>
+
+                <!-- Description -->
+                @if (!string.IsNullOrEmpty(Model.Product.GetDescription(currentCulture)))
+                {
+                    <div class="mb-10">
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed max-w-xl">
+                            @Model.Product.GetDescription(currentCulture)
+                        </p>
+                    </div>
+                }
+
+                <!-- Stock Status -->
+                <div class="mb-8">
+                    @if (Model.Product.Status == ProductStatus.Active)
+                    {
+                        <span class="inline-flex items-center gap-2 text-green-600 dark:text-green-400">
+                            <i class="fa-solid fa-check-circle"></i>
+                            <span class="font-oswald uppercase tracking-widest text-sm">@L["Products_InStock"]</span>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="inline-flex items-center gap-2 text-red-600 dark:text-red-400">
+                            <i class="fa-solid fa-times-circle"></i>
+                            <span class="font-oswald uppercase tracking-widest text-sm">@L["Products_OutOfStock"]</span>
+                        </span>
+                    }
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col md:flex-row gap-4 mb-10">
+                    <a href="https://wa.me/902122547805?text=@Uri.EscapeDataString(whatsAppMessage)"
+                       target="_blank"
+                       class="bg-green-600 text-white font-oswald uppercase tracking-widest px-8 py-4 font-bold hover:bg-green-700 transition-colors duration-300 text-center inline-flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        @L["Products_AskOnWhatsApp"]
+                    </a>
+                    <a href="@contactUrl"
+                       class="border border-black/30 dark:border-white/30 text-black dark:text-white font-oswald uppercase tracking-widest px-8 py-4 font-bold hover:bg-gumas-red hover:text-white hover:border-gumas-red transition-colors duration-300 text-center inline-flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-envelope"></i>
+                        @L["Products_GetInTouch"]
+                    </a>
+                </div>
+
+                <!-- Features -->
+                <div class="grid grid-cols-3 gap-4 border-t border-black/10 dark:border-white/10 pt-8">
+                    <div class="text-center">
+                        <div class="w-12 h-12 mx-auto mb-3 bg-gumas-red/10 flex items-center justify-center">
+                            <i class="fa-solid fa-truck text-gumas-red"></i>
+                        </div>
+                        <span class="text-xs font-oswald uppercase tracking-widest text-gray-500 dark:text-gray-400">@L["Products_FastShipping"]</span>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 mx-auto mb-3 bg-gumas-red/10 flex items-center justify-center">
+                            <i class="fa-solid fa-shield text-gumas-red"></i>
+                        </div>
+                        <span class="text-xs font-oswald uppercase tracking-widest text-gray-500 dark:text-gray-400">@L["Products_Warranty"]</span>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 mx-auto mb-3 bg-gumas-red/10 flex items-center justify-center">
+                            <i class="fa-solid fa-headset text-gumas-red"></i>
+                        </div>
+                        <span class="text-xs font-oswald uppercase tracking-widest text-gray-500 dark:text-gray-400">@L["Products_TechnicalSupport"]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    @if (Model.RelatedProducts.Any())
+    {
+        <section class="container mx-auto px-6 mt-32 relative z-10">
+            <h2 class="text-4xl md:text-5xl font-oswald font-bold uppercase mb-12 text-black dark:text-white">
+                @L["Products_RelatedTitle"] <span class="text-gumas-red">@L["Nav_Products"]</span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                @foreach (var product in Model.RelatedProducts)
+                {
+                    var relatedImage = product.Images?.FirstOrDefault(i => i.IsMain) ?? product.Images?.FirstOrDefault();
+
+                    <a href="@productDetailUrl/@product.Slug"
+                       class="group relative bg-white dark:bg-gumas-gray border border-gray-200 dark:border-white/10 hover:border-gumas-red/50 transition-colors duration-300 p-6 flex flex-col overflow-hidden">
+
+                        <!-- Product Image -->
+                        <div class="relative w-full h-48 flex items-center justify-center mb-4">
+                            @if (relatedImage != null)
+                            {
+                                <img src="@relatedImage.ImageUrl" alt="@product.GetName(currentCulture)"
+                                     class="object-contain h-full w-full grayscale group-hover:grayscale-0 transition-all duration-500" />
+                            }
+                            else
+                            {
+                                <div class="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gumas-dark/50">
+                                    <i class="fa-solid fa-image text-3xl text-gray-400"></i>
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Product Info -->
+                        <div class="flex-1">
+                            @if (product.Brand != null)
+                            {
+                                <span class="text-xs font-mono text-gumas-red mb-1 block">@product.Brand.GetName(currentCulture)</span>
+                            }
+                            <h3 class="text-lg font-oswald uppercase text-black dark:text-white mb-2 line-clamp-2">@product.GetName(currentCulture)</h3>
+                            @if (!string.IsNullOrEmpty(product.ProductCode))
+                            {
+                                <span class="text-xs text-gray-500 dark:text-gray-400">@L["Products_Code"]: @product.ProductCode</span>
+                            }
+                        </div>
+
+                        <!-- Arrow -->
+                        <div class="mt-4 pt-4 border-t border-gray-200 dark:border-white/10 flex justify-end">
+                            <i class="fa-solid fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300 text-gumas-red"></i>
+                        </div>
+                    </a>
+                }
+            </div>
+        </section>
+    }
+
+</main>
+
+@section Scripts {
+    <script>
+        function changeMainImage(imageUrl, btn) {
+            document.getElementById('mainProductImage').src = imageUrl;
+            document.querySelectorAll('.thumbnail-btn').forEach(b => {
+                b.classList.remove('border-gumas-red');
+                b.classList.add('border-gray-300', 'dark:border-white/20');
+            });
+            btn.classList.remove('border-gray-300', 'dark:border-white/20');
+            btn.classList.add('border-gumas-red');
+        }
+    </script>
+}

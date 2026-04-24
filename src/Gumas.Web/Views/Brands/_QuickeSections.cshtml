@@ -1,0 +1,49 @@
+@{
+    var culture = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEn = culture == "en";
+
+    var items = new[]
+    {
+        new {
+            TitleTr = "Ön Yükleyiciler",
+            TitleEn = "Front Loaders",
+            Image = "/images/brands/quicke-front-loaders.jpg",
+            Url = "https://quicke.com/int/",
+            DescriptionTr = "Dünya değişiyor, tarım da öyle. Quicke, üstün kalite ve ürünlere entegre edilmiş akıllı detaylar sayesinde, makinenin arkasındaki çiftçiyi daha verimli hale getirerek bu değişime öncülük ediyor. Quicke, yetmiş yılı aşkın süredir amiral gemisi olan ön yükleyicilerini mükemmelleştiriyor. Q serisi, akıllı mühendisliğin nasıl fark yarattığını gösteriyor. Bu ön yükleyiciler, olağanüstü görüş açısı, optimize edilmiş çalışma açıları ve sorunsuz ve kolay ekipman değişimleri sunuyor. \"Q-companion\" yardımcı sisteminin zekasıyla desteklenen, yüksek işlevli ve daha verimli bir ön yükleyici ortaya çıkıyor. X serisi, küçük ve orta boy traktörler için bir birinci sınıf diğer bir alternatiftir. Bu ön yükleyici serisi, tasarımı, performansı ve ekonomiyi benzersiz bir şekilde birleştiriyor.",
+            DescriptionEn = "The world is changing, and so is farming. Quicke drives this change by making the farmer behind the machine more efficient – through superior quality and smart details built into the products. For more than seven decades Quicke has been perfecting its flagship front loaders. The Q-series shows how clever engineering makes all the difference. These front loaders come with outstanding visibility, optimised working angles and smooth and easy implement changes. Supported by the intelligence of the \"Q-companion\" assistance system, a highly functional and more efficient front loader emerges. The X-series is another first-class alternative for small to medium-sized tractors. This series of front loaders combines design, performance and economy in a unique manner."
+        },
+        new {
+            TitleTr = "Ekipmanlar",
+            TitleEn = "Implements",
+            Image = "/images/brands/quicke-implements.jpg",
+            Url = "https://quicke.com/int/",
+            DescriptionTr = "Kovalar, silaj ekipmanları veya paletler – tüm Quicke ekipmanları sağlamlık, kalite ve dayanıklılık ile karakterize edilir. Uzmanlardan oluşan bir ekip, her türlü makine için hem büyük hem de küçük ekipmanlar açısından detayları mükemmelleştirerek, ürün yelpazesini tamamlamak için yorulmadan çalışmaya devam ediyor. Yeni ekipmanlar piyasaya sürdüğümüzde, bunlar pazardan gelen artan talepleri karşılamak ve zaten geniş olan ekipman portföyümüze daha fazla derinlik katmak için geliştirilmiştir. Müşterinin makinesine mükemmel uyum sağlamak için Quicke, üreticiden bağımsız modüler bir kova portföyü geliştirmiştir. İster küçük bir bahçe yükleyicisi ister tarımsal tekerlekli yükleyici olsun, fark etmez. 60'tan fazla cıvatalı kanca seçeneğiyle Quicke, geniş bir yelpazede seçenek sunmaktadır.",
+            DescriptionEn = "Buckets, silage implements or pallet – all Quicke implements are characterised by strength, quality and durability. A team of experts tirelessly continues to work to complement the offer, perfecting details, both in terms of large and small implements, for all kinds of machines. When we are launching new implements, they were developed to meet the increasing demands from the market and to add further depth to our already extensive implement portfolio. To ensure the perfect fit to the customer's machine, Quicke has developed a modular manufacturer-independent bucket portfolio. No matter whether it is a small yard loader or an agricultural wheel loader. With more than 60 bolt-on hooks available, Quicke offers a wide range of options."
+        }
+    };
+}
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+    @foreach (var item in items)
+    {
+        <a href="@item.Url" target="_blank" rel="noopener"
+           class="group bg-white dark:bg-gumas-gray border border-gray-200 dark:border-white/10 hover:border-gumas-red transition-all duration-300 flex flex-col overflow-hidden">
+            <div class="aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-black/30">
+                <img src="@item.Image" alt="@(isEn ? item.TitleEn : item.TitleTr)"
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+                <h3 class="text-xl md:text-2xl font-oswald font-bold uppercase text-black dark:text-white mb-4 group-hover:text-gumas-red transition-colors">
+                    @(isEn ? item.TitleEn : item.TitleTr)
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6 flex-grow">
+                    @(isEn ? item.DescriptionEn : item.DescriptionTr)
+                </p>
+                <span class="inline-flex items-center gap-2 text-sm font-oswald uppercase tracking-widest text-gumas-red group-hover:gap-3 transition-all mt-auto">
+                    @(isEn ? "View Catalogue" : "Kataloğa Git")
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </span>
+            </div>
+        </a>
+    }
+</div>

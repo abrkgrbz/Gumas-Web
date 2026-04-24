@@ -1,0 +1,119 @@
+@model IEnumerable<News>
+@{
+    ViewData["Title"] = "Haberler";
+}
+
+<div class="bg-white rounded-lg shadow">
+    <!-- Header -->
+    <div class="px-6 py-4 border-b flex flex-wrap justify-between items-center gap-4">
+        <h2 class="font-semibold text-gray-800">
+            <i class="fas fa-newspaper mr-2 text-gumas-red"></i>Haber Listesi
+        </h2>
+        <a href="@Url.Action("Create")" class="bg-gumas-red text-white px-4 py-2 rounded-lg hover:bg-red-800 transition-colors">
+            <i class="fas fa-plus mr-2"></i>Yeni Haber
+        </a>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Haber</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Yayın Tarihi</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durum</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Goruntuleme</th>
+                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Islemler</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                @if (Model.Any())
+                {
+                    @foreach (var news in Model)
+                    {
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    @if (!string.IsNullOrEmpty(news.ImageUrl))
+                                    {
+                                        <img src="@news.ImageUrl" alt="@news.NameTr" class="w-16 h-12 object-cover rounded">
+                                    }
+                                    else
+                                    {
+                                        <div class="w-16 h-12 bg-gray-200 rounded flex items-center justify-center">
+                                            <i class="fas fa-image text-gray-400"></i>
+                                        </div>
+                                    }
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-900">@news.NameTr</p>
+                                        <p class="text-xs text-gray-500">@(news.SummaryTr?.Length > 60 ? news.SummaryTr.Substring(0, 60) + "..." : news.SummaryTr)</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">
+                                @news.PublishDate.ToString("dd.MM.yyyy")
+                            </td>
+                            <td class="px-6 py-4">
+                                <button type="button"
+                                        onclick="toggleStatus(@news.Id, this)"
+                                        class="status-badge @(news.IsActive ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800") px-2 py-1 rounded-full text-xs cursor-pointer hover:opacity-80">
+                                    @(news.IsActive ? "Aktif" : "Pasif")
+                                </button>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">
+                                <i class="fas fa-eye mr-1"></i>@news.ViewCount
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="@Url.Action("Edit", new { id = news.Id })" class="text-blue-600 hover:text-blue-800 mr-3">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@news.Id" method="post" class="inline" onsubmit="return confirm('Bu haberi silmek istediginizden emin misiniz?')">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="text-red-600 hover:text-red-800">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                            <i class="fas fa-newspaper text-4xl mb-3 block"></i>
+                            Haber bulunamadi.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    async function toggleStatus(id, button) {
+        try {
+            const response = await fetch(`/admin/news/togglestatus/${id}`, {
+                method: 'POST',
+                headers: {
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || ''
+                }
+            });
+            const data = await response.json();
+            if (data.success) {
+                if (data.isActive) {
+                    button.className = 'status-badge bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs cursor-pointer hover:opacity-80';
+                    button.textContent = 'Aktif';
+                } else {
+                    button.className = 'status-badge bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs cursor-pointer hover:opacity-80';
+                    button.textContent = 'Pasif';
+                }
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+</script>
+}

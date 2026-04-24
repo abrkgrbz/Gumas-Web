@@ -1,0 +1,313 @@
+@model ProductsViewModel
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEnglish = currentCulture == "en";
+    ViewData["Title"] = isEnglish ? "Products" : "Ürünler";
+    var productsUrl = isEnglish ? "/en/products" : "/urunler";
+    var productDetailUrl = isEnglish ? "/en/product" : "/urun";
+}
+
+<main class="pt-20 bg-white dark:bg-gumas-dark transition-colors duration-300 min-h-screen">
+
+    @if (!Model.SelectedCategoryId.HasValue && !Model.SelectedBrandId.HasValue)
+    {
+        <!-- JOST-Style Hero -->
+        <section class="relative overflow-hidden">
+            <!-- Background Image -->
+            <div class="absolute inset-0">
+                <img src="/images/products-hero-bg.png"
+                     alt=""
+                     class="w-full h-full object-cover opacity-30 dark:opacity-25 scale-105" />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-white/40 dark:from-gumas-dark/95 dark:via-gumas-dark/80 dark:to-gumas-dark/50"></div>
+
+            <div class="container mx-auto px-6 py-20 md:py-32 relative z-10">
+                <div class="max-w-4xl">
+                    <span class="font-oswald text-xs uppercase tracking-[0.4em] text-gumas-red mb-6 block">
+                        @(isEnglish ? "Product Portfolio" : "Ürün Portföyü")
+                    </span>
+                    <h1 class="text-5xl md:text-8xl lg:text-9xl font-oswald font-bold uppercase text-black dark:text-white leading-[0.9] mb-8">
+                        @(isEnglish ? "Reliable" : "Her Koşulda")<br />
+                        <span class="text-gumas-red">@(isEnglish ? "Products." : "Güvenilir.")</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-500 dark:text-gray-400 font-light leading-relaxed max-w-2xl">
+                        @(isEnglish
+                            ? "JOST offers the widest range of products worldwide for commercial vehicles with high quality and performance."
+                            : "JOST, ticari araçlar için dünya çapında en geniş ürün yelpazesi ile yüksek kalite ve performans sunmaktadır.")
+                    </p>
+                </div>
+            </div>
+            <!-- Decorative -->
+            <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-gumas-red/5 to-transparent pointer-events-none"></div>
+        </section>
+
+        <!-- Divider -->
+        <div class="border-t border-black/10 dark:border-white/10"></div>
+
+        <!-- JOST-Style Brand Grid -->
+        <section class="container mx-auto px-6 py-16 md:py-24">
+            <div class="flex items-end justify-between mb-12">
+                <div>
+                    <span class="font-oswald text-xs uppercase tracking-[0.4em] text-gray-400 block mb-3">
+                        @(isEnglish ? "Our Brands" : "Markalarımız")
+                    </span>
+                    <h2 class="text-3xl md:text-5xl font-oswald font-bold uppercase text-black dark:text-white leading-tight">
+                        @(isEnglish ? "Our" : "Partner")<br />
+                        <span class="text-gumas-red">@(isEnglish ? "Brands" : "Markalarımız")</span>
+                    </h2>
+                </div>
+                <span class="hidden md:block text-sm text-gray-400 font-oswald tracking-widest uppercase">
+                    @Model.Brands.Count() @(isEnglish ? "Brands" : "Marka")
+                </span>
+            </div>
+
+            @if (Model.Brands.Any())
+            {
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @foreach (var brand in Model.Brands)
+                    {
+                        var brandSlug = brand.Slug?.ToLowerInvariant();
+                        var hasLocalPage = brandSlug == "jost" || brandSlug == "rockinger" || brandSlug == "tridec" || brandSlug == "quicke";
+                        string brandHref;
+                        bool openInNewTab;
+                        if (isEnglish && !string.IsNullOrEmpty(brand.Website))
+                        {
+                            // Madde 7: İngilizce sayfada kartlar orijinal üretici sitesine gitmeli
+                            brandHref = brand.Website;
+                            openInNewTab = true;
+                        }
+                        else if (hasLocalPage)
+                        {
+                            brandHref = (isEnglish ? "/en/brand/" : "/marka/") + brand.Slug;
+                            openInNewTab = false;
+                        }
+                        else if (!string.IsNullOrEmpty(brand.Website))
+                        {
+                            brandHref = brand.Website;
+                            openInNewTab = true;
+                        }
+                        else
+                        {
+                            brandHref = (isEnglish ? "/en/brand/" : "/marka/") + brand.Slug;
+                            openInNewTab = false;
+                        }
+                        var brandDesc = brand.GetDescription(currentCulture);
+
+                        <a href="@brandHref"
+                           @(openInNewTab ? "target=\"_blank\" rel=\"noopener\"" : "")
+                           class="group relative overflow-hidden bg-white dark:bg-gumas-dark border border-gray-200 dark:border-white/10 min-h-[340px] flex flex-col rounded-sm shadow-sm hover:shadow-xl hover:border-gumas-red transition-all duration-300">
+
+                            <!-- Logo centered -->
+                            <div class="flex-1 flex items-center justify-center p-10">
+                                @if (!string.IsNullOrEmpty(brand.LogoUrl))
+                                {
+                                    <img src="@brand.LogoUrl"
+                                         alt="@brand.GetName(currentCulture)"
+                                         class="max-h-28 max-w-[75%] object-contain grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all duration-500" />
+                                }
+                                else
+                                {
+                                    <span class="font-oswald text-5xl md:text-6xl font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 group-hover:text-black dark:group-hover:text-white transition-colors duration-500">
+                                        @brand.GetName(currentCulture)
+                                    </span>
+                                }
+                            </div>
+
+                            <!-- Bottom band -->
+                            <div class="relative z-10 px-8 py-6 border-t border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-black/30">
+                                <h3 class="font-oswald text-xl md:text-2xl uppercase text-gray-900 dark:text-white font-bold leading-tight mb-2 group-hover:text-gumas-red transition-colors duration-300">
+                                    @brand.GetName(currentCulture)
+                                </h3>
+                                @if (!string.IsNullOrEmpty(brandDesc))
+                                {
+                                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-3 line-clamp-2">@brandDesc</p>
+                                }
+                                <div class="inline-flex items-center gap-3 text-gray-800 dark:text-white text-sm font-oswald uppercase tracking-widest group-hover:text-gumas-red transition-colors duration-300">
+                                    @(isEnglish ? "View Products" : "Ürünleri Gör")
+                                    <i class="fa-solid @(openInNewTab ? "fa-arrow-up-right-from-square" : "fa-arrow-right") text-sm group-hover:translate-x-1 transition-transform duration-300"></i>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+            }
+        </section>
+    }
+    else
+    {
+        <!-- Filtered view: breadcrumb header -->
+        <section class="border-b border-black/10 dark:border-white/10">
+            <div class="container mx-auto px-6 py-10">
+                <div class="flex flex-wrap items-center gap-4">
+                    <a href="@productsUrl" class="inline-flex items-center gap-2 text-xs font-oswald uppercase tracking-widest text-gray-400 hover:text-gumas-red transition-colors">
+                        <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                        @(isEnglish ? "All Categories" : "Tüm Kategoriler")
+                    </a>
+
+                    @if (Model.SelectedCategoryId.HasValue)
+                    {
+                        var selectedCat = Model.Categories.FirstOrDefault(c => c.Id == Model.SelectedCategoryId);
+                        if (selectedCat != null)
+                        {
+                            <span class="text-xs text-gray-300 dark:text-gray-600">/</span>
+                            <span class="text-xs font-oswald uppercase tracking-widest text-black dark:text-white">
+                                @selectedCat.GetName(currentCulture)
+                            </span>
+                        }
+                    }
+
+                    @if (Model.SelectedBrandId.HasValue)
+                    {
+                        var selectedBrand = Model.Brands.FirstOrDefault(b => b.Id == Model.SelectedBrandId);
+                        if (selectedBrand != null)
+                        {
+                            <span class="text-xs text-gray-300 dark:text-gray-600">/</span>
+                            <span class="text-xs font-oswald uppercase tracking-widest text-black dark:text-white">
+                                @selectedBrand.GetName(currentCulture)
+                            </span>
+                        }
+                    }
+
+                    <span class="ml-auto text-xs text-gray-400 font-oswald">
+                        <span class="text-black dark:text-white font-bold">@Model.TotalCount</span> @(isEnglish ? "items" : "ürün")
+                    </span>
+                </div>
+
+                <!-- Selected category title -->
+                @if (Model.SelectedCategoryId.HasValue)
+                {
+                    var selectedCat = Model.Categories.FirstOrDefault(c => c.Id == Model.SelectedCategoryId);
+                    if (selectedCat != null)
+                    {
+                        <h1 class="text-4xl md:text-6xl font-oswald font-bold uppercase text-black dark:text-white mt-6 leading-tight">
+                            @selectedCat.GetName(currentCulture)
+                        </h1>
+                    }
+                }
+            </div>
+        </section>
+
+        <!-- Brand filter pills -->
+        @if (Model.SelectedCategoryId.HasValue && Model.Brands.Any())
+        {
+            <section class="container mx-auto px-6 pt-6">
+                <div class="flex flex-wrap gap-3">
+                    @foreach (var brand in Model.Brands)
+                    {
+                        <a href="@productsUrl?categoryId=@Model.SelectedCategoryId&brandId=@brand.Id"
+                           class="px-4 py-2 text-xs font-oswald uppercase tracking-widest border transition-all duration-200
+                                  @(Model.SelectedBrandId == brand.Id
+                                    ? "bg-gumas-red text-white border-gumas-red"
+                                    : "border-black/20 dark:border-white/20 text-gray-500 dark:text-gray-400 hover:border-gumas-red hover:text-gumas-red")">
+                            @brand.GetName(currentCulture)
+                        </a>
+                    }
+                </div>
+            </section>
+        }
+
+        <!-- Product Grid -->
+        <section class="container mx-auto px-6 py-12 pb-20">
+            @if (Model.Products.Any())
+            {
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-black/10 dark:bg-white/10">
+                    @foreach (var product in Model.Products)
+                    {
+                        var mainImage = product.Images?.FirstOrDefault(i => i.IsMain) ?? product.Images?.FirstOrDefault();
+
+                        <a href="@productDetailUrl/@product.Slug"
+                           class="group bg-white dark:bg-gumas-dark hover:bg-gray-50 dark:hover:bg-gumas-gray transition-colors duration-300 p-6 flex flex-col gap-4">
+
+                            <!-- Image -->
+                            <div class="aspect-square overflow-hidden bg-gray-50 dark:bg-gumas-gray/30 flex items-center justify-center">
+                                @if (mainImage != null)
+                                {
+                                    <img src="@mainImage.ImageUrl"
+                                         alt="@product.GetName(currentCulture)"
+                                         class="w-full h-full object-contain p-4 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
+                                }
+                                else
+                                {
+                                    <i class="fa-solid fa-cube text-3xl text-gray-200 dark:text-gray-700"></i>
+                                }
+                            </div>
+
+                            <!-- Info -->
+                            <div class="flex flex-col gap-1 flex-1">
+                                @if (!string.IsNullOrEmpty(product.ProductCode))
+                                {
+                                    <span class="text-[10px] font-mono text-gray-400 uppercase tracking-wider">@product.ProductCode</span>
+                                }
+                                <h3 class="font-oswald text-base uppercase text-black dark:text-white group-hover:text-gumas-red transition-colors duration-200 leading-tight">
+                                    @product.GetName(currentCulture)
+                                </h3>
+                                @if (product.Brand != null)
+                                {
+                                    <span class="text-[10px] font-oswald uppercase tracking-widest text-gray-400">@product.Brand.GetName(currentCulture)</span>
+                                }
+                            </div>
+
+                            <!-- Arrow -->
+                            <div class="flex justify-end">
+                                <i class="fa-solid fa-arrow-right text-xs text-gray-300 dark:text-gray-600 group-hover:text-gumas-red group-hover:translate-x-1 transition-all duration-300"></i>
+                            </div>
+                        </a>
+                    }
+                </div>
+
+                <!-- Pagination -->
+                @if (Model.TotalPages > 1)
+                {
+                    <div class="flex justify-center items-center gap-1 mt-16">
+                        @if (Model.Page > 1)
+                        {
+                            <a href="@Url.Action("Index", new { categoryId = Model.SelectedCategoryId, brandId = Model.SelectedBrandId, page = Model.Page - 1 })"
+                               class="w-10 h-10 flex items-center justify-center border border-black/20 dark:border-white/20 text-gray-500 hover:border-gumas-red hover:text-gumas-red transition-colors">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </a>
+                        }
+
+                        @{
+                            var startPage = Math.Max(1, Model.Page - 2);
+                            var endPage = Math.Min(Model.TotalPages, Model.Page + 2);
+                        }
+
+                        @if (startPage > 1)
+                        {
+                            <a href="@Url.Action("Index", new { categoryId = Model.SelectedCategoryId, brandId = Model.SelectedBrandId, page = 1 })"
+                               class="w-10 h-10 flex items-center justify-center border border-black/20 dark:border-white/20 text-gray-500 hover:border-gumas-red hover:text-gumas-red transition-colors font-oswald text-sm">1</a>
+                            @if (startPage > 2) { <span class="text-gray-400 px-1">…</span> }
+                        }
+
+                        @for (int i = startPage; i <= endPage; i++)
+                        {
+                            <a href="@Url.Action("Index", new { categoryId = Model.SelectedCategoryId, brandId = Model.SelectedBrandId, page = i })"
+                               class="w-10 h-10 flex items-center justify-center border font-oswald text-sm transition-colors
+                                      @(i == Model.Page ? "bg-gumas-red text-white border-gumas-red" : "border-black/20 dark:border-white/20 text-gray-500 hover:border-gumas-red hover:text-gumas-red")">
+                                @i
+                            </a>
+                        }
+
+                        @if (endPage < Model.TotalPages)
+                        {
+                            @if (endPage < Model.TotalPages - 1) { <span class="text-gray-400 px-1">…</span> }
+                            <a href="@Url.Action("Index", new { categoryId = Model.SelectedCategoryId, brandId = Model.SelectedBrandId, page = Model.TotalPages })"
+                               class="w-10 h-10 flex items-center justify-center border border-black/20 dark:border-white/20 text-gray-500 hover:border-gumas-red hover:text-gumas-red transition-colors font-oswald text-sm">
+                                @Model.TotalPages
+                            </a>
+                        }
+
+                        @if (Model.Page < Model.TotalPages)
+                        {
+                            <a href="@Url.Action("Index", new { categoryId = Model.SelectedCategoryId, brandId = Model.SelectedBrandId, page = Model.Page + 1 })"
+                               class="w-10 h-10 flex items-center justify-center border border-black/20 dark:border-white/20 text-gray-500 hover:border-gumas-red hover:text-gumas-red transition-colors">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </a>
+                        }
+                    </div>
+                }
+            }
+        </section>
+    }
+
+</main>

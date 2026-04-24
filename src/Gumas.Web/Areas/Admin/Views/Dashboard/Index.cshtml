@@ -1,0 +1,179 @@
+@using Gumas.Domain.Enums
+@{
+    ViewData["Title"] = "Dashboard";
+    var recentProducts = ViewBag.RecentProducts as IEnumerable<Product>;
+    var recentMessages = ViewBag.RecentMessages as IEnumerable<ContactMessage>;
+}
+
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-3 bg-blue-100 rounded-full">
+                <i class="fas fa-box text-blue-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+                <p class="text-gray-500 text-sm">Toplam Ürün</p>
+                <p class="text-2xl font-bold text-gray-800">@ViewBag.ProductCount</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-3 bg-green-100 rounded-full">
+                <i class="fas fa-tags text-green-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+                <p class="text-gray-500 text-sm">Toplam Marka</p>
+                <p class="text-2xl font-bold text-gray-800">@ViewBag.BrandCount</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-3 bg-purple-100 rounded-full">
+                <i class="fas fa-folder text-purple-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+                <p class="text-gray-500 text-sm">Toplam Kategori</p>
+                <p class="text-2xl font-bold text-gray-800">@ViewBag.CategoryCount</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-3 bg-red-100 rounded-full">
+                <i class="fas fa-envelope text-red-600 text-xl"></i>
+            </div>
+            <div class="ml-4">
+                <p class="text-gray-500 text-sm">Okunmamış Mesaj</p>
+                <p class="text-2xl font-bold text-gray-800">@ViewBag.UnreadMessageCount</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Son Eklenen Ürünler -->
+    <div class="bg-white rounded-lg shadow">
+        <div class="px-6 py-4 border-b flex justify-between items-center">
+            <h2 class="font-semibold text-gray-800">
+                <i class="fas fa-box mr-2 text-gumas-red"></i>Son Eklenen Ürünler
+            </h2>
+            <a href="@Url.Action("Index", "Products", new { area = "Admin" })" class="text-sm text-gumas-red hover:underline">
+                Tümünü Gör
+            </a>
+        </div>
+        <div class="p-6">
+            @if (recentProducts != null && recentProducts.Any())
+            {
+                <div class="space-y-4">
+                    @foreach (var product in recentProducts)
+                    {
+                        var productImage = product.Images?.FirstOrDefault()?.ImageUrl;
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                @if (!string.IsNullOrEmpty(productImage))
+                                {
+                                    <img src="@productImage" alt="@product.NameTr" class="w-10 h-10 object-cover rounded">
+                                }
+                                else
+                                {
+                                    <div class="w-10 h-10 bg-gray-200 rounded flex items-center justify-center">
+                                        <i class="fas fa-image text-gray-400"></i>
+                                    </div>
+                                }
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-800">@product.NameTr</p>
+                                    <p class="text-xs text-gray-500">@product.Brand?.NameTr - @product.Category?.NameTr</p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-gray-400">@product.CreatedAt.ToString("dd.MM.yyyy")</span>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-gray-500 text-center py-4">Henüz ürün eklenmemiş.</p>
+            }
+        </div>
+    </div>
+
+    <!-- Son Gelen Mesajlar -->
+    <div class="bg-white rounded-lg shadow">
+        <div class="px-6 py-4 border-b flex justify-between items-center">
+            <h2 class="font-semibold text-gray-800">
+                <i class="fas fa-envelope mr-2 text-gumas-red"></i>Son Gelen Mesajlar
+            </h2>
+            <a href="@Url.Action("Index", "Messages", new { area = "Admin" })" class="text-sm text-gumas-red hover:underline">
+                Tümünü Gör
+            </a>
+        </div>
+        <div class="p-6">
+            @if (recentMessages != null && recentMessages.Any())
+            {
+                <div class="space-y-4">
+                    @foreach (var message in recentMessages)
+                    {
+                        var isUnread = message.Status == MessageStatus.New;
+                        <div class="flex items-start justify-between @(isUnread ? "bg-red-50 -mx-2 px-2 py-2 rounded" : "")">
+                            <div>
+                                <p class="text-sm font-medium text-gray-800 @(isUnread ? "font-bold" : "")">
+                                    @message.FullName
+                                    @if (isUnread)
+                                    {
+                                        <span class="ml-2 text-xs bg-gumas-red text-white px-2 py-0.5 rounded-full">Yeni</span>
+                                    }
+                                </p>
+                                <p class="text-xs text-gray-600 truncate max-w-xs">@message.Subject</p>
+                                <p class="text-xs text-gray-400">@message.Email</p>
+                            </div>
+                            <span class="text-xs text-gray-400">@message.CreatedAt.ToString("dd.MM.yyyy HH:mm")</span>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-gray-500 text-center py-4">Henüz mesaj gelmemiş.</p>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Quick Stats -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Toplam Haber</p>
+                <p class="text-xl font-bold text-gray-800">@ViewBag.NewsCount</p>
+            </div>
+            <i class="fas fa-newspaper text-3xl text-gray-300"></i>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Toplam Slider</p>
+                <p class="text-xl font-bold text-gray-800">@ViewBag.SliderCount</p>
+            </div>
+            <i class="fas fa-images text-3xl text-gray-300"></i>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-gray-500 text-sm">Toplam Mesaj</p>
+                <p class="text-xl font-bold text-gray-800">@ViewBag.MessageCount</p>
+            </div>
+            <i class="fas fa-comments text-3xl text-gray-300"></i>
+        </div>
+    </div>
+</div>

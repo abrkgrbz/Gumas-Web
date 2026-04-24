@@ -1,0 +1,37 @@
+@{
+    var currentCulture = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEnglish = currentCulture == "en";
+    ViewData["Title"] = isEnglish ? "E-Catalogue" : "E-Katalog";
+    var homeUrl = isEnglish ? "/en" : "/";
+}
+
+<main class="pt-32 pb-20 bg-white dark:bg-gumas-dark transition-colors duration-300">
+
+    <!-- Breadcrumb -->
+    <div class="container mx-auto px-6 mb-8 text-xs font-mono text-gray-500 uppercase tracking-widest">
+        <a href="@homeUrl" class="hover:text-black dark:hover:text-white transition-colors">@L["Nav_Home"]</a>
+        <span class="mx-2">/</span>
+        <span class="text-gumas-red">@L["Nav_ECatalog"]</span>
+    </div>
+
+    <!-- Page Header -->
+    <section class="container mx-auto px-6 mb-16">
+        <div class="max-w-4xl">
+            <h1 class="text-4xl md:text-6xl font-oswald font-bold uppercase mb-6 text-black dark:text-white">
+                @(isEnglish ? "E-Catalogue" : "E-Katalog")
+            </h1>
+            <div class="w-20 h-1 bg-gumas-red mb-6"></div>
+            <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
+                @(isEnglish
+                    ? "Browse the full catalogue of our partner brands. Each item below links directly to the official manufacturer's product page."
+                    : "Partner markalarımızın tüm katalog içeriğine buradan ulaşabilirsiniz. Aşağıdaki her başlık, ilgili üreticinin resmi ürün sayfasına yönlendirir.")
+            </p>
+        </div>
+    </section>
+
+    <!-- Catalogue List -->
+    <section class="container mx-auto px-6">
+        @await Html.PartialAsync("_ECatalogueList")
+    </section>
+
+</main>

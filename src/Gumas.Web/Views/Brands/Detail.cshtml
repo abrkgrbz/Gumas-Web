@@ -1,0 +1,102 @@
+@model BrandDetailViewModel
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEnglish = currentCulture == "en";
+    ViewData["Title"] = Model.Brand.GetName(currentCulture);
+    var homeUrl = isEnglish ? "/en" : "/";
+    var brandsUrl = isEnglish ? "/en/brands" : "/markalar";
+    var productDetailUrl = isEnglish ? "/en/product" : "/urun";
+    var productsUrl = isEnglish ? "/en/products" : "/urunler";
+}
+
+<!-- Main Content -->
+<main class="pt-32 pb-20 bg-white dark:bg-gumas-dark transition-colors duration-300">
+
+    <!-- Breadcrumb -->
+    <div class="container mx-auto px-6 mb-8 text-xs font-mono text-gray-500 uppercase tracking-widest">
+        <a href="@homeUrl" class="hover:text-black dark:hover:text-white transition-colors">@L["Nav_Home"]</a>
+        <span class="mx-2">/</span>
+        <a href="@brandsUrl" class="hover:text-black dark:hover:text-white transition-colors">@L["Nav_Brands"]</a>
+        <span class="mx-2">/</span>
+        <span class="text-gumas-red">@Model.Brand.GetName(currentCulture)</span>
+    </div>
+
+    <!-- Brand Header -->
+    <section class="container mx-auto px-6 mb-20 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-12 items-start">
+            <!-- Brand Logo -->
+            <div class="lg:col-span-1">
+                <div class="bg-white dark:bg-gumas-gray border border-gray-200 dark:border-white/10 p-8 flex items-center justify-center">
+                    @if (!string.IsNullOrEmpty(Model.Brand.LogoUrl))
+                    {
+                        <img src="@Model.Brand.LogoUrl" alt="@Model.Brand.GetName(currentCulture)"
+                             class="max-h-24 object-contain" />
+                    }
+                    else
+                    {
+                        <span class="font-oswald text-4xl font-bold text-black dark:text-white">
+                            @Model.Brand.GetName(currentCulture)
+                        </span>
+                    }
+                </div>
+            </div>
+
+            <!-- Brand Info -->
+            <div class="lg:col-span-3">
+                <div class="mb-4">
+                    <a href="@brandsUrl"
+                       class="text-sm font-oswald uppercase tracking-widest text-gray-500 dark:text-gray-400 hover:text-gumas-red transition-colors inline-flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        @(isEnglish ? "Back to Brands" : "Markalara Dön")
+                    </a>
+                </div>
+
+                <h1 class="text-4xl md:text-6xl font-oswald font-bold uppercase mb-6 text-black dark:text-white">
+                    @Model.Brand.GetName(currentCulture)
+                </h1>
+
+                @if (!string.IsNullOrEmpty(Model.Brand.GetDescription(currentCulture)))
+                {
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl mb-6">
+                        @Model.Brand.GetDescription(currentCulture)
+                    </p>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.Brand.Website))
+                {
+                    <a href="@Model.Brand.Website" target="_blank" rel="noopener"
+                       class="inline-flex items-center gap-2 px-6 py-3 bg-gumas-red text-white font-oswald text-sm uppercase tracking-widest hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all">
+                        @(isEnglish ? "Visit Official Website" : "Kurumsal Siteyi Ziyaret Et")
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                }
+            </div>
+        </div>
+    </section>
+
+    @{
+        var brandSlug = Model.Brand.Slug?.ToLowerInvariant();
+        var sectionPartial = brandSlug switch
+        {
+            "jost" => "_JostSections",
+            "rockinger" => "_RockingerSections",
+            "tridec" => "_TridecSections",
+            "quicke" => "_QuickeSections",
+            _ => null
+        };
+    }
+
+    @if (sectionPartial != null)
+    {
+        <section class="container mx-auto px-6 mb-20">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl md:text-5xl font-oswald font-bold uppercase text-black dark:text-white mb-4">
+                    @(isEnglish ? "Product Categories" : "Ürün Kategorileri")
+                </h2>
+                <div class="w-20 h-1 bg-gumas-red mx-auto"></div>
+            </div>
+            @await Html.PartialAsync(sectionPartial)
+        </section>
+    }
+
+</main>

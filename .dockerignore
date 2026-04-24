@@ -1,0 +1,52 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vs
+.vscode
+.idea
+*.user
+*.suo
+
+# Build outputs
+**/bin
+**/obj
+**/out
+**/publish
+
+# Test results
+**/TestResults
+
+# NuGet
+**/packages
+
+# Node (if any)
+**/node_modules
+
+# Docker
+Dockerfile*
+docker-compose*
+.docker
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# Misc
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Local settings
+appsettings.Development.json
+*.local.json
+
+# Database files
+*.db
+*.mdf
+*.ldf

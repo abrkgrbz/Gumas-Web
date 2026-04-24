@@ -1,0 +1,83 @@
+@{
+    Layout = null;
+    ViewData["Title"] = "Admin Giriş";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Giriş - GÜMAŞ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gumas-red': '#B91C1C',
+                        'gumas-dark': '#1F2937'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md">
+        <div class="bg-white rounded-lg shadow-xl p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gumas-red">GÜMAŞ</h1>
+                <p class="text-gray-600 mt-2">Yönetim Paneli</p>
+            </div>
+
+            <form method="post" asp-area="Admin" asp-controller="Auth" asp-action="Login">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                        <i class="fas fa-exclamation-circle mr-2"></i>
+                        @Html.ValidationSummary(true, "", new { @class = "inline" })
+                    </div>
+                }
+
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 text-sm font-medium mb-2">
+                        <i class="fas fa-user mr-2"></i>Kullanıcı Adı
+                    </label>
+                    <input type="text" id="username" name="username"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gumas-red focus:border-transparent"
+                           placeholder="Kullanıcı adınızı girin" required>
+                </div>
+
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700 text-sm font-medium mb-2">
+                        <i class="fas fa-lock mr-2"></i>Şifre
+                    </label>
+                    <input type="password" id="password" name="password"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gumas-red focus:border-transparent"
+                           placeholder="Şifrenizi girin" required>
+                </div>
+
+                <button type="submit"
+                        class="w-full bg-gumas-red text-white py-3 rounded-lg hover:bg-red-800 transition-colors font-medium">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Giriş Yap
+                </button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <a href="/" class="text-gray-600 hover:text-gumas-red text-sm">
+                    <i class="fas fa-arrow-left mr-2"></i>Ana Sayfaya Dön
+                </a>
+            </div>
+        </div>
+
+        <p class="text-center text-gray-500 text-sm mt-4">
+            &copy; @DateTime.Now.Year Gümaş Otomotiv. Tüm hakları saklıdır.
+        </p>
+    </div>
+</body>
+</html>

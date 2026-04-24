@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+
+  <!-- Navigation -->
+  <data name="Nav_Products" xml:space="preserve">
+    <value>Ürünler</value>
+  </data>
+  <data name="Nav_Brands" xml:space="preserve">
+    <value>Markalar</value>
+  </data>
+  <data name="Nav_ECatalog" xml:space="preserve">
+    <value>E-Katalog</value>
+  </data>
+  <data name="Nav_About" xml:space="preserve">
+    <value>Hakkımızda</value>
+  </data>
+  <data name="Nav_Contact" xml:space="preserve">
+    <value>İletişim</value>
+  </data>
+  <data name="Nav_News" xml:space="preserve">
+    <value>Haberler</value>
+  </data>
+  <data name="Nav_GetQuote" xml:space="preserve">
+    <value>Teklif Al</value>
+  </data>
+
+  <!-- Common -->
+  <data name="Common_ReadMore" xml:space="preserve">
+    <value>Devamını Oku</value>
+  </data>
+  <data name="Common_ViewAll" xml:space="preserve">
+    <value>Tümünü Gör</value>
+  </data>
+  <data name="Common_Search" xml:space="preserve">
+    <value>Ara</value>
+  </data>
+  <data name="Common_Filter" xml:space="preserve">
+    <value>Filtrele</value>
+  </data>
+  <data name="Common_ClearAll" xml:space="preserve">
+    <value>Temizle</value>
+  </data>
+  <data name="Common_NoResults" xml:space="preserve">
+    <value>Sonuç Bulunamadı</value>
+  </data>
+  <data name="Common_ProductsFound" xml:space="preserve">
+    <value>ürün bulundu</value>
+  </data>
+  <data name="Common_Featured" xml:space="preserve">
+    <value>Öne Çıkan</value>
+  </data>
+  <data name="Common_Details" xml:space="preserve">
+    <value>Detaylar</value>
+  </data>
+  <data name="Common_Download" xml:space="preserve">
+    <value>İndir</value>
+  </data>
+  <data name="Common_Send" xml:space="preserve">
+    <value>Gönder</value>
+  </data>
+  <data name="Common_Loading" xml:space="preserve">
+    <value>Yükleniyor...</value>
+  </data>
+  <data name="Common_Previous" xml:space="preserve">
+    <value>Önceki</value>
+  </data>
+  <data name="Common_Next" xml:space="preserve">
+    <value>Sonraki</value>
+  </data>
+  <data name="Common_All" xml:space="preserve">
+    <value>Tümü</value>
+  </data>
+  <data name="Common_Category" xml:space="preserve">
+    <value>Kategori</value>
+  </data>
+  <data name="Common_Brand" xml:space="preserve">
+    <value>Marka</value>
+  </data>
+  <data name="Common_AllCategories" xml:space="preserve">
+    <value>Tüm Kategoriler</value>
+  </data>
+  <data name="Common_AllBrands" xml:space="preserve">
+    <value>Tüm Markalar</value>
+  </data>
+
+  <!-- Home Page -->
+  <data name="Home_FeaturedBrands" xml:space="preserve">
+    <value>Öne Çıkan Markalar</value>
+  </data>
+  <data name="Home_FeaturedProducts" xml:space="preserve">
+    <value>Öne Çıkan Ürünler</value>
+  </data>
+  <data name="Home_LatestNews" xml:space="preserve">
+    <value>Son Haberler</value>
+  </data>
+  <data name="Home_Categories" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
+  <data name="Home_WhyUs" xml:space="preserve">
+    <value>Neden Biz?</value>
+  </data>
+  <data name="Home_Explore" xml:space="preserve">
+    <value>Keşfet</value>
+  </data>
+  <data name="Home_ProductCategories" xml:space="preserve">
+    <value>Ürün Kategorileri</value>
+  </data>
+  <data name="Home_SpareParts_Title1" xml:space="preserve">
+    <value>Yedek</value>
+  </data>
+  <data name="Home_SpareParts_Title2" xml:space="preserve">
+    <value>Parçalar</value>
+  </data>
+  <data name="Home_PartsCatalog" xml:space="preserve">
+    <value>Parça Kataloğu</value>
+  </data>
+  <data name="Home_BrandsSubtitle" xml:space="preserve">
+    <value>Çözüm Ortaklarımız</value>
+  </data>
+  <data name="Home_AllBrands" xml:space="preserve">
+    <value>Tüm Markalar</value>
+  </data>
+  <data name="Home_Feature1_Title" xml:space="preserve">
+    <value>40+ Yıl Deneyim</value>
+  </data>
+  <data name="Home_Feature1_Description" xml:space="preserve">
+    <value>1985'ten bu yana ağır vasıta sektöründe güvenilir tedarikçi.</value>
+  </data>
+  <data name="Home_Feature2_Title" xml:space="preserve">
+    <value>10.000+ Ürün</value>
+  </data>
+  <data name="Home_Feature2_Description" xml:space="preserve">
+    <value>Geniş ürün yelpazesi ile tüm ihtiyaçlarınıza tek noktadan çözüm.</value>
+  </data>
+  <data name="Home_Feature3_Title" xml:space="preserve">
+    <value>Hızlı Teslimat</value>
+  </data>
+  <data name="Home_Feature3_Description" xml:space="preserve">
+    <value>Güçlü stok kapasitesi ve hızlı lojistik altyapısı.</value>
+  </data>
+  <data name="Home_AllNews" xml:space="preserve">
+    <value>Tüm Haberler</value>
+  </data>
+  <data name="Home_Cta_Title1" xml:space="preserve">
+    <value>Sorularınız mı</value>
+  </data>
+  <data name="Home_Cta_Title2" xml:space="preserve">
+    <value>Var?</value>
+  </data>
+  <data name="Home_Cta_Description" xml:space="preserve">
+    <value>Uzman ekibimiz size yardımcı olmak için hazır. Hemen iletişime geçin.</value>
+  </data>
+  <data name="Home_Support247" xml:space="preserve">
+    <value>7/24 Destek</value>
+  </data>
+  <data name="Home_SupportDesc" xml:space="preserve">
+    <value>Teknik destek ekibimiz her zaman yanınızda.</value>
+  </data>
+
+  <!-- Products Page -->
+  <data name="Products_Title" xml:space="preserve">
+    <value>Ürün Kataloğu</value>
+  </data>
+  <data name="Products_SearchPlaceholder" xml:space="preserve">
+    <value>Ürün adı, kod veya OEM numarası ile arama...</value>
+  </data>
+  <data name="Products_Code" xml:space="preserve">
+    <value>Ürün Kodu</value>
+  </data>
+  <data name="Products_OEM" xml:space="preserve">
+    <value>OEM Numarası</value>
+  </data>
+  <data name="Products_Specifications" xml:space="preserve">
+    <value>Teknik Özellikler</value>
+  </data>
+  <data name="Products_RelatedProducts" xml:space="preserve">
+    <value>Benzer Ürünler</value>
+  </data>
+  <data name="Products_RequestQuote" xml:space="preserve">
+    <value>Teklif İste</value>
+  </data>
+  <data name="Products_WhatsAppOrder" xml:space="preserve">
+    <value>WhatsApp ile Sipariş</value>
+  </data>
+  <data name="Products_Featured" xml:space="preserve">
+    <value>Öne Çıkan</value>
+  </data>
+  <data name="Products_ViewAll" xml:space="preserve">
+    <value>Tüm Ürünler</value>
+  </data>
+
+  <!-- Brands Page -->
+  <data name="Brands_Title" xml:space="preserve">
+    <value>Markalarımız</value>
+  </data>
+  <data name="Brands_AllBrands" xml:space="preserve">
+    <value>Tüm Markalar</value>
+  </data>
+  <data name="Brands_Products" xml:space="preserve">
+    <value>Ürünler</value>
+  </data>
+  <data name="Brands_ViewProducts" xml:space="preserve">
+    <value>Ürünleri Görüntüle</value>
+  </data>
+  <data name="Brands_TitleSuffix" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Brands_Description" xml:space="preserve">
+    <value>Dünya standartlarında üreticilerin Türkiye yetkili temsilcisi olarak, en kaliteli yedek parçaları sizlere sunuyoruz.</value>
+  </data>
+  <data name="Brands_FeaturedTitle" xml:space="preserve">
+    <value>Öne Çıkan</value>
+  </data>
+  <data name="Brands_CtaTitle" xml:space="preserve">
+    <value>Doğru Parçayı mı</value>
+  </data>
+  <data name="Brands_CtaTitleHighlight" xml:space="preserve">
+    <value>Arıyorsunuz?</value>
+  </data>
+  <data name="Brands_CtaDescription" xml:space="preserve">
+    <value>12.000'den fazla ürün referansı ile ihtiyacınız olan parçayı hızlıca temin ediyoruz. Hemen teklif alın.</value>
+  </data>
+
+  <!-- News Page -->
+  <data name="News_Title" xml:space="preserve">
+    <value>Haberler</value>
+  </data>
+  <data name="News_TitleSuffix" xml:space="preserve">
+    <value>ler</value>
+  </data>
+  <data name="News_Description" xml:space="preserve">
+    <value>Sektördeki son gelişmeler, yeni ürün lansmanları ve şirket haberlerimiz.</value>
+  </data>
+  <data name="News_LatestNews" xml:space="preserve">
+    <value>Son Haberler</value>
+  </data>
+  <data name="News_RelatedNews" xml:space="preserve">
+    <value>İlgili Haberler</value>
+  </data>
+  <data name="News_Share" xml:space="preserve">
+    <value>Paylaş</value>
+  </data>
+  <data name="News_BackToNews" xml:space="preserve">
+    <value>Haberlere Dön</value>
+  </data>
+  <data name="News_HaveQuestions" xml:space="preserve">
+    <value>Sorularınız mı var?</value>
+  </data>
+  <data name="News_ContactUs" xml:space="preserve">
+    <value>Bizimle iletişime geçin.</value>
+  </data>
+  <data name="News_NoResults" xml:space="preserve">
+    <value>Haber Bulunamadı</value>
+  </data>
+  <data name="News_NoResultsDesc" xml:space="preserve">
+    <value>Henüz yayınlanmış haber bulunmamaktadır. Lütfen daha sonra tekrar kontrol edin.</value>
+  </data>
+  <data name="Nav_Home" xml:space="preserve">
+    <value>Ana Sayfa</value>
+  </data>
+
+  <!-- Contact Page -->
+  <data name="Contact_Title" xml:space="preserve">
+    <value>İletişim</value>
+  </data>
+  <data name="Contact_Subtitle" xml:space="preserve">
+    <value>Bizimle</value>
+  </data>
+  <data name="Contact_FullName" xml:space="preserve">
+    <value>Ad Soyad</value>
+  </data>
+  <data name="Contact_Phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="Contact_Email" xml:space="preserve">
+    <value>E-posta Adresi</value>
+  </data>
+  <data name="Contact_Company" xml:space="preserve">
+    <value>Firma Adı</value>
+  </data>
+  <data name="Contact_Subject" xml:space="preserve">
+    <value>Konu</value>
+  </data>
+  <data name="Contact_Message" xml:space="preserve">
+    <value>Mesajınız</value>
+  </data>
+  <data name="Contact_SendMessage" xml:space="preserve">
+    <value>Mesaj Gönder</value>
+  </data>
+  <data name="Contact_HeadOffice" xml:space="preserve">
+    <value>Merkez Ofis</value>
+  </data>
+  <data name="Contact_WorkingHours" xml:space="preserve">
+    <value>Çalışma Saatleri</value>
+  </data>
+  <data name="Contact_SocialMedia" xml:space="preserve">
+    <value>Sosyal Medya</value>
+  </data>
+  <data name="Contact_SuccessMessage" xml:space="preserve">
+    <value>Mesajınız başarıyla gönderildi. En kısa sürede sizinle iletişime geçeceğiz.</value>
+  </data>
+  <data name="Contact_TitleSuffix" xml:space="preserve">
+    <value>Bilgileri</value>
+  </data>
+  <data name="Contact_Description" xml:space="preserve">
+    <value>Sorularınız, talepleriniz veya iş birliği fırsatları için bizimle iletişime geçin. Size en kısa sürede dönüş yapacağız.</value>
+  </data>
+  <data name="Contact_Headquarters" xml:space="preserve">
+    <value>Merkez Ofis</value>
+  </data>
+  <data name="Contact_PhoneField" xml:space="preserve">
+    <value>Telefon Numaranız</value>
+  </data>
+  <data name="Contact_EmailField" xml:space="preserve">
+    <value>E-posta Adresiniz</value>
+  </data>
+  <data name="Contact_WeekdayHours" xml:space="preserve">
+    <value>Pazartesi - Cuma: 09:00 - 18:00</value>
+  </data>
+  <data name="Contact_SundayHours" xml:space="preserve">
+    <value>Cumartesi - Pazar: Kapalı</value>
+  </data>
+
+  <!-- About Page -->
+  <data name="About_Title" xml:space="preserve">
+    <value>Hakkımızda</value>
+  </data>
+  <data name="About_Since1985" xml:space="preserve">
+    <value>1985'ten Beri</value>
+  </data>
+  <data name="About_HeroTitle1" xml:space="preserve">
+    <value>Küresel</value>
+  </data>
+  <data name="About_HeroTitle2" xml:space="preserve">
+    <value>Tedarik</value>
+  </data>
+  <data name="About_Intro1" xml:space="preserve">
+    <value>GÜMAŞ, Otobüs, Kamyon ve Treyler segmentleri için yüksek kaliteli yedek parçaların ithalatı ve dağıtımında uzmanlaşmış, ticari araç endüstrisi için önde gelen bir iş ortağıdır. Dünya standartlarındaki üreticiler ile yerel pazar arasında köprü kuruyoruz.</value>
+  </data>
+  <data name="About_Intro2" xml:space="preserve">
+    <value>Devasa stok gücümüz ve gelişmiş lojistik ağımızla, filo operatörlerinin ve servis merkezlerinin kritik bileşenlere anında erişimini sağlıyoruz. Önde gelen küresel markaları temsil ederek OEM seviyesinde kalite ve güvenilirliği garanti ediyoruz.</value>
+  </data>
+  <data name="About_HistoryTitle1" xml:space="preserve">
+    <value>1985'ten</value>
+  </data>
+  <data name="About_HistoryTitle2" xml:space="preserve">
+    <value>Bugüne</value>
+  </data>
+  <data name="About_HistoryText1" xml:space="preserve">
+    <value>Kırk yılı aşkın süredir GÜMAŞ, küresel üretim mükemmelliği ile yerel endüstriyel ihtiyaçlar arasında köprü görevi görüyor. Sadece parça tedarik etmiyoruz; sürekliliği garanti ediyoruz.</value>
+  </data>
+  <data name="About_HistoryText2" xml:space="preserve">
+    <value>Önde gelen bir ithalatçı ve distribütör olarak, ağır ticari araç pazarını derinlemesine anlıyoruz. Lojistik ağımız, tek bir aks bileşenine veya bir filonun tüm fren sistemlerine ihtiyacınız olsun, her zaman zamanında teslimat yapılmasını sağlar.</value>
+  </data>
+  <data name="About_YearsExperience" xml:space="preserve">
+    <value>Yıllık Deneyim</value>
+  </data>
+  <data name="About_ProductReferences" xml:space="preserve">
+    <value>Ürün Referansı</value>
+  </data>
+  <data name="About_ProductVariety" xml:space="preserve">
+    <value>Ürün Çeşidi</value>
+  </data>
+  <data name="About_HappyCustomers" xml:space="preserve">
+    <value>Mutlu Müşteri</value>
+  </data>
+  <data name="About_BrandPartnerships" xml:space="preserve">
+    <value>Marka Ortaklığı</value>
+  </data>
+  <data name="About_IndustrialLogistics" xml:space="preserve">
+    <value>Endüstriyel Lojistik</value>
+  </data>
+  <data name="About_OurStory" xml:space="preserve">
+    <value>Hikayemiz</value>
+  </data>
+  <data name="About_Mission" xml:space="preserve">
+    <value>Misyonumuz</value>
+  </data>
+  <data name="About_MissionText" xml:space="preserve">
+    <value>Ağır vasıta sektöründe müşterilerimize en kaliteli yedek parçaları, en rekabetçi fiyatlarla sunmak. Hızlı teslimat, profesyonel hizmet ve güvenilir iş ortaklığı ile sektörün vazgeçilmez tedarikçisi olmak.</value>
+  </data>
+  <data name="About_Vision" xml:space="preserve">
+    <value>Vizyonumuz</value>
+  </data>
+  <data name="About_VisionText" xml:space="preserve">
+    <value>Türkiye ve uluslararası pazarlarda ağır vasıta yedek parça sektörünün lider markası olmak. Teknoloji yatırımları ve sürekli gelişim ile müşteri memnuniyetinde en yüksek standartları belirlemek.</value>
+  </data>
+  <data name="About_OurValues" xml:space="preserve">
+    <value>Değer</value>
+  </data>
+  <data name="About_OurValuesSuffix" xml:space="preserve">
+    <value>lerimiz</value>
+  </data>
+  <data name="About_Value_Quality" xml:space="preserve">
+    <value>Kalite</value>
+  </data>
+  <data name="About_Value_QualityDesc" xml:space="preserve">
+    <value>Her ürünümüzde en yüksek kalite standartlarını uyguluyoruz.</value>
+  </data>
+  <data name="About_Value_Reliability" xml:space="preserve">
+    <value>Güvenilirlik</value>
+  </data>
+  <data name="About_Value_ReliabilityDesc" xml:space="preserve">
+    <value>Müşterilerimizle uzun vadeli, güvene dayalı ilişkiler kuruyoruz.</value>
+  </data>
+  <data name="About_Value_Speed" xml:space="preserve">
+    <value>Hız</value>
+  </data>
+  <data name="About_Value_SpeedDesc" xml:space="preserve">
+    <value>Siparişlerinizi en kısa sürede hazırlayıp teslim ediyoruz.</value>
+  </data>
+  <data name="About_Value_CustomerFocus" xml:space="preserve">
+    <value>Müşteri Odaklılık</value>
+  </data>
+  <data name="About_Value_CustomerFocusDesc" xml:space="preserve">
+    <value>Müşteri memnuniyeti her zaman önceliğimizdir.</value>
+  </data>
+  <data name="About_Value_Improvement" xml:space="preserve">
+    <value>Sürekli Gelişim</value>
+  </data>
+  <data name="About_Value_ImprovementDesc" xml:space="preserve">
+    <value>Kendimizi ve hizmetlerimizi sürekli geliştiriyoruz.</value>
+  </data>
+  <data name="About_Value_GlobalVision" xml:space="preserve">
+    <value>Global Vizyon</value>
+  </data>
+  <data name="About_Value_GlobalVisionDesc" xml:space="preserve">
+    <value>Uluslararası standartlarda hizmet sunuyoruz.</value>
+  </data>
+  <data name="About_CTATitle1" xml:space="preserve">
+    <value>Bizimle Çalışmak</value>
+  </data>
+  <data name="About_CTATitle2" xml:space="preserve">
+    <value>İster misiniz?</value>
+  </data>
+  <data name="About_CTADescription" xml:space="preserve">
+    <value>Sorularınız için hemen iletişime geçin, size yardımcı olmaktan mutluluk duyarız.</value>
+  </data>
+  <data name="About_CTAButton" xml:space="preserve">
+    <value>İletişime Geç</value>
+  </data>
+  <data name="About_Values" xml:space="preserve">
+    <value>Değerlerimiz</value>
+  </data>
+  <data name="About_Quality" xml:space="preserve">
+    <value>Kalite</value>
+  </data>
+  <data name="About_Trust" xml:space="preserve">
+    <value>Güven</value>
+  </data>
+  <data name="About_Innovation" xml:space="preserve">
+    <value>Yenilikçilik</value>
+  </data>
+  <data name="About_CustomerFocus" xml:space="preserve">
+    <value>Müşteri Odaklılık</value>
+  </data>
+
+  <!-- E-Catalog Page -->
+  <data name="Catalog_Title" xml:space="preserve">
+    <value>E-Katalog</value>
+  </data>
+  <data name="Catalog_Subtitle" xml:space="preserve">
+    <value>Dijital Kataloglarımız</value>
+  </data>
+  <data name="Catalog_Download" xml:space="preserve">
+    <value>PDF İndir</value>
+  </data>
+  <data name="Catalog_View" xml:space="preserve">
+    <value>Görüntüle</value>
+  </data>
+  <data name="Catalog_GeneralCatalog" xml:space="preserve">
+    <value>Genel Ürün Kataloğu</value>
+  </data>
+  <data name="Catalog_MotorParts" xml:space="preserve">
+    <value>Motor Parçaları Kataloğu</value>
+  </data>
+  <data name="Catalog_BrakeSystems" xml:space="preserve">
+    <value>Fren Sistemleri Kataloğu</value>
+  </data>
+
+  <!-- Footer -->
+  <data name="Footer_QuickLinks" xml:space="preserve">
+    <value>Hızlı Linkler</value>
+  </data>
+  <data name="Footer_Corporate" xml:space="preserve">
+    <value>Kurumsal</value>
+  </data>
+  <data name="Footer_Contact" xml:space="preserve">
+    <value>İletişim</value>
+  </data>
+  <data name="Footer_PrivacyPolicy" xml:space="preserve">
+    <value>Gizlilik Politikası</value>
+  </data>
+  <data name="Footer_TermsOfUse" xml:space="preserve">
+    <value>Kullanım Şartları</value>
+  </data>
+  <data name="Footer_AllRights" xml:space="preserve">
+    <value>Tüm hakları saklıdır.</value>
+  </data>
+  <data name="Footer_Description" xml:space="preserve">
+    <value>Ağır vasıta yedek parça tedarikçiniz. Kaliteli ürünler, rekabetçi fiyatlar.</value>
+  </data>
+  <data name="Footer_CompanyName" xml:space="preserve">
+    <value>GÜMAŞ A.Ş.</value>
+  </data>
+
+  <!-- Errors -->
+  <data name="Error_NotFound" xml:space="preserve">
+    <value>Sayfa Bulunamadı</value>
+  </data>
+  <data name="Error_ServerError" xml:space="preserve">
+    <value>Sunucu Hatası</value>
+  </data>
+  <data name="Error_TryAgain" xml:space="preserve">
+    <value>Lütfen tekrar deneyin</value>
+  </data>
+  <data name="Error_GoHome" xml:space="preserve">
+    <value>Ana Sayfaya Dön</value>
+  </data>
+
+</root>

@@ -1,0 +1,49 @@
+@{
+    var culture = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEn = culture == "en";
+
+    var items = new[]
+    {
+        new {
+            TitleTr = "Dümenleme Sistemleri",
+            TitleEn = "Steering Systems",
+            Image = "/images/brands/tridec-steering.jpg",
+            Url = "https://www.jost-world.com/en/products/pdf-downloads/tridec.html",
+            DescriptionTr = "Hiçbir kamyon veya römork bağlantı sistemi birbirine benzemez. TRIDEC, uzun yıllara dayanan deneyimi ve çeşitli uzmanlığı sayesinde her görev için özel çözümler sunabilmektedir. Modüler sistemler, her tür römorkta uygulanmaya olanak tanır. TRIDEC uzmanları sadece mekanik olarak kontrol edilen dümenleme sistemleri değil, aynı zamanda hidrolik ve elektronik yöntemlerle kontrol edilen sistemler de geliştirmektedir. Bunu yaparken, müşteriler ve kullanıcılarla uzun vadeli iş birliklere büyük önem vererek, her zaman gereksinimlere uygun mükemmel bir TRIDEC sisteminin geliştirilebilmesini sağlarlar. Sistemler, aks veya araç üreticisinden bağımsız olarak kurulabilir. Hidrolik dümenleme sistemleri, baskı plakası ile akslar arasında hidrolik bağlantı oluşturmak için silindirler kullanır.",
+            DescriptionEn = "No two truck or trailer hitches are alike. Based on its many years of experience and diverse expertise, TRIDEC is able to offer tailored solutions for every task. Modular systems allow implementation on all types of trailer. The specialists at TRIDEC not only develop mechanically controlled steering systems, but also those controlled by hydraulic and electronic means. In doing so, they place great importance on long-term collaborations with customers and users, ensuring that the perfect TRIDEC system can always be developed for the requirements. The systems can be installed independently of the axle or vehicle manufacturer. Hydraulic steering systems use cylinders to create a hydraulic connection between the pressure plate and the axles."
+        },
+        new {
+            TitleTr = "Aks Süspansiyonları",
+            TitleEn = "Axle Suspensions",
+            Image = "/images/brands/tridec-axle.jpg",
+            Url = "https://www.tridec.com/",
+            DescriptionTr = "TRIDEC, dümenleme sistemlerinin yanı sıra, çift katlı ve cam taşıma römorkları için bağımsız aks süspansiyonları, hidrolik süspansiyonlar ve salıncak akslar da üretmektedir. TRIDEC aks süspansiyonları hem hacim hem de yük kapasitesi açısından römork kapasitesini artırır. TRIDEC'in hesaplamaları, bu çözümün taşıma hareketlerini azaltabileceğini göstermektedir. Daha az lastik aşınması ve yakıt tüketimi, daha fazla tasarruf sağlayarak, TRIDEC sistemlerinin uzun vadede daha yüksek bir kâr marjına katkıda bulunmasını sağlar.",
+            DescriptionEn = "Alongside steering systems, TRIDEC also manufactures independent axle suspensions for double-deck and glass-transport trailers as well as for hydraulic suspensions and swinging axles. TRIDEC axle suspensions increase the trailer capacity with regard to both volume and payload. Calculations from TRIDEC show that this solution can reduce transport movements. Reduced tyre wear and fuel consumption lead to greater savings, so that TRIDEC systems contribute to a higher profit margin in the long run."
+        }
+    };
+}
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+    @foreach (var item in items)
+    {
+        <a href="@item.Url" target="_blank" rel="noopener"
+           class="group bg-white dark:bg-gumas-gray border border-gray-200 dark:border-white/10 hover:border-gumas-red transition-all duration-300 flex flex-col overflow-hidden">
+            <div class="aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-black/30">
+                <img src="@item.Image" alt="@(isEn ? item.TitleEn : item.TitleTr)"
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+                <h3 class="text-xl md:text-2xl font-oswald font-bold uppercase text-black dark:text-white mb-4 group-hover:text-gumas-red transition-colors">
+                    @(isEn ? item.TitleEn : item.TitleTr)
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6 flex-grow">
+                    @(isEn ? item.DescriptionEn : item.DescriptionTr)
+                </p>
+                <span class="inline-flex items-center gap-2 text-sm font-oswald uppercase tracking-widest text-gumas-red group-hover:gap-3 transition-all mt-auto">
+                    @(isEn ? "View Catalogue" : "Kataloğa Git")
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </span>
+            </div>
+        </a>
+    }
+</div>

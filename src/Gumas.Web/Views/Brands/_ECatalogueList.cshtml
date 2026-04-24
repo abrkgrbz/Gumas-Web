@@ -1,0 +1,148 @@
+@{
+    // E-KATALOG verileri: ekatolog.xlsx (2. Revizyon, 19.04.2026) baz alınarak her öğe kendi spesifik üretici sayfasına linklenir.
+    var catalogueGroups = new[]
+    {
+        new {
+            Brand = "JOST",
+            Category = "Kamyon ve Treyler Bileşenleri",
+            Items = new[]
+            {
+                new { Title = "Beşinci teker kaplinleri – genel bilgiler", Url = "https://truck-and-trailer.jost-world-catalogues.com/general-information-fifth-wheel-couplings/range-of-application-fifth-wheel-couplings.html" },
+                new { Title = "Çift yükseklikli beşinci teker sistemleri", Url = "https://truck-and-trailer.jost-world-catalogues.com/dual-height-fifth-wheel-systems/general-information.html" },
+                new { Title = "Bilyeli döner tablalar ve döner halkalar", Url = "https://truck-and-trailer.jost-world-catalogues.com/ball-bearing-turntablesand-slewing-rings/general-information.html" },
+                new { Title = "Sensör sistemleri ve LubeTronic", Url = "https://truck-and-trailer.jost-world-catalogues.com/systems-sensor-system-and-lubetronic/general-information.html" },
+                new { Title = "Kaydırmalı beşinci tekerler (sliders)", Url = "https://truck-and-trailer.jost-world-catalogues.com/sliders/general-information.html" },
+                new { Title = "Mekanik ayak / Modul", Url = "https://truck-and-trailer.jost-world-catalogues.com/landing-gear-modul/general-information.html" },
+                new { Title = "Beşinci teker montaj plakaları", Url = "https://truck-and-trailer.jost-world-catalogues.com/fifth-wheel-couplings-and-mounting-plates/mounting-plates-for-2-fifth-wheel-couplings.html" },
+                new { Title = "Kingpinler", Url = "https://truck-and-trailer.jost-world-catalogues.com/king-pins/general-information.html" },
+                new { Title = "Hubodometreler ve poyra kapakları", Url = "https://truck-and-trailer.jost-world-catalogues.com/hubodometers-and-axle-caps/general-information.html" }
+            }
+        },
+        new {
+            Brand = "JOST",
+            Category = "Konteyner Ekipmanları ve İntermodal Taşımacılık",
+            Items = new[]
+            {
+                new { Title = "Konteyner kilitleri", Url = "https://container-equipment.jost-world-catalogues.com/twist-locks/general-informations.html" },
+                new { Title = "Destekler (bolster)", Url = "https://container-equipment.jost-world-catalogues.com/bolsters/general-informations.html" },
+                new { Title = "Hava yastıklı kaldırma tertibatı", Url = "https://container-equipment.jost-world-catalogues.com/airbag-lifting-device/general-informations.html" },
+                new { Title = "Yedek lastik tutucu", Url = "https://container-equipment.jost-world-catalogues.com/spare-wheel-holder/general-informations.html" },
+                new { Title = "İntermodal taşımacılık için bileşenler", Url = "https://container-equipment.jost-world-catalogues.com/components-for-intermodal-transports/general-information.html" }
+            }
+        },
+        new {
+            Brand = "JOST",
+            Category = "Aks Sistemleri",
+            Items = new[]
+            {
+                new { Title = "Ürün Kataloğu", Url = "https://www.jostinformationcentre.com/static/upload/pdf/completecatalogue/202504_FLY009001_EN.pdf" },
+                new { Title = "Ürün Broşürü", Url = "https://www.jost-world.com/en/products/pdf-downloads/jost-axle-systems.html" },
+                new { Title = "Teknik Bilgi", Url = "https://www.jost-world.com/en/products/pdf-downloads/jost-axle-systems.html" },
+                new { Title = "Konfigürasyon ve Montaj", Url = "https://www.jost-world.com/en/products/pdf-downloads/jost-axle-systems.html" },
+                new { Title = "İşletim ve Bakım", Url = "https://www.jost-world.com/en/products/pdf-downloads/jost-axle-systems.html" },
+                new { Title = "Yedek Parça ve Tamir", Url = "https://www.jost-world.com/en/products/pdf-downloads/jost-axle-systems.html" }
+            }
+        },
+        new {
+            Brand = "ROCKINGER",
+            Category = "Ticari Araçlar",
+            Items = new[]
+            {
+                new { Title = "Genel bilgiler", Url = "https://rockinger-commercial-vehicles.jost-world-catalogues.com/general-information/used-pictographs.html" },
+                new { Title = "Çeki kancaları", Url = "https://rockinger-commercial-vehicles.jost-world-catalogues.com/towing-hitches-40-mm/ro225-/-227.html" },
+                new { Title = "Çengel kaplinler - 76mm", Url = "https://rockinger-commercial-vehicles.jost-world-catalogues.com/hook-couplings-76-mm/ro231.html" },
+                new { Title = "Küresel mafsallı bağlantılar - 80mm", Url = "https://rockinger-commercial-vehicles.jost-world-catalogues.com/ball-head-hitch-80-mm/ro908-typ-roku80.html" },
+                new { Title = "Çeki halkaları - 50mm", Url = "https://rockinger-commercial-vehicles.jost-world-catalogues.com/ball-hitchs-50-mm/rokk260/330/390/445.html" },
+                new { Title = "VARIOBLOC", Url = "https://rockinger-commercial-vehicles.jost-world-catalogues.com/variobloc/variobloc.html" },
+                new { Title = "Manuel çekme tertibatları", Url = "https://rockinger-commercial-vehicles.jost-world-catalogues.com/manual-towing-hitches/ro205/207/230.html" },
+                new { Title = "Travers", Url = "https://rockinger-commercial-vehicles.jost-world-catalogues.com/cross-member/rocm-75-cross-member.html" },
+                new { Title = "Adaptör çeki kancaları", Url = "https://rockinger-commercial-vehicles.jost-world-catalogues.com/adapter-towing-hitches/ro480/483/580-40mm/50-mm.html" },
+                new { Title = "Çeki gözleri", Url = "https://rockinger-commercial-vehicles.jost-world-catalogues.com/towing-eyes/towing-eyes.html" }
+            }
+        },
+        new {
+            Brand = "ROCKINGER",
+            Category = "Tarım ve Ormancılık",
+            Items = new[]
+            {
+                new { Title = "Hesaplama", Url = "https://www.rockinger-agriculture-catalogue.com/calculation.html" },
+                new { Title = "Çeki kancaları", Url = "https://www.rockinger-agriculture-catalogue.com/towing-hitch/ro200-hitch-heads.html" },
+                new { Title = "Çeki okları (Drawbar)", Url = "https://www.rockinger-agriculture-catalogue.com/drawbar/ro801l.html" },
+                new { Title = "Pitonfix", Url = "https://www.rockinger-agriculture-catalogue.com/piton-fix/ro820a.html" },
+                new { Title = "Küresel bağlantılı çeki kancaları", Url = "https://www.rockinger-agriculture-catalogue.com/ball-hitch/ro825a.html" },
+                new { Title = "Merdivenler", Url = "https://www.rockinger-agriculture-catalogue.com/ladder/ro880a13-case-deutz-fahr-huerlimann-lamborghini-new-holland-same-steyr-terrion.html" },
+                new { Title = "Kanca destekleri", Url = "https://www.rockinger-agriculture-catalogue.com/hitch-support/ro899d.html" },
+                new { Title = "Çeki kelpi ve çeki gözleri", Url = "https://www.rockinger-agriculture-catalogue.com/calotte-and-towing-eyes/low-maintenance-calotte-ro57l036-/-ro57l039.html" },
+                new { Title = "Aksesuarlar", Url = "https://www.rockinger-agriculture-catalogue.com/accessories/hitch-accessories.html" }
+            }
+        },
+        new {
+            Brand = "ROCKINGER",
+            Category = "Çeki Okları (Drawbar)",
+            Items = new[]
+            {
+                new { Title = "Genel bilgiler", Url = "https://rockinger-drawbar.jost-world-catalogues.com/general-information/used-pictographs.html" },
+                new { Title = "Çeki okları", Url = "https://rockinger-drawbar.jost-world-catalogues.com/drawbars/gnz.html" },
+                new { Title = "Yükseklik ayar sistemi", Url = "https://rockinger-drawbar.jost-world-catalogues.com/height-adjustment-system/gh.html" },
+                new { Title = "Çeki oku boruları", Url = "https://rockinger-drawbar.jost-world-catalogues.com/towbar-pipe/gzl-/-gzlg.html" },
+                new { Title = "Yedek parçalar ve aksesuarlar", Url = "https://rockinger-drawbar.jost-world-catalogues.com/spare-parts-and-accessories.html" },
+                new { Title = "Sipariş numarası kırılımı", Url = "https://rockinger-drawbar.jost-world-catalogues.com/breakdown-to-order-no.html" },
+                new { Title = "Sipariş formları", Url = "https://rockinger-drawbar.jost-world-catalogues.com/order-form.html" }
+            }
+        },
+        new {
+            Brand = "TRIDEC",
+            Category = "Dümenleme ve Süspansiyon Sistemleri",
+            Items = new[]
+            {
+                new { Title = "TD/TD-X Rijit aks mekanik dümenleme", Url = "https://www.tridec.com/en/system-applications-product-information/mechanical-steering-systems/td.html" },
+                new { Title = "TR Rijit aks mekanik dümenleme", Url = "https://www.tridec.com/en/system-applications-product-information/mechanical-steering-systems/tr.html" },
+                new { Title = "TF Dümenlenir aks mekanik dümenleme", Url = "https://www.tridec.com/en/system-applications-product-information/mechanical-steering-systems/tf.html" },
+                new { Title = "HS Hidrolik dümenleme", Url = "https://www.tridec.com/en/system-applications-product-information/hydraulic-steering-systems/hs.html" },
+                new { Title = "HF Hidrolik dümenleme", Url = "https://www.tridec.com/en/system-applications-product-information/hydraulic-steering-systems/hf.html" },
+                new { Title = "HF-E Hidrolik dümenleme", Url = "https://www.tridec.com/en/system-applications-product-information/hydraulic-steering-systems/hf-e.html" },
+                new { Title = "EFS Elektronik dümenleme", Url = "https://www.tridec.com/en/system-applications-product-information/electronic-steering-systems.html" },
+                new { Title = "LV-O Hava süspansiyon", Url = "https://www.tridec.com/en/system-applications-product-information/air-suspensions/lv-o.html" },
+                new { Title = "TF-VO Hava süspansiyon", Url = "https://www.tridec.com/en/system-applications-product-information/air-suspensions/tf-vo.html" },
+                new { Title = "HV Hidrolik süspansiyon", Url = "https://www.tridec.com/en/system-applications-product-information/hydraulic-suspensions/hv.html" },
+                new { Title = "DL-S Hidrolik bağımsız süspansiyon", Url = "https://www.tridec.com/en/system-applications-product-information/hydraulic-suspensions/dl-s.html" },
+                new { Title = "TP-O Hidrolik pendle süspansiyon", Url = "https://www.tridec.com/en/system-applications-product-information/hydraulic-suspensions/tp-o.html" },
+                new { Title = "HD-O/MD-O Hidrolik süspansiyon", Url = "https://www.tridec.com/en/system-applications-product-information/hydraulic-suspensions/hd-o.html" }
+            }
+        },
+        new {
+            Brand = "SIRIT",
+            Category = "Genel Katalog",
+            Items = new[]
+            {
+                new { Title = "SIRIT Genel Ürün Kataloğu (PDF)", Url = "https://www.sirit.it/eng/catalogo_generale_sirit.pdf" }
+            }
+        }
+    };
+}
+
+<div class="space-y-8">
+    @foreach (var group in catalogueGroups)
+    {
+        <div class="border border-gray-200 dark:border-white/10 bg-white dark:bg-gumas-gray">
+            <div class="px-6 py-5 border-b border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-black/30">
+                <div class="text-xl md:text-2xl font-oswald font-bold uppercase tracking-wider text-gumas-red mb-2">@group.Brand</div>
+                <h3 class="text-lg md:text-2xl font-oswald font-bold uppercase text-black dark:text-white">
+                    @group.Category
+                </h3>
+            </div>
+            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                @foreach (var item in group.Items)
+                {
+                    <li class="border-b border-r border-gray-100 dark:border-white/5 last:border-b-0">
+                        <a href="@item.Url" target="_blank" rel="noopener"
+                           class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors group h-full">
+                            <span class="pr-3">@item.Title</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 group-hover:opacity-100 transition-opacity flex-shrink-0"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>

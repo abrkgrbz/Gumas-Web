@@ -1,0 +1,471 @@
+@{
+    var currentCulture = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEnglish = currentCulture == "en";
+    var currentUrl = Context.Request.Path + Context.Request.QueryString;
+    var baseUrl = $"{Context.Request.Scheme}://{Context.Request.Host}";
+}
+<!DOCTYPE html>
+<html lang="@currentCulture" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - GÜMAŞ Otomotiv</title>
+    @{
+        var metaDescription = ViewData["MetaDescription"]?.ToString() ?? (isEnglish
+            ? "GÜMAŞ Automotive - Heavy vehicle spare parts supplier. Original and equivalent spare parts for Mercedes, MAN, Volvo, Scania, DAF, Iveco, Renault brands."
+            : "GÜMAŞ Otomotiv - Ağır vasıta yedek parça tedarikçisi. Mercedes, MAN, Volvo, Scania, DAF, Iveco, Renault markaları için orijinal ve eşdeğer yedek parçalar.");
+        var ogImage = ViewData["OgImage"]?.ToString() ?? "/images/og-default.jpg";
+        var pageTitle = ViewData["Title"]?.ToString() ?? "GÜMAŞ Otomotiv";
+        var canonicalUrl = baseUrl + currentUrl;
+    }
+    <meta name="description" content="@metaDescription" />
+    <meta name="keywords" content="@(isEnglish ? "heavy vehicle spare parts, truck parts, bus parts, trailer parts, JOST, TRIDEC, Rockinger, fifth wheel, steering system" : "ağır vasıta yedek parça, kamyon parçası, otobüs parçası, treyler parçası, JOST, TRIDEC, Rockinger, beşinci teker, direksiyon sistemi")" />
+    <meta name="author" content="GÜMAŞ Otomotiv" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="@canonicalUrl" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="@canonicalUrl" />
+    <meta property="og:title" content="@pageTitle - GÜMAŞ Otomotiv" />
+    <meta property="og:description" content="@metaDescription" />
+    <meta property="og:image" content="@baseUrl@ogImage" />
+    <meta property="og:locale" content="@(isEnglish ? "en_US" : "tr_TR")" />
+    <meta property="og:locale:alternate" content="@(isEnglish ? "tr_TR" : "en_US")" />
+    <meta property="og:site_name" content="GÜMAŞ Otomotiv" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="@canonicalUrl" />
+    <meta name="twitter:title" content="@pageTitle - GÜMAŞ Otomotiv" />
+    <meta name="twitter:description" content="@metaDescription" />
+    <meta name="twitter:image" content="@baseUrl@ogImage" />
+
+    <!-- Hreflang Tags for SEO -->
+    <link rel="alternate" hreflang="tr" href="@baseUrl@GetTurkishUrl(currentUrl)" />
+    <link rel="alternate" hreflang="en" href="@baseUrl@GetEnglishUrl(currentUrl)" />
+    <link rel="alternate" hreflang="x-default" href="@baseUrl@GetTurkishUrl(currentUrl)" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "Organization",
+        "name": "GÜMAŞ Otomotiv",
+        "alternateName": "Gümaş A.Ş.",
+        "url": "@baseUrl",
+        "logo": "@baseUrl/images/logo.png",
+        "description": "@(isEnglish ? "Heavy vehicle spare parts supplier since 1985" : "1985'ten beri ağır vasıta yedek parça tedarikçisi")",
+        "foundingDate": "1985",
+        "address": {
+            "@@type": "PostalAddress",
+            "streetAddress": "Dolapdere Taksim Cad. No:35 Kat:2",
+            "addressLocality": "Beyoğlu",
+            "addressRegion": "İstanbul",
+            "postalCode": "34437",
+            "addressCountry": "TR"
+        },
+        "contactPoint": {
+            "@@type": "ContactPoint",
+            "telephone": "+90-212-254-78-05",
+            "contactType": "customer service",
+            "availableLanguage": ["Turkish", "English"]
+        },
+        "sameAs": [
+            "https://www.linkedin.com/company/gümaş-a-ş/"
+        ]
+    }
+    </script>
+    @RenderSection("StructuredData", required: false)
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Tailwind Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gumas: {
+                            dark: '#0f0f0f',
+                            bg: '#0a0a0a',
+                            light: '#e5e5e5',
+                            red: '#D32F2F',
+                            accent: '#FF3D00',
+                            steel: '#4A5568',
+                            gray: '#2d2d2d'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        oswald: ['Oswald', 'sans-serif'],
+                    },
+                    cursor: {
+                        'none': 'none',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #0f0f0f;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+
+        /* Swiper Customization */
+        .swiper-slide { overflow: hidden; }
+        .slide-bg { transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+        /* Text Reveal Mask */
+        .text-reveal { overflow: hidden; display: inline-block; }
+        .text-reveal span {
+            display: inline-block;
+            transform: translateY(110%);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .swiper-slide-active .text-reveal span { transform: translateY(0); }
+
+        /* Sharp Edges Utility */
+        .sharp-btn { clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%); }
+
+        /* Mobile menu */
+        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-in-out; }
+        .mobile-menu.active { transform: translateX(0); }
+
+        /* Floating animation */
+        .floating-part { animation: float 6s ease-in-out infinite; }
+        @@keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Product card hover */
+        .product-card-landing:hover img { filter: grayscale(0); }
+        .product-card-landing img { filter: grayscale(100%); transition: filter 0.5s; }
+    </style>
+
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body class="font-sans antialiased text-gray-900 bg-gray-50 dark:bg-gumas-dark dark:text-gumas-light transition-colors duration-300 selection:bg-gumas-red selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center bg-white/50 dark:bg-black/50 backdrop-blur-md transition-colors duration-300 border-b border-black/5 dark:border-white/5">
+        <a href="@(isEnglish ? "/en" : "/")" class="flex items-center">
+            <img src="/images/logo/gumas_logo_light.png" alt="GÜMAŞ" class="h-16 block dark:hidden transition-all duration-300" />
+            <img src="/images/logo/gumas_logo_dark.png" alt="GÜMAŞ" class="h-16 hidden dark:block transition-all duration-300" />
+        </a>
+
+        <div class="hidden md:flex space-x-10 font-oswald text-sm tracking-widest uppercase opacity-80 text-black dark:text-white">
+            <!-- Products Dropdown -->
+            <div class="relative group">
+                <a href="@(isEnglish ? "/en/products" : "/urunler")" class="hover:text-gumas-red transition-colors flex items-center gap-1">
+                    @L["Nav_Products"]
+                    <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </a>
+                <div class="absolute left-1/2 -translate-x-1/2 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div class="bg-white dark:bg-gumas-dark border border-gray-200 dark:border-white/10 shadow-xl min-w-[220px] py-3">
+                        <a href="@(isEnglish ? "/en/brand/jost" : "/marka/jost")" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">JOST</a>
+                        <a href="@(isEnglish ? "/en/brand/rockinger" : "/marka/rockinger")" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">ROCKINGER</a>
+                        <a href="@(isEnglish ? "/en/brand/tridec" : "/marka/tridec")" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">TRIDEC</a>
+                        <a href="@(isEnglish ? "/en/brand/quicke" : "/marka/quicke")" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">QUICKE</a>
+                        <a href="https://www.gerflortransport.com/en" target="_blank" rel="noopener" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">
+                            GERFLOR <i class="fas fa-external-link-alt text-[9px] ml-1 opacity-60"></i>
+                        </a>
+                        <a href="https://www.sirit.it/eng/catalogo_generale_sirit.pdf" target="_blank" rel="noopener" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">
+                            SIRIT <i class="fas fa-external-link-alt text-[9px] ml-1 opacity-60"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <a href="@(isEnglish ? "/en/brands" : "/markalar")" class="hover:text-gumas-red transition-colors">@L["Nav_Brands"]</a>
+            <a href="@(isEnglish ? "/en/e-catalogue" : "/e-katalog")" class="hover:text-gumas-red transition-colors">@L["Nav_ECatalog"]</a>
+            <a href="@(isEnglish ? "/en/about" : "/hakkimizda")" class="hover:text-gumas-red transition-colors">@L["Nav_About"]</a>
+            <a href="@(isEnglish ? "/en/contact" : "/iletisim")" class="hover:text-gumas-red transition-colors">@L["Nav_Contact"]</a>
+        </div>
+
+        <div class="flex items-center space-x-6 text-black dark:text-white">
+            <!-- Language Switcher (Server-side) -->
+            <div class="hidden md:flex items-center space-x-1 font-oswald text-sm tracking-widest">
+                <form asp-area="" asp-controller="Language" asp-action="SetLanguage" method="post" class="inline">
+                    <input type="hidden" name="culture" value="tr" />
+                    <input type="hidden" name="returnUrl" value="@currentUrl" />
+                    <button type="submit" class="px-2 py-1 uppercase hover:text-gumas-red transition-colors @(currentCulture == "tr" ? "text-gumas-red font-bold" : "opacity-50")">TR</button>
+                </form>
+                <span class="text-gray-400">|</span>
+                <form asp-area="" asp-controller="Language" asp-action="SetLanguage" method="post" class="inline">
+                    <input type="hidden" name="culture" value="en" />
+                    <input type="hidden" name="returnUrl" value="@currentUrl" />
+                    <button type="submit" class="px-2 py-1 uppercase hover:text-gumas-red transition-colors @(currentCulture == "en" ? "text-gumas-red font-bold" : "opacity-50")">EN</button>
+                </form>
+            </div>
+
+            <button id="theme-switch" class="hover:text-gumas-red transition-colors">
+                <svg id="icon-sun" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <svg id="icon-moon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+            <a href="@(isEnglish ? "/en/contact" : "/iletisim")" class="font-oswald border border-black/30 dark:border-white/30 px-6 py-2 uppercase text-sm tracking-widest hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300">
+                @L["Nav_GetQuote"]
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-64 h-full bg-white dark:bg-gumas-dark z-50 p-8 pt-20 border-l border-gray-200 dark:border-white/10">
+        <button id="mobile-menu-close" class="absolute top-6 right-6 text-black dark:text-white">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <div class="flex flex-col space-y-5 font-oswald text-lg uppercase tracking-widest text-black dark:text-white">
+            <div>
+                <button type="button" id="mobile-products-toggle" class="flex items-center justify-between w-full hover:text-gumas-red transition-colors">
+                    <span>@L["Nav_Products"]</span>
+                    <svg class="w-4 h-4 transition-transform" id="mobile-products-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="mobile-products-submenu" class="hidden flex-col space-y-3 mt-4 pl-4 border-l border-gray-200 dark:border-white/10 text-sm">
+                    <a href="@(isEnglish ? "/en/brand/jost" : "/marka/jost")" class="hover:text-gumas-red transition-colors">JOST</a>
+                    <a href="@(isEnglish ? "/en/brand/rockinger" : "/marka/rockinger")" class="hover:text-gumas-red transition-colors">ROCKINGER</a>
+                    <a href="@(isEnglish ? "/en/brand/tridec" : "/marka/tridec")" class="hover:text-gumas-red transition-colors">TRIDEC</a>
+                    <a href="@(isEnglish ? "/en/brand/quicke" : "/marka/quicke")" class="hover:text-gumas-red transition-colors">QUICKE</a>
+                    <a href="https://www.gerflortransport.com/en" target="_blank" rel="noopener" class="hover:text-gumas-red transition-colors">GERFLOR</a>
+                    <a href="https://www.sirit.it/eng/catalogo_generale_sirit.pdf" target="_blank" rel="noopener" class="hover:text-gumas-red transition-colors">SIRIT</a>
+                </div>
+            </div>
+            <a href="@(isEnglish ? "/en/brands" : "/markalar")" class="hover:text-gumas-red transition-colors">@L["Nav_Brands"]</a>
+            <a href="@(isEnglish ? "/en/e-catalogue" : "/e-katalog")" class="hover:text-gumas-red transition-colors">@L["Nav_ECatalog"]</a>
+            <a href="@(isEnglish ? "/en/about" : "/hakkimizda")" class="hover:text-gumas-red transition-colors">@L["Nav_About"]</a>
+            <a href="@(isEnglish ? "/en/contact" : "/iletisim")" class="hover:text-gumas-red transition-colors">@L["Nav_Contact"]</a>
+        </div>
+        <!-- Mobile Language Switcher -->
+        <div class="flex items-center space-x-4 mt-8 pt-6 border-t border-gray-200 dark:border-white/10">
+            <form asp-area="" asp-controller="Language" asp-action="SetLanguage" method="post" class="inline">
+                <input type="hidden" name="culture" value="tr" />
+                <input type="hidden" name="returnUrl" value="@currentUrl" />
+                <button type="submit" class="font-oswald text-sm uppercase tracking-widest hover:text-gumas-red transition-colors @(currentCulture == "tr" ? "text-gumas-red font-bold" : "opacity-50")">TR</button>
+            </form>
+            <span class="text-gray-400">|</span>
+            <form asp-area="" asp-controller="Language" asp-action="SetLanguage" method="post" class="inline">
+                <input type="hidden" name="culture" value="en" />
+                <input type="hidden" name="returnUrl" value="@currentUrl" />
+                <button type="submit" class="font-oswald text-sm uppercase tracking-widest hover:text-gumas-red transition-colors @(currentCulture == "en" ? "text-gumas-red font-bold" : "opacity-50")">EN</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-black py-12 border-t border-gray-200 dark:border-white/10 transition-colors duration-300">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Brand -->
+                <div>
+                    <img src="/images/logo/gumas_logo_light.png" alt="GÜMAŞ" class="h-10 mb-4 block dark:hidden" />
+                    <img src="/images/logo/gumas_logo_dark.png" alt="GÜMAŞ" class="h-10 mb-4 hidden dark:block" />
+                    <p class="text-gray-500 text-sm">@L["Footer_Description"]</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-oswald text-sm uppercase tracking-widest text-black dark:text-white mb-4">@L["Footer_QuickLinks"]</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="@(isEnglish ? "/en/products" : "/urunler")" class="hover:text-gumas-red transition-colors">@L["Nav_Products"]</a></li>
+                        <li><a href="@(isEnglish ? "/en/brands" : "/markalar")" class="hover:text-gumas-red transition-colors">@L["Nav_Brands"]</a></li>
+                        <li><a href="@(isEnglish ? "/en/news" : "/haberler")" class="hover:text-gumas-red transition-colors">@L["Nav_News"]</a></li>
+                    </ul>
+                </div>
+
+                <!-- Corporate -->
+                <div>
+                    <h4 class="font-oswald text-sm uppercase tracking-widest text-black dark:text-white mb-4">@L["Footer_Corporate"]</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="@(isEnglish ? "/en/about" : "/hakkimizda")" class="hover:text-gumas-red transition-colors">@L["Nav_About"]</a></li>
+                        <li><a href="@(isEnglish ? "/en/contact" : "/iletisim")" class="hover:text-gumas-red transition-colors">@L["Nav_Contact"]</a></li>
+                        <li><a href="#" class="hover:text-gumas-red transition-colors">@L["Footer_PrivacyPolicy"]</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-oswald text-sm uppercase tracking-widest text-black dark:text-white mb-4">@L["Footer_Contact"]</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><i class="fas fa-map-marker-alt mr-2 text-gumas-red"></i>Dolapdere Taksim Cad. No:35 Kat:2, 34437 Beyoğlu - İstanbul</li>
+                        <li><i class="fas fa-phone mr-2 text-gumas-red"></i>+90 212 254 78 05 - 06</li>
+                        <li><i class="fas fa-fax mr-2 text-gumas-red"></i>+90 212 256 17 86</li>
+                        <li><i class="fas fa-envelope mr-2 text-gumas-red"></i>info@gumas.com.tr</li>
+                    </ul>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="https://www.linkedin.com/company/gümaş-a-ş/" target="_blank" class="text-gray-500 hover:text-gumas-red transition-colors"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://wa.me/905412547805" target="_blank" class="text-gray-500 hover:text-gumas-red transition-colors"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-200 dark:border-white/10 opacity-50">
+                <p class="text-xs text-gray-500 uppercase">&copy; @DateTime.Now.Year GÜMAŞ Otomotiv. @L["Footer_AllRights"]</p>
+                <div class="flex space-x-8 text-sm font-oswald tracking-widest text-gray-400 mt-4 md:mt-0">
+                    <a href="https://www.linkedin.com/company/gümaş-a-ş/" target="_blank" class="hover:text-black dark:hover:text-white transition-colors">LinkedIn</a>
+                    <a href="https://wa.me/905412547805" target="_blank" class="hover:text-black dark:hover:text-white transition-colors">WhatsApp</a>
+                    <a href="@(isEnglish ? "/en/contact" : "/iletisim")" class="hover:text-black dark:hover:text-white transition-colors">@L["Nav_Contact"]</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+
+    <script>
+        // Theme Switcher
+        const themeSwitch = document.getElementById('theme-switch');
+        themeSwitch.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn?.addEventListener('click', () => mobileMenu.classList.add('active'));
+        mobileMenuClose?.addEventListener('click', () => mobileMenu.classList.remove('active'));
+
+        // Mobile Products Accordion
+        const mobileProductsToggle = document.getElementById('mobile-products-toggle');
+        const mobileProductsSubmenu = document.getElementById('mobile-products-submenu');
+        const mobileProductsChevron = document.getElementById('mobile-products-chevron');
+        mobileProductsToggle?.addEventListener('click', () => {
+            const isHidden = mobileProductsSubmenu.classList.contains('hidden');
+            mobileProductsSubmenu.classList.toggle('hidden', !isHidden);
+            mobileProductsSubmenu.classList.toggle('flex', isHidden);
+            mobileProductsChevron.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0)';
+        });
+
+        // Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP Register
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Nav animation
+        gsap.from("nav", {
+            y: -50,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power4.out",
+            delay: 0.5
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
+
+@functions {
+    string GetEnglishUrl(string url)
+    {
+        if (string.IsNullOrEmpty(url) || url == "/") return "/en";
+        if (url.StartsWith("/en")) return url;
+
+        return url
+            .Replace("/urunler", "/en/products")
+            .Replace("/urun/", "/en/product/")
+            .Replace("/markalar", "/en/brands")
+            .Replace("/marka/", "/en/brand/")
+            .Replace("/e-katalog", "/en/e-catalogue")
+            .Replace("/haberler", "/en/news")
+            .Replace("/haber/", "/en/news/")
+            .Replace("/hakkimizda", "/en/about")
+            .Replace("/iletisim", "/en/contact");
+    }
+
+    string GetTurkishUrl(string url)
+    {
+        if (string.IsNullOrEmpty(url) || url == "/en" || url == "/") return "/";
+        if (!url.StartsWith("/en")) return url;
+
+        return url
+            .Replace("/en/products", "/urunler")
+            .Replace("/en/product/", "/urun/")
+            .Replace("/en/brands", "/markalar")
+            .Replace("/en/brand/", "/marka/")
+            .Replace("/en/e-catalogue", "/e-katalog")
+            .Replace("/en/news", "/haberler")
+            .Replace("/en/about", "/hakkimizda")
+            .Replace("/en/contact", "/iletisim")
+            .Replace("/en", "/");
+    }
+}

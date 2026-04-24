@@ -1,0 +1,57 @@
+@{
+    var culture = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEn = culture == "en";
+
+    var items = new[]
+    {
+        new {
+            TitleTr = "Ticari Araçlar",
+            TitleEn = "Commercial Vehicles",
+            Image = "/images/brands/rockinger-commercial.jpg",
+            Url = "https://rockinger-commercial-vehicles.jost-world-catalogues.com",
+            DescriptionTr = "ROCKINGER'ın karayolu trafiği için ürün yelpazesi, çekicilere monte edilen tüm ürünleri kapsamaktadır. Çeki kancaları, bir römorku ve çekiciyi bir çeki demiri kullanarak birbirine bağlar. Parçalar genellikle travers olarak da bilinen bir çapraz elemana monte edilir. Yüksek hacimli araçlar için çeki kancası, çekici aksına yakın, alçak bir yere monte edilir. Bu uygulamada bir çeki demiri braketi (yan plakalar ve süspansiyon elemanları) kullanılır. Bu tür bir montaj, yasal olarak uzaktan ekran ve uzaktan kumanda aparatı gerektirir. Bu bileşenler de ROCKINGER ürün portföyünde yer almaktadır.",
+            DescriptionEn = "ROCKINGER's product range for road traffic comprises all products which are installed on tractors. Towing hitches connect a trailer and a tractor using a drawbar. The parts are generally installed on a cross member, also known as a traverse. For high-volume vehicles, the towing hitch is installed low down near the tractor axle. A drawbar bracket (side plates and suspension elements) is used in this application. This type of installation legally requires a remote display and a remote control. These components are also part of the ROCKINGER product portfolio."
+        },
+        new {
+            TitleTr = "Tarım ve Ormancılık",
+            TitleEn = "Agriculture and Forestry",
+            Image = "/images/brands/rockinger-agriculture.jpg",
+            Url = "https://www.rockinger-agriculture-catalogue.com",
+            DescriptionTr = "1973 yılında ROCKINGER, tarım ve ormancılık için çekme kancalarını üretim programına ekleyerek ürün yelpazesini genişletti. Karayolu trafiği için kullanılan kancalara kıyasla, bu traktörlerin standart bir arayüzü yoktur. İlgili şanzıman arka kısmına bir çekme çubuğu braketi tasarlanmalı ve ardından çekme kancası buna takılmalıdır. Tarım ve ormancılık sektörü, karayolu trafiğinden farklı olarak, bağlantı alanı sürücü koltuğundan görülebiliyorsa, otomatik olmayan çekme kancalarının (geçmeli pimli) kullanılabilmesine de olanak tanır.",
+            DescriptionEn = "In 1973, ROCKINGER expanded its product range by adding towing hitches for agriculture and forestry to its production programme. Compared to couplings for road traffic, these tractors do not have a standard interface. A drawbar bracket must be designed for the respective gearbox rear, to which the towing hitch is then attached. The agriculture and forestry sector also differs from road traffic in that it allows the use of non-automatic towing hitches (with slide-in pin) if the coupling area is visible from the driver's seat."
+        },
+        new {
+            TitleTr = "Çeki Demirleri",
+            TitleEn = "Drawbars",
+            Image = "/images/brands/rockinger-drawbars.jpg",
+            Url = "https://rockinger-drawbar.jost-world-catalogues.com",
+            DescriptionTr = "2004 yılında JOST, uzun yıllardır faaliyet gösteren Regensburger Zuggabel şirketini devraldı. Eskiden Grau olarak bilinen şirket, yaklaşık 80 yıldır çeki demiri geliştirip üretmektedir. Bu ürünler bugün ROCKINGER markası altında satılmaktadır. Çeki demiri, traktör ile yönlendirilebilir çeki demiri römorku arasındaki bağlantıyı sağlar. Bir pivot desteğine monte edilmek üzere tasarlanmışlardır ve en yüksek güvenlik gereksinimlerine uygun tasarlanmışlardır. Çeki demirleri, yalnızca ilgili çeki gözleri için onaylanmış olan amaçlanan çekme bağlantı elemanlarıyla çalıştırılabilir.",
+            DescriptionEn = "In 2004, JOST took over the long-established company Regensburger Zuggabel. The company, formerly known as Grau, has been developing and producing drawbars for nearly 80 years. These products are sold under the ROCKINGER brand today. Drawbars are the connection between the tractor and the steerable drawbar trailer. They are designed to be mounted on a pivot support and are subject to the highest safety requirements. Drawbars may only be operated with intended towing couplings that are approved for the respective towing eyes."
+        }
+    };
+}
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    @foreach (var item in items)
+    {
+        <a href="@item.Url" target="_blank" rel="noopener"
+           class="group bg-white dark:bg-gumas-gray border border-gray-200 dark:border-white/10 hover:border-gumas-red transition-all duration-300 flex flex-col overflow-hidden">
+            <div class="aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-black/30">
+                <img src="@item.Image" alt="@(isEn ? item.TitleEn : item.TitleTr)"
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+                <h3 class="text-xl md:text-2xl font-oswald font-bold uppercase text-black dark:text-white mb-4 group-hover:text-gumas-red transition-colors">
+                    @(isEn ? item.TitleEn : item.TitleTr)
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6 flex-grow">
+                    @(isEn ? item.DescriptionEn : item.DescriptionTr)
+                </p>
+                <span class="inline-flex items-center gap-2 text-sm font-oswald uppercase tracking-widest text-gumas-red group-hover:gap-3 transition-all mt-auto">
+                    @(isEn ? "View Catalogue" : "Kataloğa Git")
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </span>
+            </div>
+        </a>
+    }
+</div>

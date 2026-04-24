@@ -1,0 +1,33 @@
+# GÜMAŞ Otomotiv - Robots.txt
+# https://www.gumas.com.tr
+
+User-agent: *
+Allow: /
+
+# Disallow admin and internal paths
+Disallow: /admin/
+Disallow: /api/
+Disallow: /Identity/
+
+# Allow search engines to index all public content
+Allow: /urunler
+Allow: /markalar
+Allow: /haberler
+Allow: /hakkimizda
+Allow: /iletisim
+Allow: /e-katalog
+
+# English routes
+Allow: /en/
+Allow: /en/products
+Allow: /en/brands
+Allow: /en/news
+Allow: /en/about
+Allow: /en/contact
+Allow: /en/e-catalog
+
+# Sitemap location
+Sitemap: https://www.gumas.com.tr/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - GÜMAŞ Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gumas-red': '#B91C1C',
+                        'gumas-dark': '#1F2937',
+                        'admin-sidebar': '#111827',
+                        'admin-bg': '#F3F4F6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar-link.active {
+            background-color: #B91C1C;
+            color: white;
+        }
+        .sidebar-link:hover:not(.active) {
+            background-color: #374151;
+        }
+    </style>
+</head>
+<body class="bg-admin-bg min-h-screen">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-admin-sidebar text-white fixed h-full">
+            <div class="p-4 border-b border-gray-700">
+                <a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })" class="flex items-center space-x-2">
+                    <span class="text-xl font-bold text-gumas-red">GÜMAŞ</span>
+                    <span class="text-sm text-gray-400">Admin</span>
+                </a>
+            </div>
+
+            <nav class="mt-4">
+                <a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })"
+                   class="sidebar-link flex items-center px-4 py-3 text-gray-300 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" ? "active" : "")">
+                    <i class="fas fa-tachometer-alt w-6"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="@Url.Action("Index", "Products", new { area = "Admin" })"
+                   class="sidebar-link flex items-center px-4 py-3 text-gray-300 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Products" ? "active" : "")">
+                    <i class="fas fa-box w-6"></i>
+                    <span>Ürünler</span>
+                </a>
+
+                <a href="@Url.Action("Index", "Brands", new { area = "Admin" })"
+                   class="sidebar-link flex items-center px-4 py-3 text-gray-300 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Brands" ? "active" : "")">
+                    <i class="fas fa-tags w-6"></i>
+                    <span>Markalar</span>
+                </a>
+
+                <a href="@Url.Action("Index", "Categories", new { area = "Admin" })"
+                   class="sidebar-link flex items-center px-4 py-3 text-gray-300 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Categories" ? "active" : "")">
+                    <i class="fas fa-folder w-6"></i>
+                    <span>Kategoriler</span>
+                </a>
+
+                <a href="@Url.Action("Index", "News", new { area = "Admin" })"
+                   class="sidebar-link flex items-center px-4 py-3 text-gray-300 @(ViewContext.RouteData.Values["controller"]?.ToString() == "News" ? "active" : "")">
+                    <i class="fas fa-newspaper w-6"></i>
+                    <span>Haberler</span>
+                </a>
+
+                <a href="@Url.Action("Index", "Sliders", new { area = "Admin" })"
+                   class="sidebar-link flex items-center px-4 py-3 text-gray-300 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Sliders" ? "active" : "")">
+                    <i class="fas fa-images w-6"></i>
+                    <span>Sliderlar</span>
+                </a>
+
+                <a href="@Url.Action("Index", "Messages", new { area = "Admin" })"
+                   class="sidebar-link flex items-center px-4 py-3 text-gray-300 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Messages" ? "active" : "")">
+                    <i class="fas fa-envelope w-6"></i>
+                    <span>Mesajlar</span>
+                    @if (ViewBag.UnreadMessageCount != null && ViewBag.UnreadMessageCount > 0)
+                    {
+                        <span class="ml-auto bg-gumas-red text-white text-xs px-2 py-1 rounded-full">@ViewBag.UnreadMessageCount</span>
+                    }
+                </a>
+
+                <div class="border-t border-gray-700 mt-4 pt-4">
+                    <a href="/" target="_blank" class="sidebar-link flex items-center px-4 py-3 text-gray-300">
+                        <i class="fas fa-external-link-alt w-6"></i>
+                        <span>Siteyi Görüntüle</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-700">
+                <form asp-area="Admin" asp-controller="Auth" asp-action="Logout" method="post">
+                    <button type="submit" class="flex items-center text-gray-400 hover:text-white w-full">
+                        <i class="fas fa-sign-out-alt w-6"></i>
+                        <span>Çıkış Yap</span>
+                    </button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 ml-64">
+            <!-- Top Bar -->
+            <header class="bg-white shadow-sm px-6 py-4">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-xl font-semibold text-gray-800">@ViewData["Title"]</h1>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm text-gray-600">
+                            <i class="fas fa-user mr-2"></i>@User.Identity?.Name
+                        </span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="p-6">
+                @if (TempData["Success"] != null)
+                {
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                        <i class="fas fa-check-circle mr-2"></i>@TempData["Success"]
+                    </div>
+                }
+
+                @if (TempData["Error"] != null)
+                {
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                        <i class="fas fa-exclamation-circle mr-2"></i>@TempData["Error"]
+                    </div>
+                }
+
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

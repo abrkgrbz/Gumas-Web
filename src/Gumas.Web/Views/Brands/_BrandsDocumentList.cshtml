@@ -1,0 +1,135 @@
+@{
+    var documentGroups = new[]
+    {
+        new {
+            Category = "Kamyon ve Treyler Bileşenleri",
+            Brand = "JOST",
+            Url = "https://www.jost-world.com/en/products/jost.html",
+            Items = new[]
+            {
+                "Ürün Broşürü",
+                "Montaj ve Kullanım Talimatları",
+                "Tamir Kılavuzları",
+                "Teknik Bilgi",
+                "Ürün Kataloğu",
+                "Genel Şartlar ve Koşullar"
+            }
+        },
+        new {
+            Category = "Konteyner Ekipmanları ve İntermodal Taşımacılık",
+            Brand = "JOST",
+            Url = "https://www.jost-world.com/en/products/jost.html",
+            Items = new[]
+            {
+                "Ürün Kataloğu",
+                "Ürün Broşürü",
+                "Montaj ve Kullanım Talimatları",
+                "Yedek Parça ve Tamir",
+                "Videolar",
+                "Genel Şartlar ve Koşullar"
+            }
+        },
+        new {
+            Category = "Aks Sistemleri",
+            Brand = "JOST",
+            Url = "https://www.jost-world.com/en/products/jost.html",
+            Items = new[]
+            {
+                "Ürün Kataloğu",
+                "Ürün Broşürü",
+                "Teknik Bilgi",
+                "Konfigürasyon ve Montaj",
+                "İşletim ve Bakım",
+                "Yedek Parça ve Tamir",
+                "Genel Şartlar ve Koşullar"
+            }
+        },
+        new {
+            Category = "Ticari Araçlar",
+            Brand = "ROCKINGER",
+            Url = "https://www.jost-world.com/en/products/rockinger.html",
+            Items = new[]
+            {
+                "Ürün Broşürü",
+                "Montaj ve Kullanım Talimatları",
+                "Tamir Kılavuzları",
+                "Teknik Bilgi",
+                "Ürün Kataloğu",
+                "Genel Şartlar ve Koşullar"
+            }
+        },
+        new {
+            Category = "Tarım ve Ormancılık",
+            Brand = "ROCKINGER",
+            Url = "https://www.jost-world.com/en/products/rockinger.html",
+            Items = new[]
+            {
+                "Ürün Broşürü",
+                "Montaj ve Kullanım Talimatları",
+                "Tamir Kılavuzları",
+                "Teknik Bilgi",
+                "Ürün Kataloğu",
+                "Genel Şartlar ve Koşullar"
+            }
+        },
+        new {
+            Category = "Çeki Demirleri / Oklar",
+            Brand = "ROCKINGER",
+            Url = "https://www.jost-world.com/en/products/rockinger.html",
+            Items = new[]
+            {
+                "Ürün Kataloğu",
+                "Ürün Broşürü",
+                "Teknik Bilgi",
+                "Kurulum, İşletim ve Bakım",
+                "Yedek Parça ve Tamir",
+                "Genel Şartlar ve Koşullar"
+            }
+        },
+        new {
+            Category = "Dümenleme Sistemleri ve Aks Süspansiyonları",
+            Brand = "TRIDEC",
+            Url = "https://www.jost-world.com/en/products/tridec.html",
+            Items = new[] { "Ürün Broşürü" }
+        },
+        new {
+            Category = "Ön Yükleyiciler ve Ekipmanlar",
+            Brand = "QUICKE",
+            Url = "https://www.jost-world.com/en/products/quicke.html",
+            Items = new[] { "Ön Yükleyiciler", "Ekipmanlar" }
+        }
+    };
+}
+
+<div class="space-y-6">
+    @foreach (var group in documentGroups)
+    {
+        <div class="border border-gray-200 dark:border-white/10 bg-white dark:bg-gumas-gray">
+            <div class="px-6 py-4 border-b border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-black/30 flex items-center justify-between flex-wrap gap-3">
+                <div>
+                    <div class="text-xs font-mono text-gumas-red uppercase tracking-widest mb-1">@group.Brand</div>
+                    <h3 class="text-lg md:text-xl font-oswald font-bold uppercase text-black dark:text-white">
+                        @group.Category
+                    </h3>
+                </div>
+                <a href="@group.Url" target="_blank" rel="noopener"
+                   class="text-xs font-oswald uppercase tracking-widest text-gumas-red hover:text-black dark:hover:text-white transition-colors inline-flex items-center gap-2">
+                    Kurumsal Siteye Git
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                @foreach (var item in group.Items)
+                {
+                    <li class="border-b border-r border-gray-100 dark:border-white/5 last:border-b-0">
+                        <a href="@group.Url" target="_blank" rel="noopener"
+                           class="flex items-center justify-between px-6 py-3 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors group h-full">
+                            <span class="pr-3">@item</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 group-hover:opacity-100 transition-opacity flex-shrink-0"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>

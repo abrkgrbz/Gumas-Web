@@ -1,0 +1,107 @@
+@using Gumas.Domain.Enums
+@model ContactMessage
+@{
+    ViewData["Title"] = "Mesaj Detayı";
+    var isRead = Model.Status != MessageStatus.New;
+}
+
+<div class="max-w-3xl">
+    <div class="bg-white rounded-lg shadow">
+        <div class="px-6 py-4 border-b flex justify-between items-center">
+            <h2 class="font-semibold text-gray-800">
+                <i class="fas fa-envelope-open mr-2 text-gumas-red"></i>Mesaj Detayı
+            </h2>
+            <a href="@Url.Action("Index")" class="text-gray-600 hover:text-gray-800">
+                <i class="fas fa-arrow-left mr-2"></i>Geri
+            </a>
+        </div>
+
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-500 mb-1">Gönderen</label>
+                    <p class="text-gray-900 font-medium">@Model.FullName</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-500 mb-1">Tarih</label>
+                    <p class="text-gray-900">@Model.CreatedAt.ToString("dd MMMM yyyy HH:mm")</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-500 mb-1">E-posta</label>
+                    <p class="text-gray-900">
+                        <a href="mailto:@Model.Email" class="text-blue-600 hover:underline">@Model.Email</a>
+                    </p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-500 mb-1">Telefon</label>
+                    <p class="text-gray-900">
+                        @if (!string.IsNullOrEmpty(Model.Phone))
+                        {
+                            <a href="tel:@Model.Phone" class="text-blue-600 hover:underline">@Model.Phone</a>
+                        }
+                        else
+                        {
+                            <span class="text-gray-400">Belirtilmedi</span>
+                        }
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-500 mb-1">Konu</label>
+                <p class="text-gray-900 font-medium">@Model.Subject</p>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-500 mb-1">Mesaj</label>
+                <div class="bg-gray-50 rounded-lg p-4 text-gray-900 whitespace-pre-wrap">@Model.Message</div>
+            </div>
+
+            @if (isRead && Model.ReadAt.HasValue)
+            {
+                <div class="text-sm text-gray-500">
+                    <i class="fas fa-check mr-1"></i>
+                    Okundu: @Model.ReadAt.Value.ToString("dd MMMM yyyy HH:mm")
+                </div>
+            }
+        </div>
+
+        <div class="px-6 py-4 border-t bg-gray-50 flex justify-between">
+            <div class="flex gap-2">
+                @if (isRead)
+                {
+                    <form asp-action="MarkAsUnread" asp-route-id="@Model.Id" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="px-4 py-2 border rounded-lg hover:bg-gray-100">
+                            <i class="fas fa-envelope mr-2"></i>Okunmadı İşaretle
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <form asp-action="MarkAsRead" asp-route-id="@Model.Id" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="px-4 py-2 border rounded-lg hover:bg-gray-100">
+                            <i class="fas fa-check mr-2"></i>Okundu İşaretle
+                        </button>
+                    </form>
+                }
+            </div>
+
+            <div class="flex gap-2">
+                <a href="mailto:@Model.Email?subject=RE: @Model.Subject" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    <i class="fas fa-reply mr-2"></i>E-posta ile Yanıtla
+                </a>
+                <form asp-action="Delete" asp-route-id="@Model.Id" method="post" onsubmit="return confirm('Bu mesajı silmek istediğinizden emin misiniz?')">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        <i class="fas fa-trash mr-2"></i>Sil
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

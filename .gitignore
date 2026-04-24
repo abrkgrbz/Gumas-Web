@@ -1,0 +1,106 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio
+.vs/
+*.user
+*.userosscache
+*.suo
+*.cache
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+_UpgradeReport_Files/
+
+# Rider
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# NuGet
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ASP.NET
+ScaffoldingReadMe.txt
+appsettings.Development.json
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+*.mdf
+*.ldf
+
+# User-specific files
+*.rsuser
+*.pubxml
+!**/[Pp]ublish[Pp]rofiles/
+*.publishproj
+
+# Publish output
+publish/
+[Pp]ublish/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+[Bb]uild[Ll]og.*
+
+# Node modules (if any)
+node_modules/
+
+# JetBrains
+*.DotSettings.user
+
+# Uploads (user content)
+wwwroot/uploads/*
+!wwwroot/uploads/.gitkeep
+
+# Claude Code / Serena / MCP local tool config
+.claude/
+.serena/
+.playwright-mcp/
+
+# Customer brief documents (not for repo)
+*.pdf
+*.docx
+*.xlsx
+!src/**/*.pdf
+
+# Misc dev artefacts
+*.tmp

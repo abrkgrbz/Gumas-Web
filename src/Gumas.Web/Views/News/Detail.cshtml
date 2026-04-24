@@ -1,0 +1,154 @@
+@model NewsDetailViewModel
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEnglish = currentCulture == "en";
+    ViewData["Title"] = Model.News.GetTitle(currentCulture);
+    var homeUrl = isEnglish ? "/en" : "/";
+    var newsUrl = isEnglish ? "/en/news" : "/haberler";
+    var newsDetailUrl = isEnglish ? "/en/news" : "/haber";
+    var contactUrl = isEnglish ? "/en/contact" : "/iletisim";
+    var dateCulture = isEnglish ? new CultureInfo("en-US") : new CultureInfo("tr-TR");
+}
+
+<!-- Main Content -->
+<main class="pt-32 pb-20 bg-white dark:bg-gumas-dark transition-colors duration-300">
+
+    <!-- Breadcrumb -->
+    <div class="container mx-auto px-6 mb-8 text-xs font-mono text-gray-500 uppercase tracking-widest">
+        <a href="@homeUrl" class="hover:text-black dark:hover:text-white transition-colors">@L["Nav_Home"]</a>
+        <span class="mx-2">/</span>
+        <a href="@newsUrl" class="hover:text-black dark:hover:text-white transition-colors">@L["Nav_News"]</a>
+        <span class="mx-2">/</span>
+        <span class="text-gumas-red">@Model.News.GetTitle(currentCulture)</span>
+    </div>
+
+    <!-- News Detail -->
+    <section class="container mx-auto px-6 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+            <!-- Main Content -->
+            <div class="lg:col-span-2">
+                <article class="bg-white dark:bg-gumas-gray border border-gray-200 dark:border-white/10 overflow-hidden">
+                    @if (!string.IsNullOrEmpty(Model.News.ImageUrl))
+                    {
+                        <div class="aspect-video overflow-hidden">
+                            <img src="@Model.News.ImageUrl" alt="@Model.News.GetTitle(currentCulture)"
+                                 class="w-full h-full object-cover" />
+                        </div>
+                    }
+
+                    <div class="p-8 md:p-12">
+                        <!-- Meta -->
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="text-xs text-gray-500 dark:text-gray-400">
+                                <i class="fa-solid fa-calendar-days mr-1"></i>
+                                @Model.News.PublishDate.ToString("dd MMMM yyyy", dateCulture)
+                            </span>
+                        </div>
+
+                        <!-- Title -->
+                        <h1 class="text-3xl md:text-5xl font-oswald font-bold uppercase mb-6 text-black dark:text-white">
+                            @Model.News.GetTitle(currentCulture)
+                        </h1>
+
+                        <!-- Summary -->
+                        @if (!string.IsNullOrEmpty(Model.News.GetSummary(currentCulture)))
+                        {
+                            <p class="text-xl text-gray-600 dark:text-gray-400 mb-8 font-light leading-relaxed border-l-4 border-gumas-red pl-6">
+                                @Model.News.GetSummary(currentCulture)
+                            </p>
+                        }
+
+                        <!-- Content -->
+                        @if (!string.IsNullOrEmpty(Model.News.GetContent(currentCulture)))
+                        {
+                            <div class="prose prose-lg dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 leading-relaxed">
+                                @Html.Raw(Model.News.GetContent(currentCulture))
+                            </div>
+                        }
+
+                        <!-- Share -->
+                        <div class="mt-12 pt-8 border-t border-gray-200 dark:border-white/10">
+                            <span class="text-sm font-oswald uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-4 block">
+                                @L["News_Share"]
+                            </span>
+                            <div class="flex gap-3">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=@Context.Request.Path" target="_blank"
+                                   class="w-10 h-10 flex items-center justify-center bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-400 hover:bg-blue-600 hover:text-white transition-colors">
+                                    <i class="fa-brands fa-facebook-f"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?url=@Context.Request.Path&text=@Uri.EscapeDataString(Model.News.GetTitle(currentCulture))" target="_blank"
+                                   class="w-10 h-10 flex items-center justify-center bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-400 hover:bg-black hover:text-white transition-colors">
+                                    <i class="fa-brands fa-x-twitter"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&url=@Context.Request.Path&title=@Uri.EscapeDataString(Model.News.GetTitle(currentCulture))" target="_blank"
+                                   class="w-10 h-10 flex items-center justify-center bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-400 hover:bg-blue-700 hover:text-white transition-colors">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://wa.me/?text=@Uri.EscapeDataString(Model.News.GetTitle(currentCulture) + " " + Context.Request.Path)" target="_blank"
+                                   class="w-10 h-10 flex items-center justify-center bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-400 hover:bg-green-600 hover:text-white transition-colors">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Back Link -->
+                <div class="mt-8">
+                    <a href="@newsUrl"
+                       class="inline-flex items-center gap-2 text-sm font-oswald uppercase tracking-widest text-gray-500 dark:text-gray-400 hover:text-gumas-red transition-colors">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        @L["News_BackToNews"]
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+                @if (Model.RelatedNews.Any())
+                {
+                    <div class="bg-white dark:bg-gumas-gray border border-gray-200 dark:border-white/10 p-6 mb-8">
+                        <h3 class="text-xl font-oswald uppercase text-black dark:text-white mb-6 pb-4 border-b border-gray-200 dark:border-white/10">
+                            @L["News_RelatedNews"]
+                        </h3>
+                        <div class="space-y-6">
+                            @foreach (var news in Model.RelatedNews)
+                            {
+                                <a href="@newsDetailUrl/@news.Slug" class="group flex gap-4">
+                                    @if (!string.IsNullOrEmpty(news.ImageUrl))
+                                    {
+                                        <div class="w-20 h-20 flex-shrink-0 overflow-hidden">
+                                            <img src="@news.ImageUrl" alt="@news.GetTitle(currentCulture)"
+                                                 class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" />
+                                        </div>
+                                    }
+                                    <div class="flex-1">
+                                        <h4 class="text-sm font-oswald uppercase text-black dark:text-white group-hover:text-gumas-red transition-colors line-clamp-2 mb-1">
+                                            @news.GetTitle(currentCulture)
+                                        </h4>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">
+                                            @news.PublishDate.ToString("dd MMM yyyy", dateCulture)
+                                        </span>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+
+                <!-- CTA Widget -->
+                <div class="bg-gumas-dark dark:bg-black/50 p-8 text-center">
+                    <i class="fa-solid fa-circle-question text-4xl text-gumas-red mb-4"></i>
+                    <h4 class="text-lg font-oswald uppercase text-white mb-2">@L["News_HaveQuestions"]</h4>
+                    <p class="text-sm text-gray-400 mb-6">@L["News_ContactUs"]</p>
+                    <a href="@contactUrl"
+                       class="inline-flex items-center justify-center gap-2 w-full bg-gumas-red text-white font-oswald uppercase tracking-widest px-6 py-3 text-sm hover:bg-red-700 transition-colors">
+                        <i class="fa-solid fa-envelope"></i>
+                        @L["Nav_Contact"]
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>

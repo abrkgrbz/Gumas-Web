@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gumas.Domain\Gumas.Domain.csproj" />
+    <ProjectReference Include="..\Gumas.Application\Gumas.Application.csproj" />
+    <ProjectReference Include="..\Gumas.Infrastructure\Gumas.Infrastructure.csproj" />
+  </ItemGroup>
+
+
+</Project>

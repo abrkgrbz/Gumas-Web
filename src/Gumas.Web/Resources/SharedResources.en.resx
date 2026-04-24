@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter</value>
+  </resheader>
+
+  <!-- Navigation -->
+  <data name="Nav_Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Nav_Brands" xml:space="preserve">
+    <value>Brands</value>
+  </data>
+  <data name="Nav_ECatalog" xml:space="preserve">
+    <value>E-Catalog</value>
+  </data>
+  <data name="Nav_About" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="Nav_Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Nav_News" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="Nav_GetQuote" xml:space="preserve">
+    <value>Get Quote</value>
+  </data>
+
+  <!-- Common -->
+  <data name="Common_ReadMore" xml:space="preserve">
+    <value>Read More</value>
+  </data>
+  <data name="Common_ViewAll" xml:space="preserve">
+    <value>View All</value>
+  </data>
+  <data name="Common_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Common_Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Common_ClearAll" xml:space="preserve">
+    <value>Clear All</value>
+  </data>
+  <data name="Common_NoResults" xml:space="preserve">
+    <value>No Results Found</value>
+  </data>
+  <data name="Common_ProductsFound" xml:space="preserve">
+    <value>products found</value>
+  </data>
+  <data name="Common_Featured" xml:space="preserve">
+    <value>Featured</value>
+  </data>
+  <data name="Common_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Common_Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Common_Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Common_Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="Common_Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Common_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Common_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Common_Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Common_Brand" xml:space="preserve">
+    <value>Brand</value>
+  </data>
+  <data name="Common_AllCategories" xml:space="preserve">
+    <value>All Categories</value>
+  </data>
+  <data name="Common_AllBrands" xml:space="preserve">
+    <value>All Brands</value>
+  </data>
+
+  <!-- Home Page -->
+  <data name="Home_FeaturedBrands" xml:space="preserve">
+    <value>Featured Brands</value>
+  </data>
+  <data name="Home_FeaturedProducts" xml:space="preserve">
+    <value>Featured Products</value>
+  </data>
+  <data name="Home_LatestNews" xml:space="preserve">
+    <value>Latest News</value>
+  </data>
+  <data name="Home_Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="Home_WhyUs" xml:space="preserve">
+    <value>Why Choose Us?</value>
+  </data>
+  <data name="Home_Explore" xml:space="preserve">
+    <value>Explore</value>
+  </data>
+  <data name="Home_ProductCategories" xml:space="preserve">
+    <value>Product Categories</value>
+  </data>
+  <data name="Home_SpareParts_Title1" xml:space="preserve">
+    <value>Spare</value>
+  </data>
+  <data name="Home_SpareParts_Title2" xml:space="preserve">
+    <value>Parts</value>
+  </data>
+  <data name="Home_PartsCatalog" xml:space="preserve">
+    <value>Parts Catalog</value>
+  </data>
+  <data name="Home_BrandsSubtitle" xml:space="preserve">
+    <value>Our Partners</value>
+  </data>
+  <data name="Home_AllBrands" xml:space="preserve">
+    <value>All Brands</value>
+  </data>
+  <data name="Home_Feature1_Title" xml:space="preserve">
+    <value>40+ Years Experience</value>
+  </data>
+  <data name="Home_Feature1_Description" xml:space="preserve">
+    <value>Trusted supplier in heavy vehicle industry since 1985.</value>
+  </data>
+  <data name="Home_Feature2_Title" xml:space="preserve">
+    <value>10,000+ Products</value>
+  </data>
+  <data name="Home_Feature2_Description" xml:space="preserve">
+    <value>Wide product range for all your needs from a single source.</value>
+  </data>
+  <data name="Home_Feature3_Title" xml:space="preserve">
+    <value>Fast Delivery</value>
+  </data>
+  <data name="Home_Feature3_Description" xml:space="preserve">
+    <value>Strong stock capacity and fast logistics infrastructure.</value>
+  </data>
+  <data name="Home_AllNews" xml:space="preserve">
+    <value>All News</value>
+  </data>
+  <data name="Home_Cta_Title1" xml:space="preserve">
+    <value>Have</value>
+  </data>
+  <data name="Home_Cta_Title2" xml:space="preserve">
+    <value>Questions?</value>
+  </data>
+  <data name="Home_Cta_Description" xml:space="preserve">
+    <value>Our expert team is ready to help you. Contact us now.</value>
+  </data>
+  <data name="Home_Support247" xml:space="preserve">
+    <value>24/7 Support</value>
+  </data>
+  <data name="Home_SupportDesc" xml:space="preserve">
+    <value>Our technical support team is always by your side.</value>
+  </data>
+
+  <!-- Products Page -->
+  <data name="Products_Title" xml:space="preserve">
+    <value>Product Catalog</value>
+  </data>
+  <data name="Products_SearchPlaceholder" xml:space="preserve">
+    <value>Search by product name, code or OEM number...</value>
+  </data>
+  <data name="Products_Code" xml:space="preserve">
+    <value>Product Code</value>
+  </data>
+  <data name="Products_OEM" xml:space="preserve">
+    <value>OEM Number</value>
+  </data>
+  <data name="Products_Specifications" xml:space="preserve">
+    <value>Technical Specifications</value>
+  </data>
+  <data name="Products_RelatedProducts" xml:space="preserve">
+    <value>Related Products</value>
+  </data>
+  <data name="Products_RequestQuote" xml:space="preserve">
+    <value>Request Quote</value>
+  </data>
+  <data name="Products_WhatsAppOrder" xml:space="preserve">
+    <value>Order via WhatsApp</value>
+  </data>
+  <data name="Products_Featured" xml:space="preserve">
+    <value>Featured</value>
+  </data>
+  <data name="Products_ViewAll" xml:space="preserve">
+    <value>View All Products</value>
+  </data>
+
+  <!-- Brands Page -->
+  <data name="Brands_Title" xml:space="preserve">
+    <value>Our Brands</value>
+  </data>
+  <data name="Brands_AllBrands" xml:space="preserve">
+    <value>All Brands</value>
+  </data>
+  <data name="Brands_Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Brands_ViewProducts" xml:space="preserve">
+    <value>View Products</value>
+  </data>
+  <data name="Brands_TitleSuffix" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Brands_Description" xml:space="preserve">
+    <value>As the authorized representative of world-class manufacturers in Turkey, we offer you the highest quality spare parts.</value>
+  </data>
+  <data name="Brands_FeaturedTitle" xml:space="preserve">
+    <value>Featured</value>
+  </data>
+  <data name="Brands_CtaTitle" xml:space="preserve">
+    <value>Looking for the</value>
+  </data>
+  <data name="Brands_CtaTitleHighlight" xml:space="preserve">
+    <value>Right Part?</value>
+  </data>
+  <data name="Brands_CtaDescription" xml:space="preserve">
+    <value>With over 12,000 product references, we quickly supply the parts you need. Get a quote now.</value>
+  </data>
+
+  <!-- News Page -->
+  <data name="News_Title" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="News_TitleSuffix" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="News_Description" xml:space="preserve">
+    <value>Latest industry developments, new product launches and company news.</value>
+  </data>
+  <data name="News_LatestNews" xml:space="preserve">
+    <value>Latest News</value>
+  </data>
+  <data name="News_RelatedNews" xml:space="preserve">
+    <value>Related News</value>
+  </data>
+  <data name="News_Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="News_BackToNews" xml:space="preserve">
+    <value>Back to News</value>
+  </data>
+  <data name="News_HaveQuestions" xml:space="preserve">
+    <value>Have questions?</value>
+  </data>
+  <data name="News_ContactUs" xml:space="preserve">
+    <value>Get in touch with us.</value>
+  </data>
+  <data name="News_NoResults" xml:space="preserve">
+    <value>No News Found</value>
+  </data>
+  <data name="News_NoResultsDesc" xml:space="preserve">
+    <value>No published news at the moment. Please check back later.</value>
+  </data>
+  <data name="Nav_Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+
+  <!-- Contact Page -->
+  <data name="Contact_Title" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Contact_Subtitle" xml:space="preserve">
+    <value>Us</value>
+  </data>
+  <data name="Contact_FullName" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="Contact_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Contact_Email" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="Contact_Company" xml:space="preserve">
+    <value>Company Name</value>
+  </data>
+  <data name="Contact_Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Contact_Message" xml:space="preserve">
+    <value>Your Message</value>
+  </data>
+  <data name="Contact_SendMessage" xml:space="preserve">
+    <value>Send Message</value>
+  </data>
+  <data name="Contact_HeadOffice" xml:space="preserve">
+    <value>Head Office</value>
+  </data>
+  <data name="Contact_WorkingHours" xml:space="preserve">
+    <value>Working Hours</value>
+  </data>
+  <data name="Contact_SocialMedia" xml:space="preserve">
+    <value>Social Media</value>
+  </data>
+  <data name="Contact_SuccessMessage" xml:space="preserve">
+    <value>Your message has been sent successfully. We will contact you as soon as possible.</value>
+  </data>
+  <data name="Contact_TitleSuffix" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Contact_Description" xml:space="preserve">
+    <value>Get in touch with us for your questions, requests or partnership opportunities. We will get back to you as soon as possible.</value>
+  </data>
+  <data name="Contact_Headquarters" xml:space="preserve">
+    <value>Head Office</value>
+  </data>
+  <data name="Contact_PhoneField" xml:space="preserve">
+    <value>Your Phone Number</value>
+  </data>
+  <data name="Contact_EmailField" xml:space="preserve">
+    <value>Your Email Address</value>
+  </data>
+  <data name="Contact_WeekdayHours" xml:space="preserve">
+    <value>Monday - Friday: 09:00 - 18:00</value>
+  </data>
+  <data name="Contact_SundayHours" xml:space="preserve">
+    <value>Saturday - Sunday: Closed</value>
+  </data>
+
+  <!-- About Page -->
+  <data name="About_Title" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="About_Since1985" xml:space="preserve">
+    <value>Since 1985</value>
+  </data>
+  <data name="About_HeroTitle1" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="About_HeroTitle2" xml:space="preserve">
+    <value>Supply</value>
+  </data>
+  <data name="About_Intro1" xml:space="preserve">
+    <value>GÜMAŞ is a leading business partner for the commercial vehicle industry, specializing in the import and distribution of high-quality spare parts for Bus, Truck and Trailer segments. We bridge the gap between world-class manufacturers and local markets.</value>
+  </data>
+  <data name="About_Intro2" xml:space="preserve">
+    <value>With our massive stock capacity and advanced logistics network, we ensure instant access to critical components for fleet operators and service centers. Representing leading global brands, we guarantee OEM-level quality and reliability.</value>
+  </data>
+  <data name="About_HistoryTitle1" xml:space="preserve">
+    <value>From 1985</value>
+  </data>
+  <data name="About_HistoryTitle2" xml:space="preserve">
+    <value>To Today</value>
+  </data>
+  <data name="About_HistoryText1" xml:space="preserve">
+    <value>For over forty years, GÜMAŞ has been bridging global manufacturing excellence with local industrial needs. We don't just supply parts; we guarantee continuity.</value>
+  </data>
+  <data name="About_HistoryText2" xml:space="preserve">
+    <value>As a leading importer and distributor, we deeply understand the heavy commercial vehicle market. Our logistics network ensures timely delivery whether you need a single axle component or complete brake systems for an entire fleet.</value>
+  </data>
+  <data name="About_YearsExperience" xml:space="preserve">
+    <value>Years of Experience</value>
+  </data>
+  <data name="About_ProductReferences" xml:space="preserve">
+    <value>Product References</value>
+  </data>
+  <data name="About_ProductVariety" xml:space="preserve">
+    <value>Product Varieties</value>
+  </data>
+  <data name="About_HappyCustomers" xml:space="preserve">
+    <value>Happy Customers</value>
+  </data>
+  <data name="About_BrandPartnerships" xml:space="preserve">
+    <value>Brand Partnerships</value>
+  </data>
+  <data name="About_IndustrialLogistics" xml:space="preserve">
+    <value>Industrial Logistics</value>
+  </data>
+  <data name="About_OurStory" xml:space="preserve">
+    <value>Our Story</value>
+  </data>
+  <data name="About_Mission" xml:space="preserve">
+    <value>Our Mission</value>
+  </data>
+  <data name="About_MissionText" xml:space="preserve">
+    <value>To provide our customers in the heavy vehicle industry with the highest quality spare parts at the most competitive prices. To become an indispensable supplier in the industry with fast delivery, professional service and reliable business partnership.</value>
+  </data>
+  <data name="About_Vision" xml:space="preserve">
+    <value>Our Vision</value>
+  </data>
+  <data name="About_VisionText" xml:space="preserve">
+    <value>To become the leading brand in the heavy vehicle spare parts industry in Turkey and international markets. To set the highest standards in customer satisfaction through technology investments and continuous development.</value>
+  </data>
+  <data name="About_OurValues" xml:space="preserve">
+    <value>Our </value>
+  </data>
+  <data name="About_OurValuesSuffix" xml:space="preserve">
+    <value>Values</value>
+  </data>
+  <data name="About_Value_Quality" xml:space="preserve">
+    <value>Quality</value>
+  </data>
+  <data name="About_Value_QualityDesc" xml:space="preserve">
+    <value>We apply the highest quality standards to every product we offer.</value>
+  </data>
+  <data name="About_Value_Reliability" xml:space="preserve">
+    <value>Reliability</value>
+  </data>
+  <data name="About_Value_ReliabilityDesc" xml:space="preserve">
+    <value>We build long-term, trust-based relationships with our customers.</value>
+  </data>
+  <data name="About_Value_Speed" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="About_Value_SpeedDesc" xml:space="preserve">
+    <value>We prepare and deliver your orders in the shortest time possible.</value>
+  </data>
+  <data name="About_Value_CustomerFocus" xml:space="preserve">
+    <value>Customer Focus</value>
+  </data>
+  <data name="About_Value_CustomerFocusDesc" xml:space="preserve">
+    <value>Customer satisfaction is always our priority.</value>
+  </data>
+  <data name="About_Value_Improvement" xml:space="preserve">
+    <value>Continuous Improvement</value>
+  </data>
+  <data name="About_Value_ImprovementDesc" xml:space="preserve">
+    <value>We continuously improve ourselves and our services.</value>
+  </data>
+  <data name="About_Value_GlobalVision" xml:space="preserve">
+    <value>Global Vision</value>
+  </data>
+  <data name="About_Value_GlobalVisionDesc" xml:space="preserve">
+    <value>We provide services at international standards.</value>
+  </data>
+  <data name="About_CTATitle1" xml:space="preserve">
+    <value>Want to Work</value>
+  </data>
+  <data name="About_CTATitle2" xml:space="preserve">
+    <value>With Us?</value>
+  </data>
+  <data name="About_CTADescription" xml:space="preserve">
+    <value>Contact us for your questions, we are happy to help you.</value>
+  </data>
+  <data name="About_CTAButton" xml:space="preserve">
+    <value>Get in Touch</value>
+  </data>
+  <data name="About_Values" xml:space="preserve">
+    <value>Our Values</value>
+  </data>
+  <data name="About_Quality" xml:space="preserve">
+    <value>Quality</value>
+  </data>
+  <data name="About_Trust" xml:space="preserve">
+    <value>Trust</value>
+  </data>
+  <data name="About_Innovation" xml:space="preserve">
+    <value>Innovation</value>
+  </data>
+  <data name="About_CustomerFocus" xml:space="preserve">
+    <value>Customer Focus</value>
+  </data>
+
+  <!-- E-Catalog Page -->
+  <data name="Catalog_Title" xml:space="preserve">
+    <value>E-Catalog</value>
+  </data>
+  <data name="Catalog_Subtitle" xml:space="preserve">
+    <value>Our Digital Catalogs</value>
+  </data>
+  <data name="Catalog_Download" xml:space="preserve">
+    <value>Download PDF</value>
+  </data>
+  <data name="Catalog_View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="Catalog_GeneralCatalog" xml:space="preserve">
+    <value>General Product Catalog</value>
+  </data>
+  <data name="Catalog_MotorParts" xml:space="preserve">
+    <value>Motor Parts Catalog</value>
+  </data>
+  <data name="Catalog_BrakeSystems" xml:space="preserve">
+    <value>Brake Systems Catalog</value>
+  </data>
+
+  <!-- Footer -->
+  <data name="Footer_QuickLinks" xml:space="preserve">
+    <value>Quick Links</value>
+  </data>
+  <data name="Footer_Corporate" xml:space="preserve">
+    <value>Corporate</value>
+  </data>
+  <data name="Footer_Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Footer_PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="Footer_TermsOfUse" xml:space="preserve">
+    <value>Terms of Use</value>
+  </data>
+  <data name="Footer_AllRights" xml:space="preserve">
+    <value>All rights reserved.</value>
+  </data>
+  <data name="Footer_Description" xml:space="preserve">
+    <value>Your trusted heavy vehicle spare parts supplier. Quality products, competitive prices.</value>
+  </data>
+  <data name="Footer_CompanyName" xml:space="preserve">
+    <value>GÜMAŞ A.Ş.</value>
+  </data>
+
+  <!-- Errors -->
+  <data name="Error_NotFound" xml:space="preserve">
+    <value>Page Not Found</value>
+  </data>
+  <data name="Error_ServerError" xml:space="preserve">
+    <value>Server Error</value>
+  </data>
+  <data name="Error_TryAgain" xml:space="preserve">
+    <value>Please try again</value>
+  </data>
+  <data name="Error_GoHome" xml:space="preserve">
+    <value>Go to Home</value>
+  </data>
+
+</root>

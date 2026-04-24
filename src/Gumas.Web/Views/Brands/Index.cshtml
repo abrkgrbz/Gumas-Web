@@ -1,0 +1,84 @@
+@model BrandsViewModel
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEnglish = currentCulture == "en";
+    ViewData["Title"] = isEnglish ? "Brands" : "Markalar";
+    var brandDetailUrl = isEnglish ? "/en/brand" : "/marka";
+    var contactUrl = isEnglish ? "/en/contact" : "/iletisim";
+}
+
+<!-- Main Content -->
+<main class="pt-32 pb-20 bg-white dark:bg-gumas-dark transition-colors duration-300">
+
+    <!-- Page Header -->
+    <section class="container mx-auto px-6 mb-20 relative z-10">
+        <h1 class="text-6xl md:text-8xl font-oswald font-bold uppercase mb-6 text-black dark:text-white">
+            @L["Brands_Title"]<span class="text-gumas-gray">@L["Brands_TitleSuffix"]</span>
+        </h1>
+        <p class="max-w-2xl text-gray-600 dark:text-gray-400 font-light">
+            @L["Brands_Description"]
+        </p>
+    </section>
+
+    <!-- Brands Grid -->
+    <section class="container mx-auto px-6 relative z-10">
+        @if (Model.Brands.Any())
+        {
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                @foreach (var brand in Model.Brands)
+                {
+                    <a href="@brandDetailUrl/@brand.Slug"
+                       class="bg-white border border-gray-200 dark:bg-white/[0.02] dark:border-white/5 aspect-[3/2] flex flex-col items-center justify-center p-6 grayscale hover:grayscale-0 hover:border-gumas-red dark:hover:bg-white/5 transition-all duration-500 group">
+                        @if (!string.IsNullOrEmpty(brand.LogoUrl))
+                        {
+                            <img src="@brand.LogoUrl" alt="@brand.GetName(currentCulture)"
+                                 class="max-h-20 max-w-[85%] object-contain mb-3 opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                        }
+                        else
+                        {
+                            <span class="font-oswald text-3xl tracking-widest text-gray-400 dark:text-gray-600 group-hover:text-black dark:group-hover:text-white transition-colors">
+                                @brand.GetName(currentCulture)
+                            </span>
+                        }
+                        @if (!string.IsNullOrEmpty(brand.LogoUrl))
+                        {
+                            <span class="text-xs font-oswald uppercase tracking-wider text-gray-400 dark:text-gray-600 group-hover:text-gumas-red transition-colors mt-2">
+                                @brand.GetName(currentCulture)
+                            </span>
+                        }
+                    </a>
+                }
+            </div>
+        }
+        else
+        {
+            <!-- No Brands -->
+            <div class="text-center py-20">
+                <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-100 dark:bg-gumas-gray flex items-center justify-center">
+                    <i class="fa-solid fa-building text-4xl text-gray-400"></i>
+                </div>
+                <h3 class="text-2xl font-oswald uppercase text-black dark:text-white mb-4">@L["Brands_NoResults"]</h3>
+                <p class="text-gray-500 dark:text-gray-400 mb-8 max-w-md mx-auto">
+                    @L["Brands_NoResultsDesc"]
+                </p>
+            </div>
+        }
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container mx-auto px-6 mt-32 relative z-10">
+        <div class="bg-gumas-dark dark:bg-gumas-gray p-12 md:p-20 text-center">
+            <h2 class="text-3xl md:text-5xl font-oswald font-bold uppercase mb-6 text-white">
+                @L["Brands_CtaTitle"] <span class="text-gumas-red">@L["Brands_CtaTitleHighlight"]</span>
+            </h2>
+            <p class="text-gray-400 mb-10 max-w-2xl mx-auto">
+                @L["Brands_CtaDescription"]
+            </p>
+            <a href="@contactUrl"
+               class="inline-block font-oswald border-2 border-white text-white px-10 py-4 uppercase text-sm tracking-widest hover:bg-gumas-red hover:border-gumas-red transition-all duration-300">
+                <i class="fa-solid fa-envelope mr-2"></i> @L["Nav_Contact"]
+            </a>
+        </div>
+    </section>
+
+</main>

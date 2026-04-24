@@ -1,0 +1,57 @@
+@{
+    var culture = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isEn = culture == "en";
+
+    var items = new[]
+    {
+        new {
+            TitleTr = "Kamyon ve Treyler",
+            TitleEn = "Truck and Trailer",
+            Image = "/images/brands/jost-truck-trailer.jpg",
+            Url = "https://truck-and-trailer.jost-world-catalogues.com",
+            DescriptionTr = "JOST, 60 yıldan fazla bir süre önce ilk çelik döküm beşinci tekerlek kaplininin patent başvurusunu yaptı. O zamandan beri, JOST'un beşinci tekerlek kaplinleri dünya çapında bir başarı öyküsü oldu. Tüm tanınmış araç üreticileri, JOST'un uzmanlığına ve performansına güveniyor. Geniş ürün yelpazesi ve yüksek kalite, şirketin yenilikçi becerisi ve güvenilir küresel bitmiş ve yedek parça tedariği kadar bu müşteri güveni için de çok önemlidir. Dünya çapındaki müşteriler için milyonlarca beşinci tekerlek kaplini üreten herkes neyin önemli olduğunu bilir. JOST, her uygulama için beşinci tekerlek kaplinleri sağlar. Bunlar arasında ağırlık optimize preslenmiş sac kaplinler ve 6 ila 74 ton arasında yük taşıma kapasitesine sahip sağlam dökme çelik kaplinler bulunur.",
+            DescriptionEn = "JOST submitted the patent application for the first cast steel fifth wheel coupling over 60 years ago. Since then, JOST's fifth wheel couplings have been a success story around the world. All renowned vehicle manufacturers place their trust in JOST's expertise and performance. The extensive product range and high quality are just as crucial for this customer trust as the company's innovative skill and reliable global supply of finished and spare parts. JOST provides fifth wheel couplings for every application. These include weight-optimised pressed sheet metal couplings as well as robust cast steel couplings with load capacities from 6 to 74 tonnes."
+        },
+        new {
+            TitleTr = "Konteyner Ekipmanları",
+            TitleEn = "Container Equipment",
+            Image = "/images/brands/jost-container.jpg",
+            Url = "https://container-equipment.jost-world-catalogues.com",
+            DescriptionTr = "JOST, 1990 yılından bu yana konteyner ekipmanları ve değiştirilebilir sistemler sektöründe sürekli bir büyüme kaydetmiştir. Sektördeki onlarca yıllık deneyimimiz, müşterilerimiz için değerli ve güvenilir bir tedarikçi olmamıza yardımcı olmuştur. Bireysel danışmanlık ve satış sonrası destek, teklifimizi tamamlamaktadır. Konteyner ekipmanları ürün portföyümüz, özellikle Avrupa'da verimli lojistik sağlayan, değiştirilebilir gövdeler için geniş bir yelpazede destekler, köşe dökümleri ve aksesuarlar içermektedir. Esneklik, uyumluluk ve istikrarın yanı sıra güvenlik, geleceğe yönelik bir araç filosunun temel parametrelerinden biridir. Değiştirilebilir gövdelerin ve yük konteynerlerinin güvenli karayolu taşımacılığını sağlamak için JOST, bu özel taşıma araçları için doğru kilitleme parçalarını sunmaktadır.",
+            DescriptionEn = "JOST has enjoyed continuous growth in the container equipment and interchangeable systems sector since 1990. Our decades of experience in the sector have helped us become a valued and trusted supplier for our customers. Individual consultation and after-sales support complete our offer. Our portfolio of container equipment products comprises a wide range of supports, corner castings and accessories for interchangeable bodies, which enable efficient logistics – particularly in Europe. As well as flexibility, compatibility and stability, safety is one of the key parameters of a forward-looking vehicle fleet. To ensure the safe road transport of interchangeable bodies and freight containers, JOST provides the right locking components for these specialised transport vehicles."
+        },
+        new {
+            TitleTr = "Aks Sistemleri",
+            TitleEn = "Axle Systems",
+            Image = "/images/brands/jost-axle.jpg",
+            Url = "https://www.jost-world.com/en/products/pdf-downloads/jost-axle-systems.html",
+            DescriptionTr = "Ocak 2015'te JOST, Mercedes-Benz Treyler Aks Sistemleri'ni satın alarak Avrupa'nın önemli treyler aks üreticilerinden biri haline geldi. Bu birleşme, müşterilerimize birçok avantaj sunmaktadır; bunlardan biri de JOST satış ağı aracılığıyla orijinal yedek parçaların güvenilir ve hızlı bir şekilde temin edilmesidir. JOST, Mercedes-Benz'den tüm seriler için orijinal yedek parça tedarik etme sorumluluğunu devralmıştır. Bu, JOST'un treyler aks sistemleri üreticisi olarak kanıtlanmış seri kalitesinde orijinal yedek parçalar sağladığı anlamına gelir. Sadece JOST orijinal yedek parçaları, akslarınızın güvenliğini, performansını ve dayanıklılığını garanti eder.",
+            DescriptionEn = "In January 2015, JOST acquired Mercedes-Benz TrailerAxleSystems, making JOST one of Europe's important manufacturers of trailer axles. The merger offers numerous advantages to our customers, one of which is the reliable and fast supply of original spare parts via the JOST sales network. JOST has assumed the responsibility from Mercedes-Benz of providing original spare parts for all series. This means that JOST provides original spare parts as the manufacturer of trailer axle systems in proven series quality. Only JOST original spare parts guarantee the safety, performance and durability of your axles."
+        }
+    };
+}
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    @foreach (var item in items)
+    {
+        <a href="@item.Url" target="_blank" rel="noopener"
+           class="group bg-white dark:bg-gumas-gray border border-gray-200 dark:border-white/10 hover:border-gumas-red transition-all duration-300 flex flex-col overflow-hidden">
+            <div class="aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-black/30">
+                <img src="@item.Image" alt="@(isEn ? item.TitleEn : item.TitleTr)"
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+                <h3 class="text-xl md:text-2xl font-oswald font-bold uppercase text-black dark:text-white mb-4 group-hover:text-gumas-red transition-colors">
+                    @(isEn ? item.TitleEn : item.TitleTr)
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6 flex-grow">
+                    @(isEn ? item.DescriptionEn : item.DescriptionTr)
+                </p>
+                <span class="inline-flex items-center gap-2 text-sm font-oswald uppercase tracking-widest text-gumas-red group-hover:gap-3 transition-all mt-auto">
+                    @(isEn ? "View Catalogue" : "Kataloğa Git")
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </span>
+            </div>
+        </a>
+    }
+</div>

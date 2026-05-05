@@ -33,7 +33,7 @@
                     <p class="text-lg md:text-xl text-gray-500 dark:text-gray-400 font-light leading-relaxed max-w-2xl">
                         @(isEnglish
                             ? "JOST offers the widest range of products worldwide for commercial vehicles with high quality and performance."
-                            : "JOST, ticari araçlar için dünya çapında en geniş ürün yelpazesi ile yüksek kalite ve performans sunmaktadır.")
+                            : "JOST, beşinci teker tablaları, mekanik ayaklar, kingpimler, hubodometreler, döner tablalar, konteyner kilitleri ile konteyner ekipmanları ve aks sistemlerinde önde gelen global üreticidir. Alman mühendisliği kalitesiyle üretim yapmaktadır.")
                     </p>
                 </div>
             </div>
@@ -67,12 +67,17 @@
                     @foreach (var brand in Model.Brands)
                     {
                         var brandSlug = brand.Slug?.ToLowerInvariant();
+                        var isGerflor = brandSlug == "gerflor";
                         var hasLocalPage = brandSlug == "jost" || brandSlug == "rockinger" || brandSlug == "tridec" || brandSlug == "quicke";
                         string brandHref;
                         bool openInNewTab;
-                        if (isEnglish && !string.IsNullOrEmpty(brand.Website))
+                        if (isGerflor)
                         {
-                            // Madde 7: İngilizce sayfada kartlar orijinal üretici sitesine gitmeli
+                            brandHref = "#";
+                            openInNewTab = false;
+                        }
+                        else if (isEnglish && !string.IsNullOrEmpty(brand.Website))
+                        {
                             brandHref = brand.Website;
                             openInNewTab = true;
                         }
@@ -93,42 +98,156 @@
                         }
                         var brandDesc = brand.GetDescription(currentCulture);
 
-                        <a href="@brandHref"
-                           @(openInNewTab ? "target=\"_blank\" rel=\"noopener\"" : "")
-                           class="group relative overflow-hidden bg-white dark:bg-gumas-dark border border-gray-200 dark:border-white/10 min-h-[340px] flex flex-col rounded-sm shadow-sm hover:shadow-xl hover:border-gumas-red transition-all duration-300">
-
-                            <!-- Logo centered -->
-                            <div class="flex-1 flex items-center justify-center p-10">
-                                @if (!string.IsNullOrEmpty(brand.LogoUrl))
-                                {
-                                    <img src="@brand.LogoUrl"
-                                         alt="@brand.GetName(currentCulture)"
-                                         class="max-h-28 max-w-[75%] object-contain grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all duration-500" />
-                                }
-                                else
-                                {
-                                    <span class="font-oswald text-5xl md:text-6xl font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 group-hover:text-black dark:group-hover:text-white transition-colors duration-500">
+                        @if (isGerflor)
+                        {
+                            <div onclick="document.getElementById('gerflor-modal').style.display='flex'"
+                                 class="group relative overflow-hidden bg-white dark:bg-gumas-dark border border-gray-200 dark:border-white/10 min-h-[340px] flex flex-col rounded-sm shadow-sm hover:shadow-xl hover:border-gumas-red transition-all duration-300 cursor-pointer select-none">
+                                <div class="flex-1 flex items-center justify-center p-10">
+                                    @if (!string.IsNullOrEmpty(brand.LogoUrl))
+                                    {
+                                        <img src="@brand.LogoUrl"
+                                             alt="@brand.GetName(currentCulture)"
+                                             class="max-h-28 max-w-[75%] object-contain grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all duration-500" />
+                                    }
+                                    else
+                                    {
+                                        <span class="font-oswald text-5xl md:text-6xl font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 group-hover:text-black dark:group-hover:text-white transition-colors duration-500">
+                                            @brand.GetName(currentCulture)
+                                        </span>
+                                    }
+                                </div>
+                                <div class="relative z-10 px-8 py-6 border-t border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-black/30">
+                                    <h3 class="font-oswald text-xl md:text-2xl uppercase text-gray-900 dark:text-white font-bold leading-tight mb-2 group-hover:text-gumas-red transition-colors duration-300">
                                         @brand.GetName(currentCulture)
-                                    </span>
-                                }
-                            </div>
-
-                            <!-- Bottom band -->
-                            <div class="relative z-10 px-8 py-6 border-t border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-black/30">
-                                <h3 class="font-oswald text-xl md:text-2xl uppercase text-gray-900 dark:text-white font-bold leading-tight mb-2 group-hover:text-gumas-red transition-colors duration-300">
-                                    @brand.GetName(currentCulture)
-                                </h3>
-                                @if (!string.IsNullOrEmpty(brandDesc))
-                                {
-                                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-3 line-clamp-2">@brandDesc</p>
-                                }
-                                <div class="inline-flex items-center gap-3 text-gray-800 dark:text-white text-sm font-oswald uppercase tracking-widest group-hover:text-gumas-red transition-colors duration-300">
-                                    @(isEnglish ? "View Products" : "Ürünleri Gör")
-                                    <i class="fa-solid @(openInNewTab ? "fa-arrow-up-right-from-square" : "fa-arrow-right") text-sm group-hover:translate-x-1 transition-transform duration-300"></i>
+                                    </h3>
+                                    @if (!string.IsNullOrEmpty(brandDesc))
+                                    {
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-3 line-clamp-2">@brandDesc</p>
+                                    }
+                                    <div class="inline-flex items-center gap-3 text-gray-800 dark:text-white text-sm font-oswald uppercase tracking-widest group-hover:text-gumas-red transition-colors duration-300">
+                                        @(isEnglish ? "View Products" : "Ürünleri Gör")
+                                        <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </a>
+                        }
+                        else
+                        {
+                            <a href="@brandHref"
+                               @(openInNewTab ? Html.Raw("target=\"_blank\" rel=\"noopener\"") : Html.Raw(""))
+                               class="group relative overflow-hidden bg-white dark:bg-gumas-dark border border-gray-200 dark:border-white/10 min-h-[340px] flex flex-col rounded-sm shadow-sm hover:shadow-xl hover:border-gumas-red transition-all duration-300">
+                                <div class="flex-1 flex items-center justify-center p-10">
+                                    @if (!string.IsNullOrEmpty(brand.LogoUrl))
+                                    {
+                                        <img src="@brand.LogoUrl"
+                                             alt="@brand.GetName(currentCulture)"
+                                             class="max-h-28 max-w-[75%] object-contain grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all duration-500" />
+                                    }
+                                    else
+                                    {
+                                        <span class="font-oswald text-5xl md:text-6xl font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 group-hover:text-black dark:group-hover:text-white transition-colors duration-500">
+                                            @brand.GetName(currentCulture)
+                                        </span>
+                                    }
+                                </div>
+                                <div class="relative z-10 px-8 py-6 border-t border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-black/30">
+                                    <h3 class="font-oswald text-xl md:text-2xl uppercase text-gray-900 dark:text-white font-bold leading-tight mb-2 group-hover:text-gumas-red transition-colors duration-300">
+                                        @brand.GetName(currentCulture)
+                                    </h3>
+                                    @if (!string.IsNullOrEmpty(brandDesc))
+                                    {
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-3 line-clamp-2">@brandDesc</p>
+                                    }
+                                    <div class="inline-flex items-center gap-3 text-gray-800 dark:text-white text-sm font-oswald uppercase tracking-widest group-hover:text-gumas-red transition-colors duration-300">
+                                        @(isEnglish ? "View Products" : "Ürünleri Gör")
+                                        @{ var iconCls = openInNewTab ? "fa-arrow-up-right-from-square" : "fa-arrow-right"; }
+                                        <i class="fa-solid @iconCls text-sm group-hover:translate-x-1 transition-transform duration-300"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        }
                     }
+                </div>
+
+                <!-- GERFLOR Seçim Modalı -->
+                <div id="gerflor-modal" style="display:none" class="fixed inset-0 z-50 items-center justify-center bg-black/60 backdrop-blur-sm" onclick="if(event.target===this){this.style.display='none'}">
+                    <div class="bg-white dark:bg-gumas-dark border border-gray-200 dark:border-white/10 w-full max-w-2xl mx-4 shadow-2xl">
+                        <!-- Modal Header -->
+                        <div class="flex items-center justify-between px-8 py-6 border-b border-gray-100 dark:border-white/10">
+                            <div>
+                                <span class="font-oswald text-xs uppercase tracking-[0.4em] text-gumas-red block mb-1">GERFLOR</span>
+                                <h3 class="font-oswald text-2xl font-bold uppercase text-black dark:text-white">
+                                    @(isEnglish ? "Select Category" : "Kategori Seçin")
+                                </h3>
+                            </div>
+                            <button onclick="document.getElementById('gerflor-modal').style.display='none'" class="text-gray-400 hover:text-black dark:hover:text-white transition-colors text-2xl leading-none">&times;</button>
+                        </div>
+                        <!-- Modal Body -->
+                        <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- OTOBÜS -->
+                            <div class="border border-gray-200 dark:border-white/10 hover:border-gumas-red transition-colors group">
+                                <div class="px-6 py-4 border-b border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-black/20 group-hover:bg-gumas-red/5 transition-colors">
+                                    <h4 class="font-oswald text-lg font-bold uppercase text-black dark:text-white group-hover:text-gumas-red transition-colors">
+                                        @(isEnglish ? "BUS" : "OTOBÜS")
+                                    </h4>
+                                </div>
+                                <ul class="divide-y divide-gray-100 dark:divide-white/5">
+                                    <li>
+                                        <a href="https://www.gerflortransport.com/en/bus/tarabus-solution-your-buses" target="_blank" rel="noopener"
+                                           class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors">
+                                            <span>@(isEnglish ? "Tarabus – Bus solutions" : "Tarabus – Otobüs çözümleri")</span>
+                                            <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 group-hover:opacity-100 ml-3 flex-shrink-0"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.gerflortransport.com/en/bus/technical-solutions-buses-and-coaches" target="_blank" rel="noopener"
+                                           class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors">
+                                            <span>@(isEnglish ? "Technical solutions – City and intercity buses" : "Teknik çözümler – Şehir içi ve Şehirlerarası otobüsler")</span>
+                                            <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 ml-3 flex-shrink-0"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.gerflortransport.com/en/bus/interior-designer-tarabus-visualize-your-project-tarabus-products" target="_blank" rel="noopener"
+                                           class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors">
+                                            <span>@(isEnglish ? "Interior design – Visualize your products" : "İç tasarım – Ürünlerinizi gözünüzde canlandırın")</span>
+                                            <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 ml-3 flex-shrink-0"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- RAYLI SİSTEMLER -->
+                            <div class="border border-gray-200 dark:border-white/10 hover:border-gumas-red transition-colors group">
+                                <div class="px-6 py-4 border-b border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-black/20 group-hover:bg-gumas-red/5 transition-colors">
+                                    <h4 class="font-oswald text-lg font-bold uppercase text-black dark:text-white group-hover:text-gumas-red transition-colors">
+                                        @(isEnglish ? "RAIL SYSTEMS" : "RAYLI SİSTEMLER")
+                                    </h4>
+                                </div>
+                                <ul class="divide-y divide-gray-100 dark:divide-white/5">
+                                    <li>
+                                        <a href="https://www.gerflortransport.com/en/rail/wherever-you-go-traveller-your-trusted-companion" target="_blank" rel="noopener"
+                                           class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors">
+                                            <span>@(isEnglish ? "Products" : "Ürünler")</span>
+                                            <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 ml-3 flex-shrink-0"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.gerflortransport.com/en/rail/technical-solutions-trains" target="_blank" rel="noopener"
+                                           class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors">
+                                            <span>@(isEnglish ? "Train technical solutions" : "Tren teknik çözümleri")</span>
+                                            <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 ml-3 flex-shrink-0"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.gerflortransport.com/en/rail/gerflors-expertise-elevating-rail-vehicle-flooring-solutions" target="_blank" rel="noopener"
+                                           class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors">
+                                            <span>@(isEnglish ? "Rail vehicle flooring solutions" : "Demiryolu araçları zemin döşeme çözümleri")</span>
+                                            <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 ml-3 flex-shrink-0"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             }
         </section>

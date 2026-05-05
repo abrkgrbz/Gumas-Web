@@ -163,14 +163,14 @@ public static class DataSeeder
 
         var revisions = new (string Slug, string Website, string? LogoUrl, string? DescTr, string? DescEn, string? LongEn)[]
         {
-            ("jost",      "https://www.jost-world.com/en/products/jost.html",              null,                        null,                                                      jostDescEn,      jostLongEn),
+            ("jost",      "https://www.jost-world.com/en/products/jost.html",              null,                        "JOST, beşinci teker tablaları, mekanik ayaklar, kingpimler, hubodometreler, döner tablalar, konteyner kilitleri ile konteyner ekipmanları ve aks sistemlerinde önde gelen global üreticidir. Alman mühendisliği kalitesiyle üretim yapmaktadır.",                                                      jostDescEn,      jostLongEn),
             ("tridec",    "https://www.jost-world.com/en/products/tridec.html",            null,
                           "TRIDEC, treyler dümenleme ve süspansiyon sistemleri.",
                           tridecDescEn,
                           tridecLongEn),
             ("rockinger", "https://www.jost-world.com/en/products/rockinger.html",         null,                        null,                                                      rockingerDescEn, rockingerLongEn),
             ("quicke",    "https://www.jost-world.com/en/products/quicke.html",            "/images/quicke-logo.jpg",   null,                                                      quickeDescEn,    quickeLongEn),
-            ("sirit",     "https://www.sirit.it/eng/catalogo_generale_sirit.pdf",          null,                        null,                                                      null,            null),
+            ("sirit",     "https://www.sirit.it/eng/catalogo_generale_sirit.pdf",          null,                        "SIRIT, ticari araçlar için üretilen en önde gelen hava freni bağlantı ve rakor markalarından biridir.",  "SIRIT today is amongst the leading brands of Air Brake Fittings dedicated to Commercial Vehicles.",  null),
         };
 
         bool dirty = false;
@@ -198,7 +198,7 @@ public static class DataSeeder
                 NameTr = "JOST",
                 NameEn = "JOST",
                 Slug = "jost",
-                DescriptionTr = "JOST, çeki kancaları, beşinci teker ve konteyner bağlantı sistemlerinde global liderdir. Alman mühendisliği kalitesiyle üretim yapmaktadır.",
+                DescriptionTr = "JOST, beşinci teker tablaları, mekanik ayaklar, kingpimler, hubodometreler, döner tablalar, konteyner kilitleri ile konteyner ekipmanları ve aks sistemlerinde önde gelen global üreticidir. Alman mühendisliği kalitesiyle üretim yapmaktadır.",
                 DescriptionEn = "JOST is a global leader in fifth wheels, landing gear, and container fastening systems. Manufactured with German engineering quality.",
                 LogoUrl = "/images/jost-grey-logo.svg",
                 Website = "https://www.jost-world.com/en/products/jost.html",
@@ -258,8 +258,8 @@ public static class DataSeeder
                 NameTr = "SIRIT",
                 NameEn = "SIRIT",
                 Slug = "sirit",
-                DescriptionTr = "SIRIT, aks sistemleri ve süspansiyon teknolojilerinde yenilikçi çözümler sunan markadır.",
-                DescriptionEn = "SIRIT is a brand offering innovative solutions in axle systems and suspension technologies.",
+                DescriptionTr = "SIRIT, ticari araçlar için üretilen en önde gelen hava freni bağlantı ve rakor markalarından biridir.",
+                DescriptionEn = "SIRIT today is amongst the leading brands of Air Brake Fittings dedicated to Commercial Vehicles.",
                 LogoUrl = "/images/sirit-grey-logo.svg",
                 Website = "https://www.sirit.it/eng/catalogo_generale_sirit.pdf",
                 DisplayOrder = 6,
@@ -366,9 +366,18 @@ public static class DataSeeder
         var brands = context.Brands.ToList();
         var categories = context.Categories.ToList();
 
-        var products = new List<Product>
+        var jost      = brands.FirstOrDefault(b => b.Slug == "jost");
+        var tridec    = brands.FirstOrDefault(b => b.Slug == "tridec");
+        var rockinger = brands.FirstOrDefault(b => b.Slug == "rockinger");
+        var sirit     = brands.FirstOrDefault(b => b.Slug == "sirit");
+        var cekiCat   = categories.FirstOrDefault(c => c.Slug == "ceki-sistemleri");
+        var aksCat    = categories.FirstOrDefault(c => c.Slug == "aks-sistemleri");
+
+        var products = new List<Product>();
+
+        if (jost != null && cekiCat != null)
         {
-            new()
+            products.Add(new()
             {
                 NameTr = "JSK 37C Beşinci Teker",
                 NameEn = "JSK 37C Fifth Wheel",
@@ -379,13 +388,17 @@ public static class DataSeeder
                 DescriptionEn = "JOST JSK 37C series fifth wheel is designed for heavy-duty tractors. With 150mm coupling height, it is suitable for standard trailer connections.",
                 SpecificationsTr = "Yük Kapasitesi: 20 ton\nBağlantı Yüksekliği: 150mm\nKilitleme Tipi: Otomatik\nMalzeme: Dökme çelik",
                 SpecificationsEn = "Load Capacity: 20 tons\nCoupling Height: 150mm\nLocking Type: Automatic\nMaterial: Cast steel",
-                BrandId = brands.First(b => b.Slug == "jost").Id,
-                CategoryId = categories.First(c => c.Slug == "ceki-sistemleri").Id,
+                BrandId = jost.Id,
+                CategoryId = cekiCat.Id,
                 Status = ProductStatus.Active,
                 IsFeatured = true,
                 DisplayOrder = 1
-            },
-            new()
+            });
+        }
+
+        if (tridec != null && aksCat != null)
+        {
+            products.Add(new()
             {
                 NameTr = "TRIDEC Direksiyon Sistemi TD-1800",
                 NameEn = "TRIDEC Steering System TD-1800",
@@ -396,13 +409,17 @@ public static class DataSeeder
                 DescriptionEn = "TRIDEC TD-1800 is a hydraulic steering system that provides excellent maneuverability for long trailers.",
                 SpecificationsTr = "Aks Sayısı: 3\nDönüş Açısı: ±25°\nKontrol: Hidrolik\nUygulanabilir Treyler Uzunluğu: 18m+",
                 SpecificationsEn = "Number of Axles: 3\nTurning Angle: ±25°\nControl: Hydraulic\nApplicable Trailer Length: 18m+",
-                BrandId = brands.First(b => b.Slug == "tridec").Id,
-                CategoryId = categories.First(c => c.Slug == "aks-sistemleri").Id,
+                BrandId = tridec.Id,
+                CategoryId = aksCat.Id,
                 Status = ProductStatus.Active,
                 IsFeatured = true,
                 DisplayOrder = 2
-            },
-            new()
+            });
+        }
+
+        if (rockinger != null && cekiCat != null)
+        {
+            products.Add(new()
             {
                 NameTr = "Rockinger RO 400 Çeki Kancası",
                 NameEn = "Rockinger RO 400 Tow Hitch",
@@ -413,13 +430,17 @@ public static class DataSeeder
                 DescriptionEn = "Rockinger RO 400 series tow hitch is a high-strength coupling element designed for heavy-duty tractors.",
                 SpecificationsTr = "D Değeri: 150 kN\nDc Değeri: 100 kN\nV Değeri: 35 kN\nKilitleme: Otomatik",
                 SpecificationsEn = "D Value: 150 kN\nDc Value: 100 kN\nV Value: 35 kN\nLocking: Automatic",
-                BrandId = brands.First(b => b.Slug == "rockinger").Id,
-                CategoryId = categories.First(c => c.Slug == "ceki-sistemleri").Id,
+                BrandId = rockinger.Id,
+                CategoryId = cekiCat.Id,
                 Status = ProductStatus.Active,
                 IsFeatured = true,
                 DisplayOrder = 3
-            },
-            new()
+            });
+        }
+
+        if (sirit != null && aksCat != null)
+        {
+            products.Add(new()
             {
                 NameTr = "SIRIT SA-12 Aks Sistemi",
                 NameEn = "SIRIT SA-12 Axle System",
@@ -430,16 +451,19 @@ public static class DataSeeder
                 DescriptionEn = "SIRIT SA-12 trailer axle system is a 12-ton capacity air suspension axle.",
                 SpecificationsTr = "Kapasite: 12 ton\nSüspansiyon: Havalı\nFren: Disk\nAks Genişliği: 2550mm",
                 SpecificationsEn = "Capacity: 12 tons\nSuspension: Air\nBrake: Disc\nAxle Width: 2550mm",
-                BrandId = brands.First(b => b.Slug == "sirit").Id,
-                CategoryId = categories.First(c => c.Slug == "aks-sistemleri").Id,
+                BrandId = sirit.Id,
+                CategoryId = aksCat.Id,
                 Status = ProductStatus.Active,
                 IsFeatured = false,
                 DisplayOrder = 4
-            }
-        };
+            });
+        }
 
-        await context.Products.AddRangeAsync(products);
-        await context.SaveChangesAsync();
+        if (products.Count > 0)
+        {
+            await context.Products.AddRangeAsync(products);
+            await context.SaveChangesAsync();
+        }
 
         // Add product images
         var savedProducts = context.Products.ToList();

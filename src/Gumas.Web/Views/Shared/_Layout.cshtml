@@ -198,11 +198,11 @@
                     <div class="bg-white dark:bg-gumas-dark border border-gray-200 dark:border-white/10 shadow-xl min-w-[220px] py-3">
                         <a href="@(isEnglish ? "/en/brand/jost" : "/marka/jost")" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">JOST</a>
                         <a href="@(isEnglish ? "/en/brand/rockinger" : "/marka/rockinger")" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">ROCKINGER</a>
-                        <button type="button" onclick="document.getElementById('nav-tridec-modal').style.display='flex'" class="w-full text-left block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors uppercase font-oswald">
+                        <button type="button" onclick="event.stopPropagation();document.getElementById('nav-tridec-modal').style.display='flex'" class="w-full text-left block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors uppercase font-oswald cursor-pointer">
                             TRIDEC <i class="fas fa-chevron-down text-[9px] ml-1 opacity-60"></i>
                         </button>
                         <a href="@(isEnglish ? "/en/brand/quicke" : "/marka/quicke")" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">QUICKE</a>
-                        <button type="button" onclick="document.getElementById('nav-gerflor-modal').style.display='flex'" class="w-full text-left block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors uppercase font-oswald">
+                        <button type="button" onclick="event.stopPropagation();document.getElementById('nav-gerflor-modal').style.display='flex'" class="w-full text-left block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors uppercase font-oswald cursor-pointer">
                             GERFLOR <i class="fas fa-chevron-down text-[9px] ml-1 opacity-60"></i>
                         </button>
                         <a href="https://www.sirit.it/eng/catalogo_generale_sirit.pdf" target="_blank" rel="noopener" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">
@@ -468,6 +468,35 @@
                         <li><a href="https://www.gerflortransport.com/en/rail/gerflors-expertise-elevating-rail-vehicle-flooring-solutions" target="_blank" rel="noopener" class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors"><span>@(isEnglish ? "Rail vehicle flooring solutions" : "Demiryolu araçları zemin döşeme çözümleri")</span><i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 ml-3 flex-shrink-0"></i></a></li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nav TRIDEC Modal (revize5 Madde 2) -->
+    <div id="nav-tridec-modal" style="display:none" class="fixed inset-0 z-[100] items-center justify-center bg-black/60 backdrop-blur-sm" onclick="if(event.target===this){this.style.display='none'}">
+        <div class="bg-white dark:bg-gumas-dark border border-gray-200 dark:border-white/10 w-full max-w-2xl mx-4 shadow-2xl">
+            <div class="flex items-center justify-between px-8 py-6 border-b border-gray-100 dark:border-white/10">
+                <div>
+                    <span class="font-oswald text-xs uppercase tracking-[0.4em] text-gumas-red block mb-1">TRIDEC</span>
+                    <h3 class="font-oswald text-2xl font-bold uppercase text-black dark:text-white">
+                        @(isEnglish ? "Select Category" : "Kategori Seçin")
+                    </h3>
+                </div>
+                <button type="button" onclick="document.getElementById('nav-tridec-modal').style.display='none'" class="text-gray-400 hover:text-black dark:hover:text-white transition-colors text-2xl leading-none">&times;</button>
+            </div>
+            <div class="p-8 flex flex-col gap-4">
+                <a href="https://www.jost-world.com/en/products/pdf-downloads/tridec.html" target="_blank" rel="noopener" class="flex items-center justify-between px-6 py-5 border border-gray-200 dark:border-white/10 hover:border-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-all group">
+                    <span class="font-oswald text-lg font-bold uppercase text-black dark:text-white group-hover:text-gumas-red transition-colors">
+                        @(isEnglish ? "STEERING SYSTEMS" : "DÜMENLEME SİSTEMLERİ")
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-sm text-gray-400 group-hover:text-gumas-red transition-colors"></i>
+                </a>
+                <a href="https://www.tridec.com/en/system-applications-product-information.html" target="_blank" rel="noopener" class="flex items-center justify-between px-6 py-5 border border-gray-200 dark:border-white/10 hover:border-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-all group">
+                    <span class="font-oswald text-lg font-bold uppercase text-black dark:text-white group-hover:text-gumas-red transition-colors">
+                        @(isEnglish ? "AXLE SUSPENSIONS" : "AKS SÜSPANSİYONLARI")
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-sm text-gray-400 group-hover:text-gumas-red transition-colors"></i>
+                </a>
             </div>
         </div>
     </div>

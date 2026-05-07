@@ -198,11 +198,13 @@
                     <div class="bg-white dark:bg-gumas-dark border border-gray-200 dark:border-white/10 shadow-xl min-w-[220px] py-3">
                         <a href="@(isEnglish ? "/en/brand/jost" : "/marka/jost")" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">JOST</a>
                         <a href="@(isEnglish ? "/en/brand/rockinger" : "/marka/rockinger")" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">ROCKINGER</a>
-                        <a href="@(isEnglish ? "/en/brand/tridec" : "/marka/tridec")" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">TRIDEC</a>
+                        <button type="button" onclick="document.getElementById('nav-tridec-modal').style.display='flex'" class="w-full text-left block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors uppercase font-oswald">
+                            TRIDEC <i class="fas fa-chevron-down text-[9px] ml-1 opacity-60"></i>
+                        </button>
                         <a href="@(isEnglish ? "/en/brand/quicke" : "/marka/quicke")" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">QUICKE</a>
-                        <a href="https://www.gerflortransport.com/en" target="_blank" rel="noopener" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">
-                            GERFLOR <i class="fas fa-external-link-alt text-[9px] ml-1 opacity-60"></i>
-                        </a>
+                        <button type="button" onclick="document.getElementById('nav-gerflor-modal').style.display='flex'" class="w-full text-left block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors uppercase font-oswald">
+                            GERFLOR <i class="fas fa-chevron-down text-[9px] ml-1 opacity-60"></i>
+                        </button>
                         <a href="https://www.sirit.it/eng/catalogo_generale_sirit.pdf" target="_blank" rel="noopener" class="block px-6 py-2.5 text-xs tracking-widest hover:bg-gumas-red hover:text-white transition-colors">
                             SIRIT <i class="fas fa-external-link-alt text-[9px] ml-1 opacity-60"></i>
                         </a>
@@ -430,6 +432,46 @@
     </script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- Nav GERFLOR Modal (revize5 Madde 1) -->
+    <div id="nav-gerflor-modal" style="display:none" class="fixed inset-0 z-[100] items-center justify-center bg-black/60 backdrop-blur-sm" onclick="if(event.target===this){this.style.display='none'}">
+        <div class="bg-white dark:bg-gumas-dark border border-gray-200 dark:border-white/10 w-full max-w-2xl mx-4 shadow-2xl">
+            <div class="flex items-center justify-between px-8 py-6 border-b border-gray-100 dark:border-white/10">
+                <div>
+                    <span class="font-oswald text-xs uppercase tracking-[0.4em] text-gumas-red block mb-1">GERFLOR</span>
+                    <h3 class="font-oswald text-2xl font-bold uppercase text-black dark:text-white">
+                        @(isEnglish ? "Select Category" : "Kategori Seçin")
+                    </h3>
+                </div>
+                <button type="button" onclick="document.getElementById('nav-gerflor-modal').style.display='none'" class="text-gray-400 hover:text-black dark:hover:text-white transition-colors text-2xl leading-none">&times;</button>
+            </div>
+            <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- OTOBÜS -->
+                <div class="border border-gray-200 dark:border-white/10 hover:border-gumas-red transition-colors group">
+                    <div class="px-6 py-4 border-b border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-black/20">
+                        <h4 class="font-oswald text-lg font-bold uppercase text-black dark:text-white">@(isEnglish ? "BUS" : "OTOBÜS")</h4>
+                    </div>
+                    <ul class="divide-y divide-gray-100 dark:divide-white/5">
+                        <li><a href="https://www.gerflortransport.com/en/bus/tarabus-solution-your-buses" target="_blank" rel="noopener" class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors"><span>@(isEnglish ? "Tarabus – Bus solutions" : "Tarabus – Otobüs çözümleri")</span><i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 ml-3 flex-shrink-0"></i></a></li>
+                        <li><a href="https://www.gerflortransport.com/en/bus/technical-solutions-buses-and-coaches" target="_blank" rel="noopener" class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors"><span>@(isEnglish ? "Technical solutions – City and intercity buses" : "Teknik çözümler – Şehir içi ve Şehirlerarası otobüsler")</span><i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 ml-3 flex-shrink-0"></i></a></li>
+                        <li><a href="https://www.gerflortransport.com/en/bus/interior-designer-tarabus-visualize-your-project-tarabus-products" target="_blank" rel="noopener" class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors"><span>@(isEnglish ? "Interior design – Visualize your products" : "İç tasarım – Ürünlerinizi gözünüzde canlandırın")</span><i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 ml-3 flex-shrink-0"></i></a></li>
+                    </ul>
+                </div>
+                <!-- RAYLI SİSTEMLER -->
+                <div class="border border-gray-200 dark:border-white/10 hover:border-gumas-red transition-colors group">
+                    <div class="px-6 py-4 border-b border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-black/20">
+                        <h4 class="font-oswald text-lg font-bold uppercase text-black dark:text-white">@(isEnglish ? "RAIL SYSTEMS" : "RAYLI SİSTEMLER")</h4>
+                    </div>
+                    <ul class="divide-y divide-gray-100 dark:divide-white/5">
+                        <li><a href="https://www.gerflortransport.com/en/rail/wherever-you-go-traveller-your-trusted-companion" target="_blank" rel="noopener" class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors"><span>@(isEnglish ? "Products" : "Ürünler")</span><i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 ml-3 flex-shrink-0"></i></a></li>
+                        <li><a href="https://www.gerflortransport.com/en/rail/technical-solutions-trains" target="_blank" rel="noopener" class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors"><span>@(isEnglish ? "Train technical solutions" : "Tren teknik çözümleri")</span><i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 ml-3 flex-shrink-0"></i></a></li>
+                        <li><a href="https://www.gerflortransport.com/en/rail/gerflors-expertise-elevating-rail-vehicle-flooring-solutions" target="_blank" rel="noopener" class="flex items-center justify-between px-6 py-4 text-sm text-gray-700 dark:text-gray-300 hover:text-gumas-red hover:bg-gray-50 dark:hover:bg-black/30 transition-colors"><span>@(isEnglish ? "Rail vehicle flooring solutions" : "Demiryolu araçları zemin döşeme çözümleri")</span><i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-40 ml-3 flex-shrink-0"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

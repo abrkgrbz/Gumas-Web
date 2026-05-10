@@ -171,6 +171,10 @@ public static class DataSeeder
             ("rockinger", "https://www.jost-world.com/en/products/rockinger.html",         null,                        null,                                                      rockingerDescEn, rockingerLongEn),
             ("quicke",    "https://www.jost-world.com/en/products/quicke.html",            "/images/quicke-logo.jpg",   null,                                                      quickeDescEn,    quickeLongEn),
             ("sirit",     "https://www.sirit.it/eng/catalogo_generale_sirit.pdf",          null,                        "SIRIT, ticari araçlar için üretilen en önde gelen hava freni bağlantı ve rakor markalarından biridir.",  "SIRIT today is amongst the leading brands of Air Brake Fittings dedicated to Commercial Vehicles.",  null),
+            ("gerflor",   "https://www.gerflor.com",                                       null,
+                          "GERFLOR, TARABUS markasıyla belediye ve şehirlerarası otobüsler için tasarlanmış ve TRAVELLER EVOLUTION markasıyla da raylı sistemler için tasarlanmış pazar lideri taban döşemesi imalatçısıdır.",
+                          "GERFLOR is the market-leading manufacturer of floor coverings specifically designed for buses and coaches under the TARABUS brand and for rail systems under the TRAVELLER EVOLUTION brand.",
+                          null),
         };
 
         bool dirty = false;
@@ -234,8 +238,8 @@ public static class DataSeeder
                 NameTr = "Gerflor",
                 NameEn = "Gerflor",
                 Slug = "gerflor",
-                DescriptionTr = "Gerflor, endüstriyel zemin kaplamaları ve araç içi döşeme sistemlerinde dünya çapında tanınan Fransız markasıdır.",
-                DescriptionEn = "Gerflor is a globally recognized French brand in industrial flooring and vehicle interior flooring systems.",
+                DescriptionTr = "GERFLOR, TARABUS markasıyla belediye ve şehirlerarası otobüsler için tasarlanmış ve TRAVELLER EVOLUTION markasıyla da raylı sistemler için tasarlanmış pazar lideri taban döşemesi imalatçısıdır.",
+                DescriptionEn = "GERFLOR is the market-leading manufacturer of floor coverings specifically designed for buses and coaches under the TARABUS brand and for rail systems under the TRAVELLER EVOLUTION brand.",
                 LogoUrl = "/images/gerflor-grey-logo.svg",
                 Website = "https://www.gerflor.com",
                 DisplayOrder = 4,

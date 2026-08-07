@@ -179,10 +179,10 @@
 <body class="font-sans antialiased text-gray-900 bg-gray-50 dark:bg-gumas-dark dark:text-gumas-light transition-colors duration-300 selection:bg-gumas-red selection:text-white">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center bg-white/50 dark:bg-black/50 backdrop-blur-md transition-colors duration-300 border-b border-black/5 dark:border-white/5">
+    <nav class="fixed top-0 w-full z-50 px-6 h-14 flex justify-between items-center bg-white/50 dark:bg-black/50 backdrop-blur-md transition-colors duration-300 border-b border-black/5 dark:border-white/5">
         <a href="@(isEnglish ? "/en" : "/")" class="flex items-center">
-            <img src="/images/logo/gumas_logo_light.png" alt="GÜMAŞ" class="h-16 block dark:hidden transition-all duration-300" />
-            <img src="/images/logo/gumas_logo_dark.png" alt="GÜMAŞ" class="h-16 hidden dark:block transition-all duration-300" />
+            <img src="/images/logo/gumas_logo_light.png" alt="GÜMAŞ" class="h-9 md:h-10 block dark:hidden transition-all duration-300 object-contain" />
+            <img src="/images/logo/gumas_logo_dark.png" alt="GÜMAŞ" class="h-9 md:h-10 hidden dark:block transition-all duration-300 object-contain" />
         </a>
 
         <div class="hidden md:flex space-x-10 font-oswald text-sm tracking-widest uppercase opacity-80 text-black dark:text-white">
@@ -310,8 +310,8 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <!-- Brand -->
                 <div>
-                    <img src="/images/logo/gumas_logo_light.png" alt="GÜMAŞ" class="h-10 mb-4 block dark:hidden" />
-                    <img src="/images/logo/gumas_logo_dark.png" alt="GÜMAŞ" class="h-10 mb-4 hidden dark:block" />
+                    <img src="/images/logo/gumas_logo_light.png" alt="GÜMAŞ" class="h-14 mb-4 block dark:hidden object-contain" />
+                    <img src="/images/logo/gumas_logo_dark.png" alt="GÜMAŞ" class="h-14 mb-4 hidden dark:block object-contain" />
                     <p class="text-gray-500 text-sm">@L["Footer_Description"]</p>
                 </div>
 

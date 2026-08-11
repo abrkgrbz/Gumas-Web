@@ -1,3 +1,7 @@
+@inject Gumas.Application.Services.ISettingService SettingService
+@{
+    var adminLogoPath = await SettingService.GetSettingValueAsync("AdminLogo", "/images/logo/gumas_logo_dark.png");
+}
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -34,10 +38,17 @@
     <div class="flex min-h-screen">
         <!-- Sidebar -->
         <aside class="w-64 bg-admin-sidebar text-white fixed h-full">
-            <div class="p-4 border-b border-gray-700">
+            <div class="p-4 border-b border-gray-700 flex items-center justify-between">
                 <a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })" class="flex items-center space-x-2">
-                    <span class="text-xl font-bold text-gumas-red">GÜMAŞ</span>
-                    <span class="text-sm text-gray-400">Admin</span>
+                    @if (!string.IsNullOrEmpty(adminLogoPath))
+                    {
+                        <img src="@adminLogoPath" alt="GÜMAŞ Admin" class="h-7 object-contain" />
+                    }
+                    else
+                    {
+                        <span class="text-xl font-bold text-gumas-red">GÜMAŞ</span>
+                    }
+                    <span class="text-xs bg-red-900 text-red-200 px-2 py-0.5 rounded font-semibold">Admin</span>
                 </a>
             </div>
 
@@ -76,6 +87,12 @@
                    class="sidebar-link flex items-center px-4 py-3 text-gray-300 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Sliders" ? "active" : "")">
                     <i class="fas fa-images w-6"></i>
                     <span>Sliderlar</span>
+                </a>
+
+                <a href="@Url.Action("Index", "Logos", new { area = "Admin" })"
+                   class="sidebar-link flex items-center px-4 py-3 text-gray-300 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Logos" ? "active" : "")">
+                    <i class="fas fa-image w-6"></i>
+                    <span>Logo Yönetimi</span>
                 </a>
 
                 <a href="@Url.Action("Index", "Messages", new { area = "Admin" })"

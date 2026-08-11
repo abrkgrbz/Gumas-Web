@@ -36,6 +36,8 @@ public static class DataSeeder
             await SeedSettingsAsync(context);
         }
 
+        await EnsureLogoSettingsAsync(context);
+
         if (!context.News.Any())
         {
             await SeedNewsAsync(context);
@@ -553,11 +555,48 @@ public static class DataSeeder
             new() { Key = "ProductCount", ValueTr = "1000+", ValueEn = "1000+", GroupName = "Statistics" },
             new() { Key = "DealerCount", ValueTr = "500+", ValueEn = "500+", GroupName = "Statistics" },
             new() { Key = "LinkedInUrl", ValueTr = "https://www.linkedin.com/company/gümaş-a-ş/", ValueEn = "https://www.linkedin.com/company/gümaş-a-ş/", GroupName = "Social" },
-            new() { Key = "WhatsAppNumber", ValueTr = "+902122547805", ValueEn = "+902122547805", GroupName = "Social" }
+            new() { Key = "WhatsAppNumber", ValueTr = "+902122547805", ValueEn = "+902122547805", GroupName = "Social" },
+            new() { Key = "SiteLogoLight", ValueTr = "/images/logo/gumas_logo_light.png", ValueEn = "/images/logo/gumas_logo_light.png", GroupName = "Logos" },
+            new() { Key = "SiteLogoDark", ValueTr = "/images/logo/gumas_logo_dark.png", ValueEn = "/images/logo/gumas_logo_dark.png", GroupName = "Logos" },
+            new() { Key = "SiteFavicon", ValueTr = "/images/logo/gumas_logo_light.png", ValueEn = "/images/logo/gumas_logo_light.png", GroupName = "Logos" },
+            new() { Key = "AdminLogo", ValueTr = "/images/logo/gumas_logo_dark.png", ValueEn = "/images/logo/gumas_logo_dark.png", GroupName = "Logos" }
         };
 
         await context.Settings.AddRangeAsync(settings);
         await context.SaveChangesAsync();
+    }
+
+    private static async Task EnsureLogoSettingsAsync(GumasDbContext context)
+    {
+        var defaultLogos = new Dictionary<string, string>
+        {
+            { "SiteLogoLight", "/images/logo/gumas_logo_light.png" },
+            { "SiteLogoDark", "/images/logo/gumas_logo_dark.png" },
+            { "SiteFavicon", "/images/logo/gumas_logo_light.png" },
+            { "AdminLogo", "/images/logo/gumas_logo_dark.png" }
+        };
+
+        bool changesMade = false;
+        foreach (var logo in defaultLogos)
+        {
+            if (!context.Settings.Any(s => s.Key == logo.Key))
+            {
+                context.Settings.Add(new Setting
+                {
+                    Key = logo.Key,
+                    ValueTr = logo.Value,
+                    ValueEn = logo.Value,
+                    GroupName = "Logos",
+                    CreatedAt = DateTime.UtcNow
+                });
+                changesMade = true;
+            }
+        }
+
+        if (changesMade)
+        {
+            await context.SaveChangesAsync();
+        }
     }
 
     private static async Task SeedTeamMembersAsync(GumasDbContext context)

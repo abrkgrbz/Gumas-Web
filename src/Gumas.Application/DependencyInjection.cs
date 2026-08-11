@@ -19,6 +19,7 @@ public static class DependencyInjection
         services.AddScoped<IContactService, ContactService>();
         services.AddScoped<ICorporateService, CorporateService>();
         services.AddScoped<IActivityLogService, ActivityLogService>();
+        services.AddScoped<ISettingService, SettingService>();
 
         return services;
     }

@@ -1,0 +1,355 @@
+@model Gumas.Application.ViewModels.LogoSettingsViewModel
+@{
+    ViewData["Title"] = "Logo Yönetimi";
+    Layout = "_AdminLayout";
+}
+
+<div class="space-y-8">
+    <!-- Header -->
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-red-100 text-gumas-red flex items-center justify-center font-bold">
+                    <i class="fas fa-image text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Logo & Görsel Kimlik Yönetimi</h2>
+                    <p class="text-sm text-gray-500">Sitenizin header, footer, mobil menü ve admin panelindeki tüm logo ve simgelerini yönetin.</p>
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center space-x-2 text-xs font-medium text-gray-600 bg-gray-50 px-4 py-2 rounded-lg border border-gray-200">
+            <i class="fas fa-info-circle text-gumas-red"></i>
+            <span>Desteklenen formatlar: <strong>PNG, SVG, WEBP, JPG, ICO</strong> (Max 10MB)</span>
+        </div>
+    </div>
+
+    <!-- Active Logo Slots Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- 1. Aydınlık Tema Logosu -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between transition-all hover:shadow-md">
+            <div class="p-5 border-b border-gray-100">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
+                        <i class="fas fa-sun mr-1"></i> Aydınlık Tema (Light)
+                    </span>
+                    <form asp-area="Admin" asp-controller="Logos" asp-action="ResetDefault" method="post" class="inline" onsubmit="return confirm('Aydınlık tema logosunu varsayılana sıfırlamak istediğinize emin misiniz?');">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="logoType" value="SiteLogoLight" />
+                        <button type="submit" class="text-gray-400 hover:text-gray-600 text-xs flex items-center gap-1" title="Varsayılana Sıfırla">
+                            <i class="fas fa-rotate-left"></i> Sıfırla
+                        </button>
+                    </form>
+                </div>
+                <h3 class="font-bold text-gray-800 text-lg">Header & Footer Logosu</h3>
+                <p class="text-xs text-gray-500">Beyaz / Açık renkli arka planlarda görüntülenir.</p>
+            </div>
+
+            <!-- Preview Box (Light Background) -->
+            <div class="p-6 bg-gray-100 flex flex-col items-center justify-center min-h-[140px] relative border-y border-gray-200 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+                <img id="preview-SiteLogoLight" src="@Model.SiteLogoLight" alt="Aydınlık Logo" class="max-h-20 max-w-full object-contain transition-transform hover:scale-105" />
+            </div>
+
+            <div class="p-5 space-y-4 bg-white flex-1 flex flex-col justify-between">
+                <div class="text-xs text-gray-500 truncate" title="@Model.SiteLogoLight">
+                    <span class="font-semibold text-gray-700">Yol:</span> @Model.SiteLogoLight
+                </div>
+
+                <form asp-area="Admin" asp-controller="Logos" asp-action="UploadLogo" method="post" enctype="multipart/form-data" class="space-y-3">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="logoType" value="SiteLogoLight" />
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Yeni Logo Yükle</label>
+                        <input type="file" name="file" accept=".png,.jpg,.jpeg,.svg,.webp" onchange="previewImage(this, 'preview-SiteLogoLight')"
+                               class="block w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-red-50 file:text-gumas-red hover:file:bg-red-100 cursor-pointer border border-gray-200 rounded-lg p-1" required />
+                    </div>
+                    <button type="submit" class="w-full bg-gumas-red hover:bg-red-700 text-white text-xs font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                        <i class="fas fa-upload"></i>
+                        <span>Aydınlık Logoyu Güncelle</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 2. Karanlık Tema Logosu -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between transition-all hover:shadow-md">
+            <div class="p-5 border-b border-gray-100">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400 bg-indigo-950 px-2.5 py-1 rounded-full border border-indigo-800">
+                        <i class="fas fa-moon mr-1"></i> Karanlık Tema (Dark)
+                    </span>
+                    <form asp-area="Admin" asp-controller="Logos" asp-action="ResetDefault" method="post" class="inline" onsubmit="return confirm('Karanlık tema logosunu varsayılana sıfırlamak istediğinize emin misiniz?');">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="logoType" value="SiteLogoDark" />
+                        <button type="submit" class="text-gray-400 hover:text-gray-600 text-xs flex items-center gap-1" title="Varsayılana Sıfırla">
+                            <i class="fas fa-rotate-left"></i> Sıfırla
+                        </button>
+                    </form>
+                </div>
+                <h3 class="font-bold text-gray-800 text-lg">Header & Footer Logosu</h3>
+                <p class="text-xs text-gray-500">Siyah / Koyu renkli arka planlarda görüntülenir.</p>
+            </div>
+
+            <!-- Preview Box (Dark Background) -->
+            <div class="p-6 bg-slate-900 flex flex-col items-center justify-center min-h-[140px] relative border-y border-slate-800">
+                <img id="preview-SiteLogoDark" src="@Model.SiteLogoDark" alt="Karanlık Logo" class="max-h-20 max-w-full object-contain transition-transform hover:scale-105" />
+            </div>
+
+            <div class="p-5 space-y-4 bg-white flex-1 flex flex-col justify-between">
+                <div class="text-xs text-gray-500 truncate" title="@Model.SiteLogoDark">
+                    <span class="font-semibold text-gray-700">Yol:</span> @Model.SiteLogoDark
+                </div>
+
+                <form asp-area="Admin" asp-controller="Logos" asp-action="UploadLogo" method="post" enctype="multipart/form-data" class="space-y-3">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="logoType" value="SiteLogoDark" />
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Yeni Logo Yükle</label>
+                        <input type="file" name="file" accept=".png,.jpg,.jpeg,.svg,.webp" onchange="previewImage(this, 'preview-SiteLogoDark')"
+                               class="block w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100 cursor-pointer border border-gray-200 rounded-lg p-1" required />
+                    </div>
+                    <button type="submit" class="w-full bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                        <i class="fas fa-upload"></i>
+                        <span>Karanlık Logoyu Güncelle</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 3. Admin Panel Logosu -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between transition-all hover:shadow-md">
+            <div class="p-5 border-b border-gray-100">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-rose-600 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200">
+                        <i class="fas fa-user-shield mr-1"></i> Admin Panel
+                    </span>
+                    <form asp-area="Admin" asp-controller="Logos" asp-action="ResetDefault" method="post" class="inline" onsubmit="return confirm('Admin logosunu varsayılana sıfırlamak istediğinize emin misiniz?');">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="logoType" value="AdminLogo" />
+                        <button type="submit" class="text-gray-400 hover:text-gray-600 text-xs flex items-center gap-1" title="Varsayılana Sıfırla">
+                            <i class="fas fa-rotate-left"></i> Sıfırla
+                        </button>
+                    </form>
+                </div>
+                <h3 class="font-bold text-gray-800 text-lg">Admin Sidebar Logosu</h3>
+                <p class="text-xs text-gray-500">Yönetim paneli sol menüsünde yer alır.</p>
+            </div>
+
+            <!-- Preview Box (Admin Sidebar Dark Background) -->
+            <div class="p-6 bg-[#111827] flex flex-col items-center justify-center min-h-[140px] relative border-y border-gray-800">
+                <img id="preview-AdminLogo" src="@Model.AdminLogo" alt="Admin Logo" class="max-h-16 max-w-full object-contain transition-transform hover:scale-105" />
+            </div>
+
+            <div class="p-5 space-y-4 bg-white flex-1 flex flex-col justify-between">
+                <div class="text-xs text-gray-500 truncate" title="@Model.AdminLogo">
+                    <span class="font-semibold text-gray-700">Yol:</span> @Model.AdminLogo
+                </div>
+
+                <form asp-area="Admin" asp-controller="Logos" asp-action="UploadLogo" method="post" enctype="multipart/form-data" class="space-y-3">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="logoType" value="AdminLogo" />
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Yeni Logo Yükle</label>
+                        <input type="file" name="file" accept=".png,.jpg,.jpeg,.svg,.webp" onchange="previewImage(this, 'preview-AdminLogo')"
+                               class="block w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-gray-100 file:text-gray-800 hover:file:bg-gray-200 cursor-pointer border border-gray-200 rounded-lg p-1" required />
+                    </div>
+                    <button type="submit" class="w-full bg-gray-800 hover:bg-gray-900 text-white text-xs font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                        <i class="fas fa-upload"></i>
+                        <span>Admin Logoyu Güncelle</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 4. Favicon (Tarayıcı Simgesi) -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between transition-all hover:shadow-md">
+            <div class="p-5 border-b border-gray-100">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                        <i class="fas fa-globe mr-1"></i> Favicon
+                    </span>
+                    <form asp-area="Admin" asp-controller="Logos" asp-action="ResetDefault" method="post" class="inline" onsubmit="return confirm('Favicon ikonunu varsayılana sıfırlamak istediğinize emin misiniz?');">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="logoType" value="SiteFavicon" />
+                        <button type="submit" class="text-gray-400 hover:text-gray-600 text-xs flex items-center gap-1" title="Varsayılana Sıfırla">
+                            <i class="fas fa-rotate-left"></i> Sıfırla
+                        </button>
+                    </form>
+                </div>
+                <h3 class="font-bold text-gray-800 text-lg">Tarayıcı Sekme İkonu</h3>
+                <p class="text-xs text-gray-500">Tarayıcı sekmelerinde ve yer imlerinde görünür.</p>
+            </div>
+
+            <!-- Preview Box (Browser Tab Mockup) -->
+            <div class="p-6 bg-gray-200 flex flex-col items-center justify-center min-h-[140px] relative border-y border-gray-300">
+                <!-- Browser Tab Simulation -->
+                <div class="bg-white px-4 py-2 rounded-t-lg shadow-sm border border-gray-300 flex items-center space-x-2 w-48">
+                    <img id="preview-SiteFavicon" src="@Model.SiteFavicon" alt="Favicon" class="w-5 h-5 object-contain" />
+                    <span class="text-[11px] font-medium text-gray-600 truncate">GÜMAŞ Otomotiv</span>
+                    <span class="text-gray-400 text-xs ml-auto">&times;</span>
+                </div>
+            </div>
+
+            <div class="p-5 space-y-4 bg-white flex-1 flex flex-col justify-between">
+                <div class="text-xs text-gray-500 truncate" title="@Model.SiteFavicon">
+                    <span class="font-semibold text-gray-700">Yol:</span> @Model.SiteFavicon
+                </div>
+
+                <form asp-area="Admin" asp-controller="Logos" asp-action="UploadLogo" method="post" enctype="multipart/form-data" class="space-y-3">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="logoType" value="SiteFavicon" />
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">Yeni Favicon Yükle</label>
+                        <input type="file" name="file" accept=".png,.ico,.svg,.webp,.jpg" onchange="previewImage(this, 'preview-SiteFavicon')"
+                               class="block w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-600 hover:file:bg-emerald-100 cursor-pointer border border-gray-200 rounded-lg p-1" required />
+                    </div>
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+                        <i class="fas fa-upload"></i>
+                        <span>Favicon'u Güncelle</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Uploaded Logo Files Gallery -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div class="p-6 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h3 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <i class="fas fa-photo-video text-gumas-red"></i>
+                    <span>Mevcut Logo & Görsel Kütüphanesi</span>
+                </h3>
+                <p class="text-xs text-gray-500">Sunucuda yüklü olan tüm logolar. İstediğiniz kütüphane dosyasını 1 tıkla ilgili alana logo olarak atayabilirsiniz.</p>
+            </div>
+            <span class="text-xs font-semibold bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full border border-gray-200">
+                Toplam @Model.ExistingLogos.Count Dosya
+            </span>
+        </div>
+
+        @if (Model.ExistingLogos.Count == 0)
+        {
+            <div class="p-12 text-center text-gray-400">
+                <i class="fas fa-folder-open text-4xl mb-3"></i>
+                <p class="text-sm">Henüz yüklü logo dosyası bulunmuyor.</p>
+            </div>
+        }
+        else
+        {
+            <div class="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                @foreach (var item in Model.ExistingLogos)
+                {
+                    <div class="border border-gray-200 rounded-xl overflow-hidden bg-white flex flex-col justify-between group hover:border-gray-300 hover:shadow-md transition-all">
+                        <!-- Image Container with Checkerboard Background for Transparency -->
+                        <div class="h-36 p-4 flex items-center justify-center relative bg-[linear-gradient(45deg,#f3f4f6_25%,transparent_25%),linear-gradient(-45deg,#f3f4f6_25%,transparent_25%),linear-gradient(45deg,transparent_75%,#f3f4f6_75%),linear-gradient(-45deg,transparent_75%,#f3f4f6_75%)] bg-[size:16px_16px] bg-[position:0_0,0_8px,8px_-8px,-8px_0]">
+                            <img src="@item.FilePath" alt="@item.FileName" class="max-h-28 max-w-full object-contain transition-transform group-hover:scale-105" />
+                            
+                            @if (item.IsInUse)
+                            {
+                                <div class="absolute top-2 right-2 flex flex-col items-end gap-1">
+                                    @foreach (var usage in item.UsedAs)
+                                    {
+                                        <span class="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">
+                                            <i class="fas fa-check-circle mr-0.5"></i> @usage
+                                        </span>
+                                    }
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Card Meta -->
+                        <div class="p-4 border-t border-gray-100 space-y-3 bg-white">
+                            <div>
+                                <h4 class="text-xs font-bold text-gray-800 truncate" title="@item.FileName">@item.FileName</h4>
+                                <div class="flex items-center justify-between text-[11px] text-gray-400 mt-1">
+                                    <span>@((item.SizeBytes / 1024.0).ToString("0.0")) KB</span>
+                                    <span>@item.LastModified.ToString("dd.MM.yyyy HH:mm")</span>
+                                </div>
+                            </div>
+
+                            <!-- Assign Buttons -->
+                            <div class="pt-2 border-t border-gray-100 grid grid-cols-2 gap-1.5">
+                                <form asp-area="Admin" asp-controller="Logos" asp-action="SelectLogo" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="logoType" value="SiteLogoLight" />
+                                    <input type="hidden" name="logoPath" value="@item.FilePath" />
+                                    <button type="submit" class="w-full text-[10px] font-semibold bg-amber-50 hover:bg-amber-100 text-amber-700 py-1.5 px-2 rounded border border-amber-200 transition-colors truncate" title="Aydınlık Tema Logosu Yap">
+                                        <i class="fas fa-sun mr-1"></i> Aydınlık Yap
+                                    </button>
+                                </form>
+
+                                <form asp-area="Admin" asp-controller="Logos" asp-action="SelectLogo" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="logoType" value="SiteLogoDark" />
+                                    <input type="hidden" name="logoPath" value="@item.FilePath" />
+                                    <button type="submit" class="w-full text-[10px] font-semibold bg-indigo-50 hover:bg-indigo-100 text-indigo-700 py-1.5 px-2 rounded border border-indigo-200 transition-colors truncate" title="Karanlık Tema Logosu Yap">
+                                        <i class="fas fa-moon mr-1"></i> Karanlık Yap
+                                    </button>
+                                </form>
+
+                                <form asp-area="Admin" asp-controller="Logos" asp-action="SelectLogo" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="logoType" value="AdminLogo" />
+                                    <input type="hidden" name="logoPath" value="@item.FilePath" />
+                                    <button type="submit" class="w-full text-[10px] font-semibold bg-gray-100 hover:bg-gray-200 text-gray-800 py-1.5 px-2 rounded border border-gray-300 transition-colors truncate" title="Admin Panel Logosu Yap">
+                                        <i class="fas fa-user-shield mr-1"></i> Admin Yap
+                                    </button>
+                                </form>
+
+                                <form asp-area="Admin" asp-controller="Logos" asp-action="SelectLogo" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="logoType" value="SiteFavicon" />
+                                    <input type="hidden" name="logoPath" value="@item.FilePath" />
+                                    <button type="submit" class="w-full text-[10px] font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-700 py-1.5 px-2 rounded border border-emerald-200 transition-colors truncate" title="Favicon Yap">
+                                        <i class="fas fa-globe mr-1"></i> Favicon Yap
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Delete Option -->
+                            <div class="pt-2">
+                                @if (item.IsInUse || item.FilePath.StartsWith("/images/logo/gumas_logo"))
+                                {
+                                    <button disabled class="w-full text-[11px] font-medium text-gray-300 bg-gray-50 py-1 rounded cursor-not-allowed text-center" title="Aktif veya varsayılan logo silinemez">
+                                        <i class="fas fa-lock mr-1"></i> Silinemez
+                                    </button>
+                                }
+                                else
+                                {
+                                    <form asp-area="Admin" asp-controller="Logos" asp-action="DeleteLogo" method="post" onsubmit="return confirm('Bu logo dosyasını silmek istediğinize emin misiniz?');">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="filePath" value="@item.FilePath" />
+                                        <button type="submit" class="w-full text-[11px] font-medium text-red-600 hover:text-red-800 hover:bg-red-50 py-1 rounded transition-colors text-center">
+                                            <i class="fas fa-trash-alt mr-1"></i> Dosyayı Sil
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function previewImage(input, targetId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById(targetId);
+                    if (img) {
+                        img.src = e.target.result;
+                        img.classList.add('scale-110');
+                        setTimeout(() => img.classList.remove('scale-110'), 300);
+                    }
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}
